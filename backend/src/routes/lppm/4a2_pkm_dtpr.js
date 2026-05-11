@@ -7,6 +7,7 @@ const { UNITS } = require('../../config/permissions');
 router.use(verifyToken, authorize(UNITS.LPPM, UNITS.ADMIN));
 
 router.get('/', pkmController.index);
+router.get('/export', pkmController.exportExcel);
 router.get('/trash', pkmController.trash);
 router.post('/', pkmController.store);
 router.put('/:id', pkmController.update);

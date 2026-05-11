@@ -7,6 +7,7 @@ const { UNITS } = require('../../config/permissions');
 router.use(verifyToken, authorize(UNITS.LPPM, UNITS.ADMIN));
 
 router.get('/', penelitianController.index);
+router.get('/export', penelitianController.exportExcel);
 router.get('/trash', penelitianController.trash);
 router.post('/', penelitianController.store);
 router.put('/:id', penelitianController.update);

@@ -222,30 +222,91 @@
                 <label>Filter ID Tahun</label>
                 <input type="number" id="filter_tahun" placeholder="Contoh: 1">
             </div>
-            <div class="input-group" style="justify-content: flex-end;">
+            <div class="input-group" style="justify-content: flex-end; gap: 10px;">
                 <button type="button" style="background-color: #2980b9; height: 42px;" onclick="loadData()">🔄 Muat Data Tabel</button>
+                <button type="button" style="background-color: #27ae60; height: 42px;" onclick="exportToExcel()">📥 Ekspor ke Excel</button>
             </div>
         </div>
         
-        <div class="table-responsive">
-            <table id="dataTable" style="display: none;">
-                <thead>
-                    <tr>
-                        <th>ID 3A2</th>
-                        <th>ID Roadmap</th>
-                        <th>Dosen (Ketua)</th>
-                        <th>Tahun</th>
-                        <th>Judul Penelitian</th>
-                        <th>Jenis Hibah</th>
-                        <th>Sumber</th>
-                        <th>Dana (Juta)</th>
-                        <th>Mhs</th>
-                        <th>Relasi Anak</th>
-                        <th>Aksi CRUD</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
+        <div id="tablesContainer" style="display: none;">
+            <h3 style="color: #2c3e50; border-bottom: 2px solid #2980b9; padding-bottom: 5px;">Tabel 3.A.2: Dosen Tetap Perguruan Tinggi (Penelitian)</h3>
+            <div class="table-responsive" style="margin-bottom: 40px;">
+                <table id="tableInduk">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">No</th>
+                            <th rowspan="2">Nama DTPR (Ketua)</th>
+                            <th rowspan="2">Judul Penelitian</th>
+                            <th rowspan="2">Jumlah Mhs</th>
+                            <th rowspan="2">Jenis Hibah</th>
+                            <th>Sumber</th>
+                            <th rowspan="2">Durasi (thn)</th>
+                            <th colspan="3">Pendanaan (Rp juta)</th>
+                            <th rowspan="2">Link Bukti</th>
+                            <th rowspan="2">Aksi CRUD</th>
+                        </tr>
+                        <tr>
+                            <th>L/N/I</th>
+                            <th>TS-2</th>
+                            <th>TS-1</th>
+                            <th>TS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyInduk"></tbody>
+                </table>
+            </div>
+
+            <h3 style="color: #f39c12; border-bottom: 2px solid #f39c12; padding-bottom: 5px;">Tabel 3.C.1: Kerjasama Penelitian (Relasi)</h3>
+            <div class="table-responsive" style="margin-bottom: 40px;">
+                <table id="tableKerjasama">
+                    <thead>
+                        <tr>
+                            <th>ID 3A2</th>
+                            <th>Dosen</th>
+                            <th>Judul Penelitian</th>
+                            <th>Judul Kegiatan Kerjasama</th>
+                            <th>Mitra Kerja Sama</th>
+                            <th>Durasi</th>
+                            <th>Dana (Juta)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyKerjasama"></tbody>
+                </table>
+            </div>
+
+            <h3 style="color: #3498db; border-bottom: 2px solid #3498db; padding-bottom: 5px;">Tabel 3.C.2: Publikasi Ilmiah Mahasiswa/DTPR (Relasi)</h3>
+            <div class="table-responsive" style="margin-bottom: 40px;">
+                <table id="tablePublikasi">
+                    <thead>
+                        <tr>
+                            <th>ID 3A2</th>
+                            <th>Dosen</th>
+                            <th>Judul Penelitian</th>
+                            <th>Judul Publikasi</th>
+                            <th>Jenis Publikasi / Sinta</th>
+                            <th>Link Bukti</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyPublikasi"></tbody>
+                </table>
+            </div>
+
+            <h3 style="color: #8e44ad; border-bottom: 2px solid #8e44ad; padding-bottom: 5px;">Tabel 3.C.3: Perolehan HKI (Relasi)</h3>
+            <div class="table-responsive" style="margin-bottom: 40px;">
+                <table id="tableHKI">
+                    <thead>
+                        <tr>
+                            <th>ID 3A2</th>
+                            <th>Dosen</th>
+                            <th>Judul Penelitian</th>
+                            <th>Judul HKI</th>
+                            <th>Jenis HKI</th>
+                            <th>Link Bukti</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyHKI"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -394,51 +455,61 @@
             });
             const result = await res.json();
             
-            const table = document.getElementById('dataTable');
-            const tbody = document.getElementById('tableBody');
+            const tablesContainer = document.getElementById('tablesContainer');
+            const tbodyInduk = document.getElementById('tbodyInduk');
+            const tbodyKerjasama = document.getElementById('tbodyKerjasama');
+            const tbodyPublikasi = document.getElementById('tbodyPublikasi');
+            const tbodyHKI = document.getElementById('tbodyHKI');
             
             if (result.success) {
                 listDataPenelitian = result.data; // Simpan global
-                tbody.innerHTML = '';
+                tablesContainer.style.display = 'block';
+                
+                tbodyInduk.innerHTML = '';
+                tbodyKerjasama.innerHTML = '';
+                tbodyPublikasi.innerHTML = '';
+                tbodyHKI.innerHTML = '';
+
                 if(result.data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center">Tidak ada data penelitian di tahun ini</td></tr>';
+                    tbodyInduk.innerHTML = '<tr><td colspan="10" style="text-align:center">Tidak ada data penelitian di tahun ini</td></tr>';
+                    tbodyKerjasama.innerHTML = '<tr><td colspan="7" style="text-align:center">Kosong</td></tr>';
+                    tbodyPublikasi.innerHTML = '<tr><td colspan="6" style="text-align:center">Kosong</td></tr>';
+                    tbodyHKI.innerHTML = '<tr><td colspan="6" style="text-align:center">Kosong</td></tr>';
                 } else {
+                    let hasKerjasama = false;
+                    let hasPublikasi = false;
+                    let hasHKI = false;
+
                     result.data.forEach((item, index) => {
-                        const isRoadmapHtml = item.id_roadmap 
-                            ? `<span class="badge badge-green">${item.id_roadmap}</span>` 
-                            : `<span class="badge badge-red">Kosong</span>`;
+                        const targetTS = parseInt(tahun);
+                        const ts2 = item.id_tahun === targetTS - 2 ? item.jumlah_dana : 0;
+                        const ts1 = item.id_tahun === targetTS - 1 ? item.jumlah_dana : 0;
+                        const ts = item.id_tahun === targetTS ? item.jumlah_dana : 0;
 
-                        // Render Relasi Anak (Kerjasama, Publikasi, HKI)
-                        let relasiHtml = '';
-                        if(item.kerjasama && item.kerjasama.length > 0) {
-                            relasiHtml += `<div style="font-size:11px; margin-bottom:4px; padding:4px; background:#f39c12; color:white; border-radius:3px;"><b>Kerjasama:</b> ${item.kerjasama[0].mitra_kerja_sama}</div>`;
-                        }
-                        if(item.publikasi && item.publikasi.length > 0) {
-                            relasiHtml += `<div style="font-size:11px; margin-bottom:4px; padding:4px; background:#3498db; color:white; border-radius:3px;"><b>Publikasi:</b> ${item.publikasi[0].jenis_publikasi}</div>`;
-                        }
-                        if(item.hki && item.hki.length > 0) {
-                            relasiHtml += `<div style="font-size:11px; margin-bottom:4px; padding:4px; background:#8e44ad; color:white; border-radius:3px;"><b>HKI:</b> ${item.hki[0].jenis_hki}</div>`;
-                        }
-                        if(!relasiHtml) relasiHtml = '<span style="color:#95a5a6; font-size:11px; font-style:italic;">Tidak ada relasi</span>';
+                        const formatSumber = (s) => {
+                            if (!s) return '-';
+                            const lower = s.toLowerCase();
+                            if (lower.includes('lokal') || lower.includes('wilayah')) return 'L';
+                            if (lower.includes('nasional')) return 'N';
+                            if (lower.includes('internasional')) return 'I';
+                            return s.charAt(0).toUpperCase();
+                        };
 
-                        tbody.innerHTML += `
+                        // Render Tabel 3A2 (Induk)
+                        tbodyInduk.innerHTML += `
                             <tr>
-                                <td>${item.id_3a2}</td>
-                                <td>${isRoadmapHtml}</td>
-                                <td style="max-width: 150px; overflow: hidden; text-overflow: ellipsis;">
-                                    <b>${item.nama_dosen}</b><br><small>ID:${item.id_dosen}</small>
-                                </td>
-                                <td>${item.id_tahun}</td>
-                                <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: normal;">
-                                    ${item.judul_penelitian}
-                                    ${item.link_bukti ? `<br><a href="${item.link_bukti}" target="_blank" style="font-size:12px;">Lihat Bukti</a>` : ''}
-                                </td>
+                                <td style="text-align:center">${index + 1}</td>
+                                <td><b>${item.nama_dosen}</b><br><small>ID: ${item.id_dosen}</small></td>
+                                <td style="max-width: 200px; white-space: normal;">${item.judul_penelitian}</td>
+                                <td style="text-align:center">${item.jumlah_mahasiswa || 0}</td>
                                 <td>${item.jenis_hibah || '-'}</td>
-                                <td>${item.sumber || '-'}</td>
-                                <td>Rp ${item.jumlah_dana} Jt</td>
-                                <td>${item.jumlah_mahasiswa} Mhs</td>
-                                <td style="max-width: 150px; white-space: normal;">${relasiHtml}</td>
-                                <td>
+                                <td style="text-align:center">${formatSumber(item.sumber)}</td>
+                                <td style="text-align:center">${item.durasi || 0}</td>
+                                <td style="text-align:right">${ts2}</td>
+                                <td style="text-align:right">${ts1}</td>
+                                <td style="text-align:right">${ts}</td>
+                                <td>${item.link_bukti ? `<a href="${item.link_bukti}" target="_blank">Lihat Bukti</a>` : '-'}</td>
+                                <td style="text-align:center">
                                     <div style="display:flex; flex-direction:column; gap:5px;">
                                         <button class="btn-edit" onclick="triggerEdit(${index})">✏️ Edit</button>
                                         <button class="btn-delete" onclick="deleteData(${item.id_3a2})">🗑️ Hapus</button>
@@ -446,9 +517,64 @@
                                 </td>
                             </tr>
                         `;
+
+                        // Render Tabel Kerjasama
+                        if(item.kerjasama && item.kerjasama.length > 0) {
+                            hasKerjasama = true;
+                            item.kerjasama.forEach(k => {
+                                tbodyKerjasama.innerHTML += `
+                                    <tr>
+                                        <td>${item.id_3a2}</td>
+                                        <td>${item.nama_dosen}</td>
+                                        <td style="max-width: 150px; white-space: normal;">${item.judul_penelitian}</td>
+                                        <td style="max-width: 150px; white-space: normal;">${k.judul_kerjasama}</td>
+                                        <td>${k.mitra_kerja_sama}</td>
+                                        <td>${k.durasi} tahun</td>
+                                        <td>Rp ${k.jumlah_dana || 0} Jt</td>
+                                    </tr>
+                                `;
+                            });
+                        }
+
+                        // Render Tabel Publikasi
+                        if(item.publikasi && item.publikasi.length > 0) {
+                            hasPublikasi = true;
+                            item.publikasi.forEach(p => {
+                                tbodyPublikasi.innerHTML += `
+                                    <tr>
+                                        <td>${item.id_3a2}</td>
+                                        <td>${item.nama_dosen}</td>
+                                        <td style="max-width: 150px; white-space: normal;">${item.judul_penelitian}</td>
+                                        <td style="max-width: 150px; white-space: normal;">${p.judul_publikasi}</td>
+                                        <td><span style="padding: 3px 6px; background: #3498db; color: #fff; border-radius: 4px;">${p.jenis_publikasi}</span></td>
+                                        <td>${p.link_bukti ? `<a href="${p.link_bukti}" target="_blank">Lihat</a>` : '-'}</td>
+                                    </tr>
+                                `;
+                            });
+                        }
+
+                        // Render Tabel HKI
+                        if(item.hki && item.hki.length > 0) {
+                            hasHKI = true;
+                            item.hki.forEach(h => {
+                                tbodyHKI.innerHTML += `
+                                    <tr>
+                                        <td>${item.id_3a2}</td>
+                                        <td>${item.nama_dosen}</td>
+                                        <td style="max-width: 150px; white-space: normal;">${item.judul_penelitian}</td>
+                                        <td style="max-width: 150px; white-space: normal;">${h.judul_hki}</td>
+                                        <td><span style="padding: 3px 6px; background: #8e44ad; color: #fff; border-radius: 4px;">${h.jenis_hki}</span></td>
+                                        <td>${h.link_bukti ? `<a href="${h.link_bukti}" target="_blank">Lihat</a>` : '-'}</td>
+                                    </tr>
+                                `;
+                            });
+                        }
                     });
+
+                    if(!hasKerjasama) tbodyKerjasama.innerHTML = '<tr><td colspan="7" style="text-align:center">Tidak ada relasi Kerjasama</td></tr>';
+                    if(!hasPublikasi) tbodyPublikasi.innerHTML = '<tr><td colspan="6" style="text-align:center">Tidak ada relasi Publikasi</td></tr>';
+                    if(!hasHKI) tbodyHKI.innerHTML = '<tr><td colspan="6" style="text-align:center">Tidak ada relasi HKI</td></tr>';
                 }
-                table.style.display = 'table';
             } else {
                 alert("Gagal memuat data: " + result.message);
             }
@@ -564,6 +690,36 @@
         } catch(e) {
             alert("Error: " + e.message);
         }
+    }
+
+    // Fungsi Ekspor ke Excel (Menggunakan Backend API)
+    function exportToExcel() {
+        const token = document.getElementById('token').value;
+        const prodi = document.getElementById('filter_prodi').value;
+        const tahun = document.getElementById('filter_tahun').value;
+
+        if (!token || !prodi || !tahun) {
+            return alert("Harap isi Filter ID Prodi dan ID Tahun terlebih dahulu!");
+        }
+
+        fetch(`http://localhost:5000/api/lppm/3a2-penelitian-dtpr/export?id_prodi=${prodi}&id_tahun=${tahun}`, {
+            headers: { 'Authorization': 'Bearer ' + token }
+        })
+        .then(res => {
+            if(!res.ok) throw new Error("Gagal mengunduh file Excel dari server");
+            return res.blob();
+        })
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `LKPS_3A2_Penelitian_Prodi_${prodi}.xlsx`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(e => alert(e.message));
     }
 </script>
 

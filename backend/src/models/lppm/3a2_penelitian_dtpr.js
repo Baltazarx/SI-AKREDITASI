@@ -3,10 +3,11 @@ const db = require('../../config/db');
 const ModelPenelitian = {
     findAllRange: async (id_prodi, targetTS) => {
         const sql = `
-            SELECT p.*, peg.nama_lengkap as nama_dosen, d.nidn 
+            SELECT p.*, peg.nama_lengkap as nama_dosen, d.nidn, r.link_dokumen as roadmap_link 
             FROM \`3a2_penelitian_dtpr\` p
             JOIN dosen d ON p.id_dosen = d.id_dosen
             JOIN pegawai peg ON d.id_pegawai = peg.id_pegawai
+            LEFT JOIN roadmap_lppm r ON p.id_roadmap = r.id_roadmap
             WHERE p.deleted_at IS NULL 
             AND d.id_prodi = ? 
             AND p.id_tahun <= ? 

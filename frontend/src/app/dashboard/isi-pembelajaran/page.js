@@ -52,7 +52,7 @@ export default function IsiPembelajaranPage() {
     setLoading(true);
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:5000/api/akademik/2b1-isi-pembelajaran?id_prodi=${filterProdi}`, {
+      const res = await fetch(`http://localhost:5000/api/prodi/2b1-isi-pembelajaran?id_prodi=${filterProdi}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const result = await res.json();
@@ -121,8 +121,8 @@ export default function IsiPembelajaranPage() {
     const token = localStorage.getItem('token');
     const method = editingId ? 'PUT' : 'POST';
     const url = editingId
-      ? `http://localhost:5000/api/akademik/2b1-isi-pembelajaran/${editingId}`
-      : 'http://localhost:5000/api/akademik/2b1-isi-pembelajaran';
+      ? `http://localhost:5000/api/prodi/2b1-isi-pembelajaran/${editingId}`
+      : 'http://localhost:5000/api/prodi/2b1-isi-pembelajaran';
 
     try {
       const res = await fetch(url, {
@@ -131,10 +131,7 @@ export default function IsiPembelajaranPage() {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({
-          ...formData,
-          id_prodi: filterProdi
-        }),
+        body: JSON.stringify(formData),
       });
       const result = await res.json();
       alert(result.message);
@@ -161,7 +158,7 @@ export default function IsiPembelajaranPage() {
     
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:5000/api/akademik/2b1-isi-pembelajaran/${id}`, {
+      const res = await fetch(`http://localhost:5000/api/prodi/2b1-isi-pembelajaran/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -203,7 +200,7 @@ export default function IsiPembelajaranPage() {
                 <Plus size={18} />
                 <span>{showForm ? 'Tutup Form' : 'Tambah Data'}</span>
               </button>
-              <button onClick={() => window.open(`http://localhost:5000/api/akademik/2b1-isi-pembelajaran/export?id_prodi=${filterProdi}&token=${localStorage.getItem('token')}`, '_blank')} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-200 font-bold text-sm">
+              <button onClick={() => window.open(`http://localhost:5000/api/prodi/2b1-isi-pembelajaran/export?id_prodi=${filterProdi}&token=${localStorage.getItem('token')}`, '_blank')} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-200 font-bold text-sm">
                 <Download size={18} />
                 <span>Export Excel</span>
               </button>

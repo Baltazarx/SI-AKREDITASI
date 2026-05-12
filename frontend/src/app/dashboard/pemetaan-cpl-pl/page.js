@@ -222,7 +222,26 @@ export default function PemetaanCplPlPage() {
     }
   };
 
-
+  const handleHardDeleteGroup = async (cpl) => {
+    if (!confirm('Apakah Anda yakin ingin menghapus permanen semua pemetaan untuk CPL ini? Data tidak dapat dikembalikan!')) return;
+    
+    const itemsToDelete = data.filter(item => item.id_cpl === cpl.id_cpl);
+    const token = localStorage.getItem('token');
+    
+    try {
+      for (const item of itemsToDelete) {
+        await fetch(`http://localhost:5000/api/prodi/2b2-pemetaan-cpl/${item.id_2b2}?hard=true`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+      }
+      alert('Data berhasil dihapus permanen');
+      fetchData();
+    } catch (err) {
+      console.error('Error hard deleting data:', err);
+      alert('Gagal menghapus data secara permanen');
+    }
+  };
 
   const resetForm = () => {
     setFormData({
@@ -408,7 +427,7 @@ export default function PemetaanCplPlPage() {
               <table className="w-full text-left border-collapse">
                 <thead className="bg-gray-50/50 border-b-2 border-gray-200">
                   <tr>
-                    <th className="px-4 py-3 text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] border-r border-gray-200 bg-gray-100 min-w-[150px]">
+                    <th className="px-4 py-3 text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] border-r border-gray-200 bg-gray-100 align-middle sticky left-0 z-20 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#e5e7eb]">
                       CPL
                     </th>
                     <th className="px-4 py-3 text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] border-r border-gray-200 text-center min-w-[200px]">
@@ -430,7 +449,7 @@ export default function PemetaanCplPlPage() {
                       // CPL dengan PL kosong
                       return (
                         <tr key={cpl.id_cpl} className="hover:bg-blue-50/30 transition-colors">
-                          <td className="px-4 py-3 border-r border-gray-200 bg-gray-50">
+                          <td className="px-4 py-3 border-r border-gray-200 bg-gray-50 align-top sticky left-0 z-10 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#e5e7eb]">
                             <div className="font-black text-gray-900 text-sm">{cpl.kode_cpl || '-'}</div>
                             <div className="text-[10px] text-gray-600 mt-1 font-medium">{cpl.deskripsi_cpl || '-'}</div>
                           </td>
@@ -451,37 +470,43 @@ export default function PemetaanCplPlPage() {
                       );
                     }
                     
-                    return mappedPls.map((pl, index) => (
-                      <tr key={`${cpl.id_cpl}-${pl.id_pl}`} className="hover:bg-blue-50/30 transition-colors">
-                        {index === 0 && (
-                          <td rowSpan={mappedPls.length} className="px-4 py-3 border-r border-gray-200 bg-gray-50 align-top">
-                            <div className="font-black text-gray-900 text-sm">{cpl.kode_cpl || '-'}</div>
-                            <div className="text-[10px] text-gray-600 mt-1 font-medium">{cpl.deskripsi_cpl || '-'}</div>
-                          </td>
-                        )}
-                        <td className="px-4 py-3 border-r border-gray-200">
-                          <div className="font-mono text-xs font-bold text-gray-800">{pl.kode_pl || '-'}</div>
-                          <div className="text-[10px] text-gray-600 mt-1">{pl.deskripsi_pl || '-'}</div>
+                    return (
+                      <tr key={cpl.id_cpl} className="hover:bg-blue-50/30 transition-colors">
+                        <td className="px-4 py-3 border-r border-gray-200 bg-gray-50 align-top sticky left-0 z-10 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#e5e7eb]">
+                          <div className="font-black text-gray-900 text-sm">{cpl.kode_cpl || '-'}</div>
+                          <div className="text-[10px] text-gray-600 mt-1 font-medium">{cpl.deskripsi_cpl || '-'}</div>
                         </td>
-                        {index === 0 && (
-                          <td rowSpan={mappedPls.length} className="px-4 py-3 border-r border-gray-200 text-center align-top">
-                            {isTrashView ? (
-                              <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-red-100 text-red-600 text-xs font-bold rounded-lg shadow-sm cursor-not-allowed">
-                                Dihapus
-                              </span>
-                            ) : (
-                              <button 
-                                onClick={() => handleEditCpl(cpl)} 
-                                className="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition shadow-sm"
-                              >
-                                <Edit size={14} />
-                                Edit
-                              </button>
-                            )}
-                          </td>
-                        )}
+                        <td className="px-4 py-3 border-r border-gray-200 align-top">
+                          <div className="flex flex-wrap gap-3">
+                            {mappedPls.map(pl => (
+                              <div key={pl.id_pl} className="bg-gradient-to-br from-indigo-50 to-blue-50/50 border border-indigo-100/60 rounded-xl p-3 max-w-[280px] shadow-sm">
+                                <div className="font-black text-indigo-900 text-xs mb-1">{pl.kode_pl}</div>
+                                <div className="text-[10px] text-indigo-800/80 leading-relaxed font-medium">{pl.deskripsi_pl}</div>
+                              </div>
+                            ))}
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 border-r border-gray-200 text-center align-top w-[140px] min-w-[140px] max-w-[140px] bg-white">
+                          {isTrashView ? (
+                            <button 
+                              onClick={() => handleHardDeleteGroup(cpl)} 
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 w-full justify-center bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-red-600 hover:text-white transition-colors border border-red-100 shadow-sm"
+                            >
+                              <Trash2 size={12} />
+                              Hapus
+                            </button>
+                          ) : (
+                            <button 
+                              onClick={() => handleEditCpl(cpl)} 
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 w-full justify-center bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-blue-600 hover:text-white transition-colors border border-blue-100 shadow-sm"
+                            >
+                              <Edit size={12} />
+                              Atur PL
+                            </button>
+                          )}
+                        </td>
                       </tr>
-                    ));
+                    );
                   })}
                 </tbody>
               </table>

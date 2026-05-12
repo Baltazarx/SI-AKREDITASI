@@ -2,8 +2,8 @@ const IsiPembelajaran2B1 = require('../../models/prodi/2b1_isi_pembelajaran');
 
 exports.index = async (req, res) => {
     try {
-        const { id_prodi, id_tahun } = req.query;
-        const data = await IsiPembelajaran2B1.getAll(id_prodi, id_tahun);
+        const { id_prodi, id_tahun, is_trash } = req.query;
+        const data = await IsiPembelajaran2B1.getAll(id_prodi, id_tahun, is_trash === 'true');
         res.json({ success: true, message: 'Berhasil mengambil data tabel 2B1.', data });
     } catch (error) {
         console.error('[Error GET 2B1]', error);
@@ -26,11 +26,12 @@ exports.show = async (req, res) => {
 exports.store = async (req, res) => {
     try {
         const { id_mk, id_pl, id_tahun } = req.body;
+        const created_by = req.user?.id_user || null;
         if (!id_mk || !id_pl || !id_tahun) {
             return res.status(400).json({ success: false, message: 'Kolom id_mk, id_pl, id_tahun wajib diisi.' });
         }
-        const insertId = await IsiPembelajaran2B1.create({ id_mk, id_pl, id_tahun });
-        res.status(201).json({ success: true, message: 'Data 2B1 berhasil ditambahkan.', data: { id_2b1: insertId, ...req.body } });
+        const insertId = await IsiPembelajaran2B1.create({ id_mk, id_pl, id_tahun, created_by });
+        res.status(201).json({ success: true, message: 'Data 2B1 berhasil ditambahkan.', data: { id_2b1: insertId, ...req.body, created_by } });
     } catch (error) {
         console.error('[Error POST 2B1]', error);
         res.status(500).json({ success: false, message: 'Gagal menambahkan data 2B1.', error: error.message });
@@ -41,9 +42,10 @@ exports.update = async (req, res) => {
     try {
         const { id } = req.params;
         const { id_mk, id_pl, id_tahun } = req.body;
+        const updated_by = req.user?.id_user || null;
         const checkData = await IsiPembelajaran2B1.getById(id);
         if (!checkData) return res.status(404).json({ success: false, message: 'Data 2B1 tidak ditemukan.' });
-        await IsiPembelajaran2B1.update(id, { id_mk, id_pl, id_tahun });
+        await IsiPembelajaran2B1.update(id, { id_mk, id_pl, id_tahun, updated_by });
         res.json({ success: true, message: 'Data 2B1 berhasil diperbarui.' });
     } catch (error) {
         console.error('[Error PUT 2B1]', error);
@@ -54,9 +56,18 @@ exports.update = async (req, res) => {
 exports.destroy = async (req, res) => {
     try {
         const { id } = req.params;
+        const { hard } = req.query;
+        const deleted_by = req.user?.id_user || null;
+        
+        if (hard === 'true') {
+            const affected = await IsiPembelajaran2B1.hardDelete(id);
+            if (affected === 0) return res.status(404).json({ success: false, message: 'Data 2B1 tidak ditemukan.' });
+            return res.json({ success: true, message: 'Data 2B1 berhasil dihapus permanen.' });
+        }
+        
         const checkData = await IsiPembelajaran2B1.getById(id);
         if (!checkData) return res.status(404).json({ success: false, message: 'Data 2B1 tidak ditemukan.' });
-        await IsiPembelajaran2B1.hardDelete(id);
+        await IsiPembelajaran2B1.softDelete(id, deleted_by);
         res.json({ success: true, message: 'Data 2B1 berhasil dihapus.' });
     } catch (error) {
         console.error('[Error DELETE 2B1]', error);

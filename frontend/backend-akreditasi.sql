@@ -2284,3 +2284,18 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Dumping data for table `master_cpmk`
+--
+
+INSERT INTO `master_cpmk` (`id_prodi`, `kode_cpmk`, `deskripsi_cpmk`) VALUES
+(1, 'CPMK-01', 'Mampu menguasai konsep teoritis bidang pengetahuan Ilmu Komputer secara umum dan konsep teoritis bagian khusus dalam bidang pengetahuan tersebut secara mendalam.'),
+(1, 'CPMK-02', 'Mampu memformulasikan penyelesaian masalah prosedural dan memanfaatkan prinsip-prinsip rekayasa perangkat lunak.'),
+(1, 'CPMK-03', 'Mampu menerapkan pemikiran logis, kritis, sistematis, dan inovatif dalam konteks pengembangan atau implementasi ilmu pengetahuan dan teknologi.'),
+(1, 'CPMK-04', 'Mampu menunjukkan kinerja mandiri, bermutu, dan terukur.'),
+(1, 'CPMK-05', 'Mampu merancang dan mengembangkan sistem informasi yang memenuhi kebutuhan pengguna dan bisnis.'),
+(1, 'CPMK-06', 'Mampu menganalisis dan mendesain basis data untuk menyimpan dan mengelola data organisasi dengan efisien.'),
+(2, 'CPMK-01', 'Mampu memahami konsep dasar jaringan komputer dan penerapannya.'),
+(2, 'CPMK-02', 'Mampu mengkonfigurasi dan mengelola infrastruktur jaringan dan sistem keamanan.'),
+(2, 'CPMK-03', 'Mampu mendeteksi dan menyelesaikan permasalahan keamanan siber secara mandiri.');

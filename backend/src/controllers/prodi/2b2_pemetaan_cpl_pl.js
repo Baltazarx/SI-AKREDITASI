@@ -56,7 +56,15 @@ exports.update = async (req, res) => {
 exports.destroy = async (req, res) => {
     try {
         const { id } = req.params;
+        const { hard } = req.query;
         const deleted_by = req.user?.id_user || null;
+        
+        if (hard === 'true') {
+            const affected = await PemetaanCplPl2B2.hardDelete(id);
+            if (affected === 0) return res.status(404).json({ success: false, message: 'Data 2B2 tidak ditemukan.' });
+            return res.json({ success: true, message: 'Data 2B2 berhasil dihapus permanen.' });
+        }
+
         const checkData = await PemetaanCplPl2B2.getById(id);
         if (!checkData) return res.status(404).json({ success: false, message: 'Data 2B2 tidak ditemukan.' });
         await PemetaanCplPl2B2.softDelete(id, deleted_by);

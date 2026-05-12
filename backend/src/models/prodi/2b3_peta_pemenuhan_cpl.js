@@ -15,7 +15,7 @@ class PetaPemenuhanCpl2B3 {
             LEFT JOIN master_cpmk cpmk ON b.id_cpmk = cpmk.id_cpmk
             LEFT JOIN master_mata_kuliah mk ON b.id_mk = mk.id_mk
             LEFT JOIN tahun_akademik t ON b.id_tahun = t.id_tahun
-            WHERE 1=1
+            WHERE b.deleted_at IS NULL
         `;
         const params = [];
         if (id_prodi) {
@@ -46,7 +46,7 @@ class PetaPemenuhanCpl2B3 {
             LEFT JOIN master_cpmk cpmk ON b.id_cpmk = cpmk.id_cpmk
             LEFT JOIN master_mata_kuliah mk ON b.id_mk = mk.id_mk
             LEFT JOIN tahun_akademik t ON b.id_tahun = t.id_tahun
-            WHERE b.id_2b3 = ?
+            WHERE b.id_2b3 = ? AND b.deleted_at IS NULL
         `;
         const [rows] = await db.query(query, [id]);
         return rows[0];
@@ -56,14 +56,15 @@ class PetaPemenuhanCpl2B3 {
     static async create(data) {
         const query = `
             INSERT INTO \`2b3_peta_pemenuhan_cpl\` 
-            (id_cpl, id_cpmk, id_mk, id_tahun) 
-            VALUES (?, ?, ?, ?)
+            (id_cpl, id_cpmk, id_mk, id_tahun, created_by) 
+            VALUES (?, ?, ?, ?, ?)
         `;
         const [result] = await db.query(query, [
             data.id_cpl,
             data.id_cpmk,
             data.id_mk,
-            data.id_tahun
+            data.id_tahun,
+            data.created_by || 1
         ]);
         return result.insertId;
     }
@@ -72,7 +73,7 @@ class PetaPemenuhanCpl2B3 {
     static async update(id, data) {
         const query = `
             UPDATE \`2b3_peta_pemenuhan_cpl\` 
-            SET id_cpl = ?, id_cpmk = ?, id_mk = ?, id_tahun = ?
+            SET id_cpl = ?, id_cpmk = ?, id_mk = ?, id_tahun = ?, updated_by = ?, updated_at = NOW()
             WHERE id_2b3 = ?
         `;
         const [result] = await db.query(query, [
@@ -80,15 +81,27 @@ class PetaPemenuhanCpl2B3 {
             data.id_cpmk,
             data.id_mk,
             data.id_tahun,
+            data.updated_by || 1,
             id
         ]);
         return result.affectedRows;
     }
 
-    // 5. Delete Data
+    // 5. Hard Delete Data
     static async hardDelete(id) {
-        const query = 'DELETE FROM \`2b3_peta_pemenuhan_cpl\` WHERE id_2b3 = ?';
+        const query = 'DELETE FROM `2b3_peta_pemenuhan_cpl` WHERE id_2b3 = ?';
         const [result] = await db.query(query, [id]);
+        return result.affectedRows;
+    }
+
+    // 6. Soft Delete Data
+    static async softDelete(id, user_id) {
+        const query = `
+            UPDATE \`2b3_peta_pemenuhan_cpl\` 
+            SET deleted_at = NOW(), deleted_by = ?
+            WHERE id_2b3 = ?
+        `;
+        const [result] = await db.query(query, [user_id || 1, id]);
         return result.affectedRows;
     }
 }

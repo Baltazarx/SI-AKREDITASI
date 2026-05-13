@@ -390,80 +390,82 @@ export default function PengembanganPage() {
               <p className="text-gray-400 dark:text-gray-600 font-bold text-xl tracking-tight">Belum ada data pengembangan DTPR</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead className="bg-gray-50/50 dark:bg-gray-800/50 border-b border-gray-100 dark:border-gray-800">
+            <div className="overflow-x-auto p-4">
+              <table className="w-full border-collapse border border-gray-300 dark:border-gray-700 text-sm">
+                <thead>
                   {showTrash ? (
-                    <tr>
-                      <th className="px-8 py-5 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800">Dosen DTPR</th>
-                      <th className="px-8 py-5 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800">Pengembangan</th>
-                      <th className="px-8 py-5 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800 text-center">Tahun</th>
-                      <th className="px-8 py-5 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">Aksi</th>
+                    <tr className="bg-gray-100 dark:bg-gray-800 text-[11px] font-black text-gray-700 dark:text-gray-300 uppercase text-center">
+                      <th className="px-4 py-3 border border-gray-300 dark:border-gray-700">Dosen DTPR</th>
+                      <th className="px-4 py-3 border border-gray-300 dark:border-gray-700">Pengembangan</th>
+                      <th className="px-4 py-3 border border-gray-300 dark:border-gray-700">Tahun</th>
+                      <th className="px-4 py-3 border border-gray-300 dark:border-gray-700">Aksi</th>
                     </tr>
                   ) : (
                     <>
-                      <tr className="border-b border-gray-100 dark:border-gray-800">
-                        <th colSpan="2" className="px-8 py-4 text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest bg-gray-50/30 dark:bg-gray-800/20 border-r border-gray-100 dark:border-gray-800 text-center">Tahun Akademik</th>
-                        <th className="px-6 py-4 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800 text-center">TS-2</th>
-                        <th className="px-6 py-4 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800 text-center">TS-1</th>
-                        <th className="px-6 py-4 text-[11px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800 text-center bg-blue-50/50 dark:bg-blue-900/20">TS ({pivotedDataInfo.ts})</th>
-                        <th rowSpan="3" className="px-8 py-5 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] border-l border-gray-100 dark:border-gray-800 text-center align-middle">Link Bukti</th>
-                        <th rowSpan="3" className="px-8 py-5 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] text-center align-middle">Aksi</th>
+                      {/* Baris 1: Tahun Akademik + TS cols + Link Bukti (rowspan 3) + Aksi (rowspan 3) */}
+                      <tr className="bg-gray-100 dark:bg-gray-800 text-[11px] font-black text-gray-700 dark:text-gray-300 text-center">
+                        <th colSpan="2" className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-left uppercase">Tahun Akademik</th>
+                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 uppercase">TS-2</th>
+                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 uppercase">TS-1</th>
+                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 uppercase">TS</th>
+                        <th rowSpan="3" className="px-4 py-3 border border-gray-300 dark:border-gray-700 align-middle uppercase">Link Bukti</th>
+                        <th rowSpan="3" className="px-4 py-3 border border-gray-300 dark:border-gray-700 align-middle uppercase">Aksi</th>
                       </tr>
-                      <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/20 dark:bg-gray-800/10">
-                        <th colSpan="2" className="px-8 py-4 text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest border-r border-gray-100 dark:border-gray-800 text-center">Jumlah Dosen DTPR</th>
-                        <th className="px-6 py-4 text-sm font-black text-gray-900 dark:text-white border-r border-gray-100 dark:border-gray-800 text-center">{statTS2}</th>
-                        <th className="px-6 py-4 text-sm font-black text-gray-900 dark:text-white border-r border-gray-100 dark:border-gray-800 text-center">{statTS1}</th>
-                        <th className="px-6 py-4 text-sm font-black text-blue-600 dark:text-blue-400 border-r border-gray-100 dark:border-gray-800 text-center bg-blue-50/30 dark:bg-blue-900/30">{statTS}</th>
+                      {/* Baris 2: Jumlah Dosen DTPR */}
+                      <tr className="bg-gray-100 dark:bg-gray-800 text-[11px] font-black text-gray-700 dark:text-gray-300 text-center">
+                        <th colSpan="2" className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-left uppercase">Jumlah Dosen DTPR</th>
+                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">{statTS2}</th>
+                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">{statTS1}</th>
+                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">{statTS}</th>
                       </tr>
-                      <tr>
-                        <th className="px-8 py-5 text-[11px] font-black text-gray-900 dark:text-white uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800">Jenis Pengembangan DTPR</th>
-                        <th className="px-8 py-5 text-[11px] font-black text-gray-900 dark:text-white uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800">Nama DTPR</th>
-                        <th colSpan="3" className="px-6 py-5 text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] border-r border-gray-100 dark:border-gray-800 text-center bg-gray-50/10 dark:bg-gray-800/20">Jumlah</th>
+                      {/* Baris 3: Jenis / Nama DTPR / Jumlah */}
+                      <tr className="bg-gray-100 dark:bg-gray-800 text-[11px] font-black text-gray-700 dark:text-gray-300 text-center">
+                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-left uppercase">Jenis Pengembangan DTPR</th>
+                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-left uppercase">Nama DTPR</th>
+                        <th colSpan="3" className="px-4 py-3 border border-gray-300 dark:border-gray-700 uppercase">Jumlah</th>
                       </tr>
                     </>
                   )}
                 </thead>
-                <tbody className="divide-y divide-gray-50 dark:divide-gray-800">
+                <tbody>
                   {showTrash ? (
                     trashData.map((item) => (
-                      <tr key={item.id_pengembangan} className="hover:bg-orange-50/30 dark:hover:bg-orange-900/10 transition-colors group">
-                        <td className="px-8 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 font-black text-gray-900 dark:text-white">{item.nama_dtpr}</td>
-                        <td className="px-8 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 text-sm text-gray-600 dark:text-gray-400">{item.jenis_pengembangan}</td>
-                        <td className="px-8 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 text-center">
-                          <span className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full text-[10px] font-black">{item.nama_tahun}</span>
+                      <tr key={item.id_pengembangan} className="hover:bg-orange-50/30 dark:hover:bg-orange-900/10 transition-colors text-center text-xs">
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-black text-gray-900 dark:text-white text-left">{item.nama_dtpr}</td>
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 text-left">{item.jenis_pengembangan}</td>
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700">
+                          <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded text-[10px] font-black">{item.nama_tahun || item.id_tahun}</span>
                         </td>
-                        <td className="px-8 py-6">
-                          <div className="inline-flex items-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-1.5 rounded-xl shadow-sm">
-                            <button onClick={() => handleRestore(item.id_pengembangan)} className="p-1.5 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-lg transition" title="Restore"><RotateCcw size={16} /></button>
-                            <div className="w-px h-4 bg-gray-200 dark:bg-gray-800 mx-2"></div>
-                            <button onClick={() => handleHardDelete(item.id_pengembangan)} className="p-1.5 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition" title="Hapus Permanen"><Trash size={16} /></button>
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700">
+                          <div className="flex items-center justify-center gap-2">
+                            <button onClick={() => handleRestore(item.id_pengembangan)} className="p-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-lg transition" title="Restore"><RotateCcw size={15} /></button>
+                            <button onClick={() => handleHardDelete(item.id_pengembangan)} className="p-1.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus Permanen"><Trash size={15} /></button>
                           </div>
                         </td>
                       </tr>
                     ))
                   ) : (
                     pivotedDataInfo.data.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors group">
-                        <td className="px-8 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 text-sm font-bold text-gray-600 dark:text-gray-400">{row.jenis_pengembangan}</td>
-                        <td className="px-8 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 font-black text-gray-900 dark:text-white">{row.nama_dtpr}</td>
-                        <td className="px-6 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 text-center">
-                          <div className={`text-sm font-bold ${row.ts2 > 0 ? 'text-gray-900 dark:text-white' : 'text-gray-200 dark:text-gray-700'}`}>{row.ts2 || '-'}</div>
+                      <tr key={idx} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors text-center text-xs">
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-bold text-gray-600 dark:text-gray-400 text-left">{row.jenis_pengembangan}</td>
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-black text-gray-900 dark:text-white text-left">{row.nama_dtpr}</td>
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-bold text-gray-700 dark:text-gray-300">{row.ts2 || '-'}</td>
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-bold text-gray-700 dark:text-gray-300">{row.ts1 || '-'}</td>
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-black text-gray-900 dark:text-white">{row.ts || '-'}</td>
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700">
+                          {(() => {
+                            const tsItem = row.raw.find(ri => {
+                              const tObj = tahunList.find(t => t.id_tahun === ri.id_tahun);
+                              return tObj && parseInt(tObj.tahun) === currentTSYear;
+                            });
+                            return tsItem?.link_bukti ? (
+                              <a href={tsItem.link_bukti} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-700 font-bold bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-lg transition text-xs">
+                                <ExternalLink size={12} /> Buka
+                              </a>
+                            ) : <span className="text-gray-400 dark:text-gray-600 italic">-</span>;
+                          })()}
                         </td>
-                        <td className="px-6 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 text-center">
-                          <div className={`text-sm font-bold ${row.ts1 > 0 ? 'text-gray-900 dark:text-white' : 'text-gray-200 dark:text-gray-700'}`}>{row.ts1 || '-'}</div>
-                        </td>
-                        <td className="px-6 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 text-center bg-blue-50/20 dark:bg-blue-900/10">
-                          <div className={`text-sm font-black ${row.ts > 0 ? 'text-blue-600 dark:text-blue-400' : 'text-gray-200 dark:text-gray-700'}`}>{row.ts || '-'}</div>
-                        </td>
-                        <td className="px-8 py-6 border-r border-gray-50 dark:border-gray-800 last:border-0 text-center">
-                          {row.link_bukti ? (
-                            <a href={row.link_bukti} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-black text-[9px] uppercase tracking-widest">
-                              <ExternalLink size={10} /> Lihat Bukti
-                            </a>
-                          ) : <span className="text-gray-300 dark:text-gray-700">-</span>}
-                        </td>
-                        <td className="px-8 py-6">
+                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700">
                           <div className="flex justify-center gap-2">
                             {(() => {
                               const currentYearItem = row.raw.find(ri => {

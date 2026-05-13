@@ -13,12 +13,11 @@ const controller3a3 = {
         } catch (error) { res.status(500).json({ success: false, message: error.message }); }
     },
 
-    // Menampilkan isi "Tempat Sampah"
+    // Menampilkan isi "Tempat Sampah" (semua tahun, filter hanya prodi)
     trash: async (req, res) => {
         try {
-            const { id_tahun } = req.query;
             const id_prodi = req.query.id_prodi ? parseInt(req.query.id_prodi) : null;
-            const data = await Model3a3.findAllDeleted(id_tahun, id_prodi);
+            const data = await Model3a3.findAllDeleted(id_prodi);
             res.status(200).json({ success: true, data });
         } catch (error) { res.status(500).json({ success: false, message: error.message }); }
     },

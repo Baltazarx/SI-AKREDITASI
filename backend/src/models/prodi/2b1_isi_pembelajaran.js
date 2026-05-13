@@ -2,7 +2,7 @@ const db = require('../../config/db');
 
 class IsiPembelajaran2B1 {
     // 1. Get All Data
-    static async getAll(id_prodi, id_tahun, is_trash = false) {
+    static async getAll(id_prodi, id_tahun) {
         let query = `
             SELECT 
                 b.id_2b1, b.id_mk, b.id_pl, b.id_tahun,
@@ -13,7 +13,7 @@ class IsiPembelajaran2B1 {
             LEFT JOIN master_mata_kuliah mk ON b.id_mk = mk.id_mk
             LEFT JOIN master_profil_lulusan pl ON b.id_pl = pl.id_pl
             LEFT JOIN tahun_akademik t ON b.id_tahun = t.id_tahun
-            WHERE b.deleted_at IS ${is_trash ? 'NOT NULL' : 'NULL'}
+            WHERE 1=1
         `;
         const params = [];
         if (id_prodi) {
@@ -42,7 +42,7 @@ class IsiPembelajaran2B1 {
             LEFT JOIN master_mata_kuliah mk ON b.id_mk = mk.id_mk
             LEFT JOIN master_profil_lulusan pl ON b.id_pl = pl.id_pl
             LEFT JOIN tahun_akademik t ON b.id_tahun = t.id_tahun
-            WHERE b.id_2b1 = ? AND b.deleted_at IS NULL
+            WHERE b.id_2b1 = ?
         `;
         const [rows] = await db.query(query, [id]);
         return rows[0];
@@ -52,14 +52,13 @@ class IsiPembelajaran2B1 {
     static async create(data) {
         const query = `
             INSERT INTO \`2b1_isi_pembelajaran\` 
-            (id_mk, id_pl, id_tahun, created_by) 
-            VALUES (?, ?, ?, ?)
+            (id_mk, id_pl, id_tahun) 
+            VALUES (?, ?, ?)
         `;
         const [result] = await db.query(query, [
             data.id_mk,
             data.id_pl,
-            data.id_tahun,
-            data.created_by
+            data.id_tahun
         ]);
         return result.insertId;
     }
@@ -68,31 +67,19 @@ class IsiPembelajaran2B1 {
     static async update(id, data) {
         const query = `
             UPDATE \`2b1_isi_pembelajaran\` 
-            SET id_mk = ?, id_pl = ?, id_tahun = ?, updated_by = ?, updated_at = CURRENT_TIMESTAMP
+            SET id_mk = ?, id_pl = ?, id_tahun = ?
             WHERE id_2b1 = ?
         `;
         const [result] = await db.query(query, [
             data.id_mk,
             data.id_pl,
             data.id_tahun,
-            data.updated_by,
             id
         ]);
         return result.affectedRows;
     }
 
     // 5. Delete Data
-    static async softDelete(id, deleted_by) {
-        const query = `
-            UPDATE \`2b1_isi_pembelajaran\`
-            SET deleted_at = CURRENT_TIMESTAMP, deleted_by = ?, updated_by = ?
-            WHERE id_2b1 = ?
-        `;
-        const [result] = await db.query(query, [deleted_by, deleted_by, id]);
-        return result.affectedRows;
-    }
-
-    // 6. Delete Data (Permanent)
     static async hardDelete(id) {
         const query = 'DELETE FROM \`2b1_isi_pembelajaran\` WHERE id_2b1 = ?';
         const [result] = await db.query(query, [id]);

@@ -28,6 +28,18 @@ const controller2d = {
         } catch (error) { res.status(500).json({ success: false, message: error.message }); }
     },
 
+    update: async (req, res) => {
+        try {
+            const { id } = req.params;
+            let { id_ref_sumber, nama_sumber_baru, jenis_rekognisi, link_bukti } = req.body;
+            if (nama_sumber_baru && nama_sumber_baru.trim() !== "") {
+                id_ref_sumber = await Model2d.findOrCreateSource(nama_sumber_baru);
+            }
+            await Model2d.update(id, { id_ref_sumber, jenis_rekognisi, link_bukti, updated_by: req.user.id_user });
+            res.status(200).json({ success: true, message: "Data Rekognisi Berhasil Diperbarui" });
+        } catch (error) { res.status(500).json({ success: false, message: error.message }); }
+    },
+
     trash: async (req, res) => {
         try { const data = await Model2d.findTrash(req.query.id_prodi); res.status(200).json({ success: true, data }); }
         catch (error) { res.status(500).json({ success: false, message: error.message }); }
@@ -59,6 +71,12 @@ const controller2d = {
             const rawData = await Model2d.findAllRange(id_prodi, targetTS);
             const grads = await Model2d.getGraduatesCount(id_prodi, targetTS);
 
+            // Dapatkan tahun string dari targetTS
+            const db = require('../../config/db');
+            const [tahunObj] = await db.execute("SELECT tahun FROM tahun_akademik WHERE id_tahun = ?", [targetTS]);
+            const anchorYearString = tahunObj[0]?.tahun || new Date().getFullYear().toString();
+            const anchorYear = parseInt(anchorYearString.split('/')[0]);
+
             const workbook = new ExcelJS.Workbook();
             const worksheet = workbook.addWorksheet('2.D Rekognisi');
 
@@ -80,9 +98,9 @@ const controller2d = {
             worksheet.mergeCells('F2:F3'); worksheet.getCell('F2').value = 'Link Bukti';
             
             // Sub-header Baris 3
-            worksheet.getCell('C3').value = `TS-2 (${targetTS-2})`;
-            worksheet.getCell('D3').value = `TS-1 (${targetTS-1})`;
-            worksheet.getCell('E3').value = `TS (${targetTS})`;
+            worksheet.getCell('C3').value = `TS-2 (${anchorYear-2})`;
+            worksheet.getCell('D3').value = `TS-1 (${anchorYear-1})`;
+            worksheet.getCell('E3').value = `TS (${anchorYear})`;
 
             // Styling Header (Grey #BFBFBF)
             const greyFill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'BFBFBF' } };
@@ -97,9 +115,10 @@ const controller2d = {
             // 3. Data Rows (Kuning #FFFF00)
             let counts = { ts2: 0, ts1: 0, ts: 0 };
             rawData.forEach(item => {
-                const isTS2 = item.id_tahun == targetTS - 2 ? 'V' : '';
-                const isTS1 = item.id_tahun == targetTS - 1 ? 'V' : '';
-                const isTS = item.id_tahun == targetTS ? 'V' : '';
+                const itemYear = parseInt(item.nama_tahun.split('/')[0]);
+                const isTS2 = itemYear === anchorYear - 2 ? 'V' : '';
+                const isTS1 = itemYear === anchorYear - 1 ? 'V' : '';
+                const isTS = itemYear === anchorYear ? 'V' : '';
 
                 if (isTS2) counts.ts2++; if (isTS1) counts.ts1++; if (isTS) counts.ts++;
 
@@ -114,15 +133,21 @@ const controller2d = {
             });
 
             // 4. Footer Section (Precision Layout)
+            // Lulusan Map: Kita butuh id_tahun dari t-2, t-1, t
+            const [tahunList] = await db.execute("SELECT id_tahun, tahun FROM tahun_akademik");
+            const idTahunTS = tahunList.find(t => parseInt(t.tahun.split('/')[0]) === anchorYear)?.id_tahun;
+            const idTahunTS1 = tahunList.find(t => parseInt(t.tahun.split('/')[0]) === anchorYear - 1)?.id_tahun;
+            const idTahunTS2 = tahunList.find(t => parseInt(t.tahun.split('/')[0]) === anchorYear - 2)?.id_tahun;
+
             const graduatesMap = {}; grads.forEach(g => graduatesMap[g.id_tahun] = g.total);
 
             const footerData = [
                 { label: 'Jumlah Rekognisi', vals: [counts.ts2, counts.ts1, counts.ts] },
-                { label: 'Jumlah Lulusan', vals: [graduatesMap[targetTS-2] || 0, graduatesMap[targetTS-1] || 0, graduatesMap[targetTS] || 0] },
+                { label: 'Jumlah Lulusan', vals: [graduatesMap[idTahunTS2] || 0, graduatesMap[idTahunTS1] || 0, graduatesMap[idTahunTS] || 0] },
                 { label: 'Persentase', vals: [
-                    ((counts.ts2 / (graduatesMap[targetTS-2] || 1)) * 100).toFixed(2) + '%',
-                    ((counts.ts1 / (graduatesMap[targetTS-1] || 1)) * 100).toFixed(2) + '%',
-                    ((counts.ts / (graduatesMap[targetTS] || 1)) * 100).toFixed(2) + '%'
+                    ((counts.ts2 / (graduatesMap[idTahunTS2] || 1)) * 100).toFixed(2) + '%',
+                    ((counts.ts1 / (graduatesMap[idTahunTS1] || 1)) * 100).toFixed(2) + '%',
+                    ((counts.ts / (graduatesMap[idTahunTS] || 1)) * 100).toFixed(2) + '%'
                 ] }
             ];
 

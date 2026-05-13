@@ -1,4 +1,6 @@
 const ModelPenelitian = require('../../models/lppm/3a2_penelitian_dtpr');
+const ExcelJS = require('exceljs');
+const db = require('../../config/db');
 
 const penelitianController = {
     index: async (req, res) => {
@@ -91,11 +93,20 @@ const penelitianController = {
 
     exportExcel: async (req, res) => {
         try {
-            const ExcelJS = require('exceljs');
             const { id_prodi, id_tahun } = req.query;
             const targetTS = parseInt(id_tahun);
             const rawData = await ModelPenelitian.findAllRange(id_prodi, targetTS);
             
+            let prodiName = id_prodi;
+            let tahunName = id_tahun;
+            try {
+                const [prodiRows] = await db.execute('SELECT nama_prodi FROM prodi WHERE id_prodi = ?', [id_prodi]);
+                if(prodiRows[0]) prodiName = prodiRows[0].nama_prodi.replace(/[^a-zA-Z0-9]/g, '_');
+                
+                const [tahunRows] = await db.execute('SELECT tahun FROM tahun_akademik WHERE id_tahun = ?', [id_tahun]);
+                if(tahunRows[0]) tahunName = String(tahunRows[0].tahun).replace(/[^a-zA-Z0-9]/g, '_');
+            } catch (e) { console.error('Error fetching prodi/tahun name:', e); }
+
             const workbook = new ExcelJS.Workbook();
             
             // Helper function for styling headers
@@ -244,60 +255,241 @@ const penelitianController = {
 
             // SHEET 2: 3.C.1 Kerjasama
             const ws2 = workbook.addWorksheet('3.C.1');
-            ws2.mergeCells('A1:F1');
-            ws2.getCell('A1').value = 'Tabel 3.C.1 Kerjasama Penelitian';
-            ws2.getCell('A1').font = { bold: true, size: 12 };
-            ws2.getRow(2).values = ['Judul Kegiatan Kerjasama', 'Mitra Kerja Sama', 'Tingkat (Internasional/Nasional/Lokal)', 'Judul Penelitian', 'Durasi', 'Manfaat bagi PS'];
-            styleHeader(ws2.getRow(2));
+            ws2.mergeCells('A1:I1');
+            const h2A = ws2.getCell('A1');
+            h2A.value = 'Tabel 3.C.1 Kerjasama Penelitian';
+            h2A.font = { bold: true, size: 12 };
+            h2A.alignment = { horizontal: 'center', vertical: 'middle' };
+
+            // Header Row 2 & 3
+            ws2.mergeCells('A2:A3'); ws2.getCell('A2').value = 'No';
+            ws2.mergeCells('B2:B3'); ws2.getCell('B2').value = 'Judul Kerjasama';
+            ws2.mergeCells('C2:C3'); ws2.getCell('C2').value = 'Mitra Kerja Sama';
             
+            ws2.getCell('D2').value = 'Sumber';
+            ws2.getCell('D3').value = 'L/N/I';
+
+            ws2.mergeCells('E2:E3'); ws2.getCell('E2').value = 'Durasi (Tahun)';
+
+            ws2.mergeCells('F2:H2'); ws2.getCell('F2').value = 'Pendanaan (Rp Juta)';
+            ws2.getCell('F3').value = 'TS-2';
+            ws2.getCell('G3').value = 'TS-1';
+            ws2.getCell('H3').value = 'TS';
+            
+            ws2.mergeCells('I2:I3'); ws2.getCell('I2').value = 'Link Bukti';
+
+            styleHeader(ws2.getRow(2));
+            styleHeader(ws2.getRow(3));
+
+            let sumKTS2 = 0, sumKTS1 = 0, sumKTS = 0;
+            let countMitra = 0;
+            let counterKerjasama = 1;
+
             rawData.forEach(item => {
                 if(item.kerjasama && item.kerjasama.length > 0) {
                     item.kerjasama.forEach(k => {
-                        const row = ws2.addRow([k.judul_kerjasama, k.mitra_kerja_sama, k.sumber, item.judul_penelitian, k.durasi, 'Peningkatan IKU']);
+                        const ts2 = k.id_tahun === targetTS - 2 ? k.jumlah_dana : 0;
+                        const ts1 = k.id_tahun === targetTS - 1 ? k.jumlah_dana : 0;
+                        const ts = k.id_tahun === targetTS ? k.jumlah_dana : 0;
+
+                        sumKTS2 += ts2;
+                        sumKTS1 += ts1;
+                        sumKTS += ts;
+                        countMitra++;
+
+                        const row = ws2.addRow([
+                            counterKerjasama++,
+                            k.judul_kerjasama || '-',
+                            k.mitra_kerja_sama || '-',
+                            formatSumber(k.sumber),
+                            k.durasi || 0,
+                            ts2,
+                            ts1,
+                            ts,
+                            k.link_bukti || '-'
+                        ]);
                         styleData(row);
                     });
                 }
             });
-            ws2.columns = [{ width: 35 }, { width: 25 }, { width: 20 }, { width: 35 }, { width: 10 }, { width: 20 }];
+
+            // Footers
+            const fKRow1 = ws2.addRow([]);
+            ws2.mergeCells(`A${fKRow1.number}:E${fKRow1.number}`);
+            fKRow1.getCell(1).value = 'Jumlah Dana';
+            fKRow1.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            fKRow1.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'BFBFBF' } };
+            fKRow1.getCell(6).value = sumKTS2; fKRow1.getCell(6).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fKRow1.getCell(7).value = sumKTS1; fKRow1.getCell(7).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fKRow1.getCell(8).value = sumKTS; fKRow1.getCell(8).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fKRow1.getCell(9).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fKRow1.eachCell(c => { c.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } } });
+
+            const fKRow2 = ws2.addRow([]);
+            ws2.mergeCells(`A${fKRow2.number}:B${fKRow2.number}`);
+            fKRow2.getCell(1).value = 'Jumlah Mitra Kerjasama';
+            fKRow2.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            fKRow2.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'BFBFBF' } };
+            ws2.mergeCells(`C${fKRow2.number}:D${fKRow2.number}`);
+            fKRow2.getCell(3).value = countMitra;
+            fKRow2.getCell(3).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            ws2.mergeCells(`E${fKRow2.number}:I${fKRow2.number}`);
+            fKRow2.getCell(5).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'BFBFBF' } };
+            fKRow2.eachCell(c => { c.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } } });
+
+            ws2.addRow(['L: Lokal/Wilayah, N: Nasional, I : Internasional']);
+
+            ws2.columns = [
+                { width: 5 }, { width: 35 }, { width: 25 }, { width: 10 }, 
+                { width: 15 }, { width: 15 }, { width: 15 }, { width: 15 }, { width: 25 }
+            ];
 
             // SHEET 3: 3.C.2 Publikasi
             const ws3 = workbook.addWorksheet('3.C.2');
-            ws3.mergeCells('A1:E1');
-            ws3.getCell('A1').value = 'Tabel 3.C.2 Publikasi Ilmiah Mahasiswa / DTPR';
-            ws3.getCell('A1').font = { bold: true, size: 12 };
-            ws3.getRow(2).values = ['Judul Publikasi', 'Jenis Publikasi', 'Judul Penelitian', 'Tahun', 'Tautan (Link)'];
+            ws3.mergeCells('A1:H1');
+            const h3A = ws3.getCell('A1');
+            h3A.value = 'Tabel 3.C.2 Publikasi Penelitian';
+            h3A.font = { bold: true, size: 12 };
+            h3A.alignment = { horizontal: 'center', vertical: 'middle' };
+
+            // Header Row 2 & 3
+            ws3.mergeCells('A2:A3'); ws3.getCell('A2').value = 'No';
+            ws3.mergeCells('B2:B3'); ws3.getCell('B2').value = 'Nama DTPR';
+            ws3.mergeCells('C2:C3'); ws3.getCell('C2').value = 'Judul Publikasi';
+            ws3.mergeCells('D2:D3'); ws3.getCell('D2').value = 'Jenis Publikasi (IB/I/S1,S2,S3,S4,T)';
+
+            ws3.mergeCells('E2:G2'); ws3.getCell('E2').value = 'Tahun Terbit (beri tanda √)';
+            ws3.getCell('E3').value = 'TS-2';
+            ws3.getCell('F3').value = 'TS-1';
+            ws3.getCell('G3').value = 'TS';
+
+            ws3.mergeCells('H2:H3'); ws3.getCell('H2').value = 'Link Bukti';
+
             styleHeader(ws3.getRow(2));
+            styleHeader(ws3.getRow(3));
+
+            let countPubTS2 = 0, countPubTS1 = 0, countPubTS = 0;
+            let counterPub = 1;
 
             rawData.forEach(item => {
                 if(item.publikasi && item.publikasi.length > 0) {
                     item.publikasi.forEach(p => {
-                        const row = ws3.addRow([p.judul_publikasi, p.jenis_publikasi, item.judul_penelitian, item.id_tahun, p.link_bukti]);
+                        const isTS2 = p.id_tahun === targetTS - 2;
+                        const isTS1 = p.id_tahun === targetTS - 1;
+                        const isTS = p.id_tahun === targetTS;
+
+                        if(isTS2) countPubTS2++;
+                        if(isTS1) countPubTS1++;
+                        if(isTS) countPubTS++;
+
+                        const row = ws3.addRow([
+                            counterPub++,
+                            item.nama_dosen,
+                            p.judul_publikasi || '-',
+                            p.jenis_publikasi || '-',
+                            isTS2 ? '√' : '',
+                            isTS1 ? '√' : '',
+                            isTS ? '√' : '',
+                            p.link_bukti || '-'
+                        ]);
                         styleData(row);
                     });
                 }
             });
-            ws3.columns = [{ width: 40 }, { width: 20 }, { width: 40 }, { width: 10 }, { width: 30 }];
+
+            // Footers
+            const fPRow1 = ws3.addRow([]);
+            ws3.mergeCells(`A${fPRow1.number}:D${fPRow1.number}`);
+            fPRow1.getCell(1).value = 'Jumlah Publikasi';
+            fPRow1.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            fPRow1.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'BFBFBF' } };
+            fPRow1.getCell(5).value = countPubTS2; fPRow1.getCell(5).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fPRow1.getCell(6).value = countPubTS1; fPRow1.getCell(6).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fPRow1.getCell(7).value = countPubTS; fPRow1.getCell(7).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fPRow1.getCell(8).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fPRow1.eachCell(c => { c.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } } });
+
+            ws3.addRow(['Keterangan:']);
+            ws3.addRow(['1. IB: Internasional Bereputasi, I: Internasional tidak Bereputasi']);
+            ws3.addRow(['2. S1: Jurnal Sinta 1, S2: Jurnal Sinta 2, S3: Jurnal Sinta 3, S4: Jurnal Sinta 4, T: Tidak Terakreditasi']);
+
+            ws3.columns = [
+                { width: 5 }, { width: 25 }, { width: 40 }, { width: 35 }, 
+                { width: 10 }, { width: 10 }, { width: 10 }, { width: 25 }
+            ];
 
             // SHEET 4: 3.C.3 HKI
             const ws4 = workbook.addWorksheet('3.C.3');
-            ws4.mergeCells('A1:E1');
-            ws4.getCell('A1').value = 'Tabel 3.C.3 Perolehan HKI';
-            ws4.getCell('A1').font = { bold: true, size: 12 };
-            ws4.getRow(2).values = ['Judul HKI', 'Jenis HKI', 'Judul Penelitian', 'Tahun', 'Tautan (Link)'];
+            ws4.mergeCells('A1:H1');
+            const h4A = ws4.getCell('A1');
+            h4A.value = 'Tabel 3.C.3 Perolehan HKI (Granted)';
+            h4A.font = { bold: true, size: 12 };
+            h4A.alignment = { horizontal: 'center', vertical: 'middle' };
+
+            // Header Row 2 & 3
+            ws4.mergeCells('A2:A3'); ws4.getCell('A2').value = 'No';
+            ws4.mergeCells('B2:B3'); ws4.getCell('B2').value = 'Judul';
+            ws4.mergeCells('C2:C3'); ws4.getCell('C2').value = 'Jenis HKI';
+            ws4.mergeCells('D2:D3'); ws4.getCell('D2').value = 'Nama DTPR';
+
+            ws4.mergeCells('E2:G2'); ws4.getCell('E2').value = 'Tahun Perolehan (Beri Tanda √)';
+            ws4.getCell('E3').value = 'TS-2';
+            ws4.getCell('F3').value = 'TS-1';
+            ws4.getCell('G3').value = 'TS';
+
+            ws4.mergeCells('H2:H3'); ws4.getCell('H2').value = 'Link Bukti';
+
             styleHeader(ws4.getRow(2));
+            styleHeader(ws4.getRow(3));
+
+            let countHKITS2 = 0, countHKITS1 = 0, countHKITS = 0;
+            let counterHKI = 1;
 
             rawData.forEach(item => {
                 if(item.hki && item.hki.length > 0) {
                     item.hki.forEach(h => {
-                        const row = ws4.addRow([h.judul_hki, h.jenis_hki, item.judul_penelitian, item.id_tahun, h.link_bukti]);
+                        const isTS2 = h.id_tahun === targetTS - 2;
+                        const isTS1 = h.id_tahun === targetTS - 1;
+                        const isTS = h.id_tahun === targetTS;
+
+                        if(isTS2) countHKITS2++;
+                        if(isTS1) countHKITS1++;
+                        if(isTS) countHKITS++;
+
+                        const row = ws4.addRow([
+                            counterHKI++,
+                            h.judul_hki || '-',
+                            h.jenis_hki || '-',
+                            item.nama_dosen,
+                            isTS2 ? '√' : '',
+                            isTS1 ? '√' : '',
+                            isTS ? '√' : '',
+                            h.link_bukti || '-'
+                        ]);
                         styleData(row);
                     });
                 }
             });
-            ws4.columns = [{ width: 40 }, { width: 20 }, { width: 40 }, { width: 10 }, { width: 30 }];
+
+            // Footers
+            const fHRow1 = ws4.addRow([]);
+            ws4.mergeCells(`A${fHRow1.number}:D${fHRow1.number}`);
+            fHRow1.getCell(1).value = 'Jumlah HKI';
+            fHRow1.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
+            fHRow1.getCell(1).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'BFBFBF' } };
+            fHRow1.getCell(5).value = countHKITS2; fHRow1.getCell(5).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fHRow1.getCell(6).value = countHKITS1; fHRow1.getCell(6).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fHRow1.getCell(7).value = countHKITS; fHRow1.getCell(7).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fHRow1.getCell(8).fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFFF00' } };
+            fHRow1.eachCell(c => { c.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } } });
+
+            ws4.columns = [
+                { width: 5 }, { width: 40 }, { width: 20 }, { width: 25 }, 
+                { width: 10 }, { width: 10 }, { width: 10 }, { width: 25 }
+            ];
 
             res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            res.setHeader('Content-Disposition', `attachment; filename=LKPS_3A2_Penelitian_Prodi_${id_prodi}.xlsx`);
+            res.setHeader('Content-Disposition', `attachment; filename=LKPS_3A2_Penelitian_Prodi_${prodiName}_Tahun_${tahunName}.xlsx`);
             await workbook.xlsx.write(res);
             res.end();
         } catch (error) { res.status(500).send(error.message); }

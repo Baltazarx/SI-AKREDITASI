@@ -393,6 +393,7 @@ export default function DataMahasiswaPage() {
                     <tr key={item.id_2a1} className="hover:bg-blue-50/30 transition-colors group">
                       <td className="px-8 py-6 border-r border-gray-50 last:border-0">
                         <div className="text-sm font-black text-gray-900 group-hover:text-blue-600 transition-colors">{item.nama_prodi}</div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

@@ -15,7 +15,7 @@ export default function SarprasPenelitianPage() {
   const [showTrash, setShowTrash] = useState(false);
   const [error, setError] = useState('');
   const [prodiList, setProdiList] = useState([]);
-  
+
   const [formData, setFormData] = useState({
     id_prodi: '',
     nama_prasarana: '',
@@ -72,15 +72,15 @@ export default function SarprasPenelitianPage() {
     try {
       const baseUrl = 'http://localhost:5000/api/sarpras/3a1-sarana-prasarana';
       const params = `?id_prodi=${filterIdProdi}`;
-      
+
       const [activeRes, trashRes] = await Promise.all([
         fetch(`${baseUrl}${params}`, { headers: { 'Authorization': `Bearer ${token}` } }),
         fetch(`${baseUrl}/trash${params}`, { headers: { 'Authorization': `Bearer ${token}` } }),
       ]);
-      
+
       const activeResult = await activeRes.json();
       const trashResult = await trashRes.json();
-      
+
       if (activeResult.success) setActiveData(activeResult.data || []);
       if (trashResult.success) setTrashData(trashResult.data || []);
     } catch (err) {
@@ -94,16 +94,16 @@ export default function SarprasPenelitianPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
-    
+
     const method = editingId ? 'PUT' : 'POST';
-    const url = editingId 
+    const url = editingId
       ? `http://localhost:5000/api/sarpras/3a1-sarana-prasarana/${editingId}`
       : 'http://localhost:5000/api/sarpras/3a1-sarana-prasarana';
 
     try {
       const res = await fetch(url, {
         method,
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
@@ -266,9 +266,9 @@ export default function SarprasPenelitianPage() {
           <div className="flex gap-3 items-end">
             <div className="flex-1 lg:w-64">
               <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Program Studi</label>
-              <select 
-                value={filterIdProdi} 
-                onChange={(e) => setFilterIdProdi(e.target.value)} 
+              <select
+                value={filterIdProdi}
+                onChange={(e) => setFilterIdProdi(e.target.value)}
                 className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-sm transition appearance-none cursor-pointer"
               >
                 {prodiList.map(p => (
@@ -279,8 +279,8 @@ export default function SarprasPenelitianPage() {
             <button onClick={fetchData} className="p-2.5 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
               <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
             </button>
-            <button 
-              onClick={() => setShowTrash(!showTrash)} 
+            <button
+              onClick={() => setShowTrash(!showTrash)}
               className={`px-4 py-2.5 rounded-xl font-bold text-sm transition border shadow-sm ${showTrash ? 'bg-orange-50 border-orange-200 text-orange-600' : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'}`}
             >
               {showTrash ? 'Lihat Aktif' : 'Lihat Sampah'}
@@ -296,26 +296,26 @@ export default function SarprasPenelitianPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
                   <label className="block text-sm font-bold text-gray-700 mb-2">Nama Prasarana Penelitian</label>
-                  <input type="text" value={formData.nama_prasarana} onChange={(e) => setFormData({...formData, nama_prasarana: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="Contoh: Laboratorium Riset AI & Data Science" required />
+                  <input type="text" value={formData.nama_prasarana} onChange={(e) => setFormData({ ...formData, nama_prasarana: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="Contoh: Laboratorium Riset AI & Data Science" required />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Daya Tampung</label>
-                  <input type="number" value={formData.daya_tampung} onChange={(e) => setFormData({...formData, daya_tampung: parseInt(e.target.value) || 0})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" min="0" />
+                  <input type="number" value={formData.daya_tampung} onChange={(e) => setFormData({ ...formData, daya_tampung: parseInt(e.target.value) || 0 })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" min="0" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Luas Ruang (m²)</label>
-                  <input type="number" step="0.01" value={formData.luas_ruang} onChange={(e) => setFormData({...formData, luas_ruang: parseFloat(e.target.value) || 0})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" min="0" />
+                  <input type="number" step="0.01" value={formData.luas_ruang} onChange={(e) => setFormData({ ...formData, luas_ruang: parseFloat(e.target.value) || 0 })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" min="0" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Status Milik</label>
-                  <select value={formData.status_milik} onChange={(e) => setFormData({...formData, status_milik: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium">
+                  <select value={formData.status_milik} onChange={(e) => setFormData({ ...formData, status_milik: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium">
                     <option value="M">Milik Sendiri (M)</option>
                     <option value="W">Sewa (W)</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Status Lisensi</label>
-                  <select value={formData.status_lisensi} onChange={(e) => setFormData({...formData, status_lisensi: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium">
+                  <select value={formData.status_lisensi} onChange={(e) => setFormData({ ...formData, status_lisensi: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium">
                     <option value="L">Berlisensi (L)</option>
                     <option value="P">Public Domain (P)</option>
                     <option value="T">Tidak Berlisensi (T)</option>
@@ -323,15 +323,15 @@ export default function SarprasPenelitianPage() {
                 </div>
                 <div className="md:col-span-2">
                   <label className="block text-sm font-bold text-gray-700 mb-2">Perangkat Riset & Spesifikasi</label>
-                  <textarea value={formData.perangkat} onChange={(e) => setFormData({...formData, perangkat: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" rows="3" placeholder="Server, GPU, Alat Ukur, Software Riset, dll" />
+                  <textarea value={formData.perangkat} onChange={(e) => setFormData({ ...formData, perangkat: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" rows="3" placeholder="Server, GPU, Alat Ukur, Software Riset, dll" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Info Tambahan / Fokus Riset</label>
-                  <input type="text" value={formData.info_tambahan} onChange={(e) => setFormData({...formData, info_tambahan: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="Bidang fokus penelitian" />
+                  <input type="text" value={formData.info_tambahan} onChange={(e) => setFormData({ ...formData, info_tambahan: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="Bidang fokus penelitian" />
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-2">Link Bukti Penelitian (Drive/Web)</label>
-                  <input type="text" value={formData.link_bukti} onChange={(e) => setFormData({...formData, link_bukti: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="https://..." />
+                  <input type="text" value={formData.link_bukti} onChange={(e) => setFormData({ ...formData, link_bukti: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="https://..." />
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-4">
@@ -354,60 +354,66 @@ export default function SarprasPenelitianPage() {
               <p className="text-gray-400 font-bold text-xl tracking-tight">Belum ada data sarpras penelitian</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead className="bg-gray-50/50 border-b border-gray-100">
-                  <tr>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0">Fasilitas Riset</th>
-                    <th className="px-6 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0 text-center">Daya / Luas</th>
-                    <th className="px-6 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0 text-center">Milik / Lisensi</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0">Fokus Riset</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">Aksi</th>
+            <div className="overflow-x-auto p-4">
+              <table className="w-full border-collapse border border-gray-300 text-sm">
+                <thead>
+                  <tr className="bg-gray-200 text-center text-[11px] font-black text-gray-700 uppercase">
+                    <th className="px-3 py-3 border border-gray-300">No</th>
+                    <th className="px-3 py-3 border border-gray-300">Nama<br />Prasarana</th>
+                    <th className="px-3 py-3 border border-gray-300">Daya<br />Tampung</th>
+                    <th className="px-3 py-3 border border-gray-300">Luas Ruang<br />(m²)</th>
+                    <th className="px-3 py-3 border border-gray-300">Milik Sendiri (M)/<br />Sewa (W)</th>
+                    <th className="px-3 py-3 border border-gray-300">Berlisensi (L)/<br /><em>Public Domain</em><br />(P)/Tidak<br />Berlisensi (T)</th>
+                    <th className="px-3 py-3 border border-gray-300">Perangkat</th>
+                    <th className="px-3 py-3 border border-gray-300">Info Tambahan</th>
+                    <th className="px-3 py-3 border border-gray-300">Link Bukti</th>
+                    <th className="px-3 py-3 border border-gray-300">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
-                  {(showTrash ? trashData : activeData).map((item) => (
-                    <tr key={item.id_3a1} className="hover:bg-blue-50/30 transition-colors group">
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0">
-                        <div className="text-sm font-black text-gray-900 group-hover:text-blue-600 transition-colors">{item.nama_prasarana || '-'}</div>
-                        <div className="text-[10px] text-gray-400 font-bold mt-1 uppercase tracking-wider line-clamp-1">{item.perangkat || '-'}</div>
+                <tbody>
+                  {(showTrash ? trashData : activeData).map((item, index) => (
+                    <tr key={item.id_3a1} className="bg-yellow-50 hover:bg-yellow-100 transition-colors text-center text-xs">
+                      <td className="px-3 py-3 border border-gray-300 font-bold text-gray-500">{index + 1}</td>
+                      <td className="px-3 py-3 border border-gray-300 font-bold text-gray-800 text-left">{item.nama_prasarana || '-'}</td>
+                      <td className="px-3 py-3 border border-gray-300 font-medium text-gray-700">{item.daya_tampung ?? '-'}</td>
+                      <td className="px-3 py-3 border border-gray-300 font-medium text-gray-700">{item.luas_ruang ?? '-'}</td>
+                      <td className="px-3 py-3 border border-gray-300">
+                        <span className={`inline-block px-2 py-0.5 rounded font-black text-[11px] border ${item.status_milik === 'M' ? 'bg-blue-50 border-blue-200 text-blue-700' : 'bg-gray-50 border-gray-200 text-gray-600'
+                          }`}>
+                          {item.status_milik || '-'}
+                        </span>
                       </td>
-                      <td className="px-6 py-6 border-r border-gray-50 last:border-0 text-center">
-                        <div className="flex flex-col">
-                          <span className="text-sm font-black text-gray-900">{item.daya_tampung || 0} Peneliti</span>
-                          <span className="text-[10px] text-gray-400 font-bold">{item.luas_ruang || 0} m²</span>
-                        </div>
+                      <td className="px-3 py-3 border border-gray-300">
+                        <span className={`inline-block px-2 py-0.5 rounded font-black text-[11px] border ${item.status_lisensi === 'L' ? 'bg-green-50 border-green-200 text-green-700' :
+                            item.status_lisensi === 'P' ? 'bg-purple-50 border-purple-200 text-purple-700' :
+                              'bg-red-50 border-red-200 text-red-700'
+                          }`}>
+                          {item.status_lisensi || '-'}
+                        </span>
                       </td>
-                      <td className="px-6 py-6 border-r border-gray-50 last:border-0 text-center">
-                        <div className="flex gap-1 justify-center">
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-black border ${item.status_milik === 'M' ? 'bg-blue-50 border-blue-100 text-blue-600' : 'bg-gray-50 border-gray-100 text-gray-400'}`}>{item.status_milik}</span>
-                          <span className="px-2 py-0.5 bg-purple-50 border border-purple-100 text-purple-600 rounded text-[10px] font-black">{item.status_lisensi}</span>
-                        </div>
-                      </td>
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0">
-                        <div className="text-xs font-bold text-gray-600 line-clamp-2">{item.info_tambahan || '-'}</div>
-                        {item.link_bukti && (
-                          <a href={item.link_bukti} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 mt-1 text-blue-600 hover:text-blue-800 font-black text-[9px] uppercase tracking-widest">
-                            <ExternalLink size={10} /> Link Bukti
+                      <td className="px-3 py-3 border border-gray-300 font-medium text-gray-700 text-left max-w-[180px] whitespace-pre-wrap">{item.perangkat || '-'}</td>
+                      <td className="px-3 py-3 border border-gray-300 font-medium text-gray-600 text-left">{item.info_tambahan || '-'}</td>
+                      <td className="px-3 py-3 border border-gray-300">
+                        {item.link_bukti ? (
+                          <a href={item.link_bukti} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-700 font-bold bg-blue-50 px-2 py-1 rounded-lg transition">
+                            <ExternalLink size={12} /> Buka
                           </a>
+                        ) : (
+                          <span className="text-gray-400 italic">-</span>
                         )}
                       </td>
-                      <td className="px-8 py-6">
-                        <div className="flex flex-wrap gap-2">
-                          {showTrash ? (
-                            <div className="inline-flex items-center bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm transition-all group-hover:border-orange-200">
-                              <button onClick={() => handleRestore(item.id_3a1)} className="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition" title="Restore"><RotateCcw size={16} /></button>
-                              <div className="w-px h-4 bg-gray-200 mx-2"></div>
-                              <button onClick={() => handleHardDelete(item.id_3a1)} className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus Permanen"><Trash size={16} /></button>
-                            </div>
-                          ) : (
-                            <div className="inline-flex items-center bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm transition-all group-hover:border-blue-200 group-hover:shadow-md">
-                              <button onClick={() => handleEdit(item)} className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit"><Edit size={16} /></button>
-                              <div className="w-px h-4 bg-gray-200 mx-2"></div>
-                              <button onClick={() => handleSoftDelete(item.id_3a1)} className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus"><Trash2 size={16} /></button>
-                            </div>
-                          )}
-                        </div>
+                      <td className="px-3 py-3 border border-gray-300">
+                        {showTrash ? (
+                          <div className="flex items-center justify-center gap-2">
+                            <button onClick={() => handleRestore(item.id_3a1)} className="p-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-lg transition" title="Restore"><RotateCcw size={15} /></button>
+                            <button onClick={() => handleHardDelete(item.id_3a1)} className="p-1.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus Permanen"><Trash size={15} /></button>
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-center gap-2">
+                            <button onClick={() => handleEdit(item)} className="px-2 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg font-bold text-xs transition" title="Edit">Edit</button>
+                            <button onClick={() => handleSoftDelete(item.id_3a1)} className="p-1.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus"><Trash2 size={15} /></button>
+                          </div>
+                        )}
                       </td>
                     </tr>
                   ))}

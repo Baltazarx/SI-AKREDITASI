@@ -29,8 +29,7 @@ exports.store = async (req, res) => {
         if (!id_cpl || !id_cpmk || !id_mk || !id_tahun) {
             return res.status(400).json({ success: false, message: 'Kolom id_cpl, id_cpmk, id_mk, id_tahun wajib diisi.' });
         }
-        const user_id = req.user?.id || 1;
-        const insertId = await PetaPemenuhanCpl2B3.create({ id_cpl, id_cpmk, id_mk, id_tahun, created_by: user_id });
+        const insertId = await PetaPemenuhanCpl2B3.create({ id_cpl, id_cpmk, id_mk, id_tahun });
         res.status(201).json({ success: true, message: 'Data 2B3 berhasil ditambahkan.', data: { id_2b3: insertId, ...req.body } });
     } catch (error) {
         console.error('[Error POST 2B3]', error);
@@ -44,9 +43,7 @@ exports.update = async (req, res) => {
         const { id_cpl, id_cpmk, id_mk, id_tahun } = req.body;
         const checkData = await PetaPemenuhanCpl2B3.getById(id);
         if (!checkData) return res.status(404).json({ success: false, message: 'Data 2B3 tidak ditemukan.' });
-        
-        const user_id = req.user?.id || 1;
-        await PetaPemenuhanCpl2B3.update(id, { id_cpl, id_cpmk, id_mk, id_tahun, updated_by: user_id });
+        await PetaPemenuhanCpl2B3.update(id, { id_cpl, id_cpmk, id_mk, id_tahun });
         res.json({ success: true, message: 'Data 2B3 berhasil diperbarui.' });
     } catch (error) {
         console.error('[Error PUT 2B3]', error);
@@ -59,9 +56,7 @@ exports.destroy = async (req, res) => {
         const { id } = req.params;
         const checkData = await PetaPemenuhanCpl2B3.getById(id);
         if (!checkData) return res.status(404).json({ success: false, message: 'Data 2B3 tidak ditemukan.' });
-        
-        const user_id = req.user?.id || 1;
-        await PetaPemenuhanCpl2B3.softDelete(id, user_id);
+        await PetaPemenuhanCpl2B3.hardDelete(id);
         res.json({ success: true, message: 'Data 2B3 berhasil dihapus.' });
     } catch (error) {
         console.error('[Error DELETE 2B3]', error);

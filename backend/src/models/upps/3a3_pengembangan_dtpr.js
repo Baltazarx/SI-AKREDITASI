@@ -31,18 +31,19 @@ const Model3a3 = {
     },
 
     // 2. Ambil data di "Tempat Sampah"
-    findAllDeleted: async (id_tahun, id_prodi) => {
+    findAllDeleted: async (id_prodi) => {
         const prodiFilter = id_prodi ? 'AND d.id_prodi = ?' : '';
         const sql = `
-            SELECT p.*, peg.nama_lengkap AS nama_dtpr
+            SELECT p.*, peg.nama_lengkap AS nama_dtpr, t.tahun AS nama_tahun
             FROM \`3a3_pengembangan_dtpr\` p
             JOIN dosen d ON p.id_dosen = d.id_dosen
             JOIN pegawai peg ON d.id_pegawai = peg.id_pegawai
-            WHERE p.id_tahun = ? AND p.deleted_at IS NOT NULL
+            JOIN tahun_akademik t ON p.id_tahun = t.id_tahun
+            WHERE p.deleted_at IS NOT NULL
             ${prodiFilter}
             ORDER BY p.deleted_at DESC
         `;
-        const params = [id_tahun];
+        const params = [];
         if (id_prodi) params.push(id_prodi);
         const [rows] = await db.execute(sql, params);
         return rows;

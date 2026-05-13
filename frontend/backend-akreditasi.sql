@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 11, 2026 at 09:52 PM
+-- Generation Time: May 13, 2026 at 08:46 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.22
 
@@ -244,8 +244,10 @@ CREATE TABLE `2a1_data_mahasiswa` (
 --
 
 INSERT INTO `2a1_data_mahasiswa` (`id_2a1`, `prodi_id_prodi`, `tahun_akademik_id_tahun`, `daya_tampung`, `pendaftar`, `pendaftar_afirmasi`, `pendaftar_khusus`, `maba_reg_diterima`, `maba_reg_afirmasi`, `maba_reg_khusus`, `maba_rpl_diterima`, `maba_rpl_afirmasi`, `maba_rpl_khusus`, `aktif_reg_diterima`, `aktif_reg_afirmasi`, `aktif_reg_khusus`, `aktif_rpl_diterima`, `aktif_rpl_afirmasi`, `aktif_rpl_khusus`, `created_at`, `created_by`, `updated_at`, `updated_by`, `pmb_deleted_at`, `pmb_deleted_by`, `ala_deleted_at`, `ala_deleted_by`) VALUES
-(1, 1, 3, 96, 50, 0, 0, 45, 0, 0, 4, 0, 0, 500, 40, 3, 100, 1, 0, '2026-05-04 08:13:53', 4, '2026-05-05 06:08:20', 3, '2026-05-05 13:08:20', 3, NULL, NULL),
-(2, 1, 2, 50, 100, 10, NULL, 30, 5, NULL, 20, 3, NULL, 400, 40, 0, 100, 20, 0, '2026-05-05 03:29:46', 3, '2026-05-11 18:52:57', 1, NULL, NULL, NULL, NULL);
+(40, 1, 1, 120, 180, 10, 2, 105, 8, 1, 5, NULL, NULL, 410, 25, 3, 15, 0, 0, '2026-05-13 14:18:44', 1, '2026-05-13 15:26:16', 1, NULL, NULL, NULL, NULL),
+(47, 1, 2, 110, 170, 11, 3, 85, 9, 2, 6, 1, 0, 80, 9, 2, 6, 1, 0, '2026-05-13 15:40:19', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(48, 1, 3, 120, 190, 12, 4, 90, 10, 3, 7, 1, 0, 85, 10, 3, 7, 1, 0, '2026-05-13 15:40:19', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(49, 1, 4, 130, 210, 13, 5, 95, 11, 4, 8, 1, 0, 90, 11, 4, 8, 1, 0, '2026-05-13 15:40:19', 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -271,10 +273,9 @@ CREATE TABLE `2b1_isi_pembelajaran` (
 --
 
 INSERT INTO `2b1_isi_pembelajaran` (`id_2b1`, `id_mk`, `id_pl`, `id_tahun`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(5, 5, 5, 3, '2026-05-12 01:00:00', 3, NULL, NULL, NULL, NULL),
-(6, 6, 6, 3, '2026-05-12 01:00:00', 3, NULL, NULL, NULL, NULL),
-(7, 7, 7, 2, '2026-05-12 01:00:00', 3, NULL, NULL, NULL, NULL),
-(8, 8, 8, 2, '2026-05-12 01:00:00', 3, NULL, NULL, NULL, NULL);
+(14, 1, 5, 2, '2026-05-12 19:01:02', 3, NULL, NULL, NULL, NULL),
+(15, 1, 6, 2, '2026-05-12 19:01:02', 3, NULL, NULL, NULL, NULL),
+(16, 1, 9, 2, '2026-05-12 19:01:02', 3, '2026-05-12 19:01:14', 3, '2026-05-12 19:01:14', 3);
 
 -- --------------------------------------------------------
 
@@ -300,168 +301,18 @@ CREATE TABLE `2b2_pemetaan_cpl_pl` (
 --
 
 INSERT INTO `2b2_pemetaan_cpl_pl` (`id_2b2`, `id_cpl`, `id_pl`, `id_tahun`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(8, 2, 5, 7, '2026-05-11 20:51:18', NULL, NULL, NULL, NULL, NULL),
-(9, 2, 5, 7, '2026-05-11 20:51:19', NULL, NULL, NULL, NULL, NULL),
-(10, 2, 5, 7, '2026-05-11 20:51:19', NULL, NULL, NULL, NULL, NULL),
-(11, 2, 5, 7, '2026-05-11 20:51:20', NULL, NULL, NULL, NULL, NULL),
-(12, 2, 5, 7, '2026-05-11 20:51:20', NULL, NULL, NULL, NULL, NULL),
-(13, 2, 6, 7, '2026-05-11 20:51:21', NULL, NULL, NULL, NULL, NULL),
-(14, 2, 5, 7, '2026-05-11 20:51:21', NULL, NULL, NULL, NULL, NULL),
-(15, 2, 6, 7, '2026-05-11 20:51:22', NULL, NULL, NULL, NULL, NULL),
-(16, 2, 5, 7, '2026-05-11 20:51:23', NULL, NULL, NULL, NULL, NULL),
-(17, 1, 5, 7, '2026-05-11 20:53:45', NULL, NULL, NULL, NULL, NULL),
-(18, 1, 6, 7, '2026-05-11 20:53:46', NULL, NULL, NULL, NULL, NULL),
-(19, 1, 5, 7, '2026-05-11 20:53:46', NULL, NULL, NULL, NULL, NULL),
-(20, 1, 6, 7, '2026-05-11 20:53:47', NULL, NULL, NULL, NULL, NULL),
-(21, 1, 5, 7, '2026-05-11 20:53:48', NULL, NULL, NULL, NULL, NULL),
-(22, 1, 5, 7, '2026-05-11 20:54:37', NULL, NULL, NULL, NULL, NULL),
-(23, 1, 5, 7, '2026-05-11 20:54:37', NULL, NULL, NULL, NULL, NULL),
-(24, 1, 5, 7, '2026-05-11 20:54:37', NULL, NULL, NULL, NULL, NULL),
-(25, 1, 5, 7, '2026-05-11 20:54:38', NULL, NULL, NULL, NULL, NULL),
-(26, 1, 6, 7, '2026-05-11 20:54:39', NULL, NULL, NULL, NULL, NULL),
-(27, 1, 5, 7, '2026-05-11 20:54:39', NULL, NULL, NULL, NULL, NULL),
-(28, 1, 6, 7, '2026-05-11 20:54:39', NULL, NULL, NULL, NULL, NULL),
-(29, 1, 5, 7, '2026-05-11 21:01:16', NULL, NULL, NULL, NULL, NULL),
-(30, 1, 5, 7, '2026-05-11 21:02:11', NULL, NULL, NULL, NULL, NULL),
-(31, 1, 5, 7, '2026-05-11 21:02:12', NULL, NULL, NULL, NULL, NULL),
-(32, 1, 6, 7, '2026-05-11 21:02:12', NULL, NULL, NULL, NULL, NULL),
-(33, 1, 5, 7, '2026-05-11 21:02:12', NULL, NULL, NULL, NULL, NULL),
-(34, 1, 5, 7, '2026-05-11 21:02:32', NULL, NULL, NULL, NULL, NULL),
-(35, 1, 5, 7, '2026-05-11 21:02:32', NULL, NULL, NULL, NULL, NULL),
-(36, 1, 5, 7, '2026-05-11 21:02:32', NULL, NULL, NULL, NULL, NULL),
-(37, 1, 5, 7, '2026-05-11 21:02:33', NULL, NULL, NULL, NULL, NULL),
-(38, 1, 5, 7, '2026-05-11 21:02:33', NULL, NULL, NULL, NULL, NULL),
-(39, 1, 5, 7, '2026-05-11 21:02:33', NULL, NULL, NULL, NULL, NULL),
-(40, 1, 5, 7, '2026-05-11 21:02:33', NULL, NULL, NULL, NULL, NULL),
-(41, 1, 5, 7, '2026-05-11 21:02:34', NULL, NULL, NULL, NULL, NULL),
-(42, 1, 5, 7, '2026-05-11 21:02:34', NULL, NULL, NULL, NULL, NULL),
-(43, 1, 5, 7, '2026-05-11 21:02:35', NULL, NULL, NULL, NULL, NULL),
-(44, 1, 5, 7, '2026-05-11 21:02:35', NULL, NULL, NULL, NULL, NULL),
-(45, 1, 5, 7, '2026-05-11 21:02:35', NULL, NULL, NULL, NULL, NULL),
-(46, 1, 5, 7, '2026-05-11 21:02:39', NULL, NULL, NULL, NULL, NULL),
-(47, 1, 5, 7, '2026-05-11 21:02:40', NULL, NULL, NULL, NULL, NULL),
-(48, 1, 5, 7, '2026-05-11 21:02:40', NULL, NULL, NULL, NULL, NULL),
-(49, 1, 5, 7, '2026-05-11 21:02:40', NULL, NULL, NULL, NULL, NULL),
-(50, 1, 5, 7, '2026-05-11 21:02:40', NULL, NULL, NULL, NULL, NULL),
-(51, 1, 5, 7, '2026-05-11 21:02:40', NULL, NULL, NULL, NULL, NULL),
-(52, 2, 5, 7, '2026-05-11 21:03:29', NULL, NULL, NULL, NULL, NULL),
-(53, 1, 5, 7, '2026-05-11 21:04:08', NULL, NULL, NULL, NULL, NULL),
-(54, 1, 5, 7, '2026-05-11 21:04:08', NULL, NULL, NULL, NULL, NULL),
-(55, 1, 5, 7, '2026-05-11 21:04:08', NULL, NULL, NULL, NULL, NULL),
-(56, 1, 5, 7, '2026-05-11 21:04:08', NULL, NULL, NULL, NULL, NULL),
-(57, 1, 5, 7, '2026-05-11 21:04:09', NULL, NULL, NULL, NULL, NULL),
-(58, 1, 5, 7, '2026-05-11 21:04:09', NULL, NULL, NULL, NULL, NULL),
-(59, 1, 5, 7, '2026-05-11 21:04:09', NULL, NULL, NULL, NULL, NULL),
-(60, 1, 5, 7, '2026-05-11 21:04:09', NULL, NULL, NULL, NULL, NULL),
-(61, 1, 6, 7, '2026-05-11 21:04:14', NULL, NULL, NULL, NULL, NULL),
-(62, 1, 5, 7, '2026-05-11 21:04:14', NULL, NULL, NULL, NULL, NULL),
-(63, 1, 6, 7, '2026-05-11 21:04:15', NULL, NULL, NULL, NULL, NULL),
-(64, 1, 5, 7, '2026-05-11 21:04:15', NULL, NULL, NULL, NULL, NULL),
-(65, 1, 6, 7, '2026-05-11 21:04:15', NULL, NULL, NULL, NULL, NULL),
-(66, 1, 5, 7, '2026-05-11 21:04:16', NULL, NULL, NULL, NULL, NULL),
-(67, 1, 6, 7, '2026-05-11 21:04:16', NULL, NULL, NULL, NULL, NULL),
-(68, 1, 5, 7, '2026-05-11 21:04:16', NULL, NULL, NULL, NULL, NULL),
-(69, 1, 5, 7, '2026-05-11 21:04:31', NULL, NULL, NULL, NULL, NULL),
-(70, 1, 5, 7, '2026-05-11 21:04:40', NULL, NULL, NULL, NULL, NULL),
-(71, 1, 5, 7, '2026-05-11 21:04:40', NULL, NULL, NULL, NULL, NULL),
-(72, 1, 5, 7, '2026-05-11 21:04:40', NULL, NULL, NULL, NULL, NULL),
-(73, 1, 5, 7, '2026-05-11 21:04:41', NULL, NULL, NULL, NULL, NULL),
-(74, 1, 5, 7, '2026-05-11 21:04:41', NULL, NULL, NULL, NULL, NULL),
-(75, 1, 5, 7, '2026-05-11 21:04:58', NULL, NULL, NULL, NULL, NULL),
-(76, 1, 5, 7, '2026-05-11 21:06:02', NULL, NULL, NULL, NULL, NULL),
-(77, 1, 5, 7, '2026-05-11 21:06:02', NULL, NULL, NULL, NULL, NULL),
-(78, 1, 5, 7, '2026-05-11 21:06:02', NULL, NULL, NULL, NULL, NULL),
-(79, 1, 6, 7, '2026-05-11 21:06:03', NULL, NULL, NULL, NULL, NULL),
-(80, 1, 6, 7, '2026-05-11 21:06:03', NULL, NULL, NULL, NULL, NULL),
-(81, 1, 6, 7, '2026-05-11 21:06:03', NULL, NULL, NULL, NULL, NULL),
-(82, 1, 6, 7, '2026-05-11 21:06:07', NULL, NULL, NULL, NULL, NULL),
-(83, 1, 6, 7, '2026-05-11 21:06:07', NULL, NULL, NULL, NULL, NULL),
-(84, 1, 6, 7, '2026-05-11 21:06:07', NULL, NULL, NULL, NULL, NULL),
-(85, 1, 6, 7, '2026-05-11 21:06:08', NULL, NULL, NULL, NULL, NULL),
-(86, 1, 6, 7, '2026-05-11 21:06:13', NULL, NULL, NULL, NULL, NULL),
-(87, 1, 5, 7, '2026-05-11 21:06:19', NULL, NULL, NULL, NULL, NULL),
-(88, 1, 5, 7, '2026-05-11 21:06:19', NULL, NULL, NULL, NULL, NULL),
-(89, 1, 5, 7, '2026-05-11 21:06:19', NULL, NULL, NULL, NULL, NULL),
-(90, 1, 5, 7, '2026-05-11 21:09:44', NULL, NULL, NULL, NULL, NULL),
-(91, 1, 5, 7, '2026-05-11 21:09:52', NULL, NULL, NULL, NULL, NULL),
-(92, 1, 5, 7, '2026-05-11 21:09:53', NULL, NULL, NULL, NULL, NULL),
-(93, 1, 5, 7, '2026-05-11 21:09:53', NULL, NULL, NULL, NULL, NULL),
-(94, 1, 5, 7, '2026-05-11 21:09:53', NULL, NULL, NULL, NULL, NULL),
-(95, 1, 5, 7, '2026-05-11 21:09:53', NULL, NULL, NULL, NULL, NULL),
-(96, 1, 5, 7, '2026-05-11 21:09:59', NULL, NULL, NULL, NULL, NULL),
-(97, 1, 5, 7, '2026-05-11 21:10:00', NULL, NULL, NULL, NULL, NULL),
-(98, 1, 5, 7, '2026-05-11 21:10:00', NULL, NULL, NULL, NULL, NULL),
-(99, 1, 5, 7, '2026-05-11 21:10:00', NULL, NULL, NULL, NULL, NULL),
-(100, 1, 5, 7, '2026-05-11 21:10:00', NULL, NULL, NULL, NULL, NULL),
-(101, 1, 5, 7, '2026-05-11 21:10:00', NULL, NULL, NULL, NULL, NULL),
-(102, 1, 5, 7, '2026-05-11 21:10:01', NULL, NULL, NULL, NULL, NULL),
-(103, 1, 5, 7, '2026-05-11 21:10:01', NULL, NULL, NULL, NULL, NULL),
-(104, 1, 5, 7, '2026-05-11 21:10:20', NULL, NULL, NULL, NULL, NULL),
-(105, 1, 5, 7, '2026-05-11 21:10:20', NULL, NULL, NULL, NULL, NULL),
-(106, 1, 5, 7, '2026-05-11 21:10:21', NULL, NULL, NULL, NULL, NULL),
-(107, 1, 5, 7, '2026-05-11 21:10:21', NULL, NULL, NULL, NULL, NULL),
-(108, 1, 5, 7, '2026-05-11 21:11:07', NULL, NULL, NULL, NULL, NULL),
-(109, 1, 5, 7, '2026-05-11 21:11:18', NULL, NULL, NULL, NULL, NULL),
-(110, 1, 5, 7, '2026-05-11 21:11:19', NULL, NULL, NULL, NULL, NULL),
-(111, 1, 5, 7, '2026-05-11 21:11:19', NULL, NULL, NULL, NULL, NULL),
-(112, 1, 5, 7, '2026-05-11 21:11:19', NULL, NULL, NULL, NULL, NULL),
-(113, 1, 5, 7, '2026-05-11 21:11:19', NULL, NULL, NULL, NULL, NULL),
-(114, 1, 5, 7, '2026-05-11 21:11:19', NULL, NULL, NULL, NULL, NULL),
-(115, 1, 5, 7, '2026-05-11 21:11:20', NULL, NULL, NULL, NULL, NULL),
-(116, 1, 5, 7, '2026-05-11 21:13:15', NULL, NULL, NULL, NULL, NULL),
-(117, 1, 5, 7, '2026-05-11 21:13:15', NULL, NULL, NULL, NULL, NULL),
-(118, 1, 5, 7, '2026-05-11 21:13:15', NULL, NULL, NULL, NULL, NULL),
-(119, 1, 5, 7, '2026-05-11 21:13:15', NULL, NULL, NULL, NULL, NULL),
-(120, 1, 5, 7, '2026-05-11 21:13:15', NULL, NULL, NULL, NULL, NULL),
-(121, 1, 5, 7, '2026-05-11 21:13:16', NULL, NULL, NULL, NULL, NULL),
-(122, 1, 5, 7, '2026-05-11 21:14:48', NULL, NULL, NULL, NULL, NULL),
-(123, 1, 5, 7, '2026-05-11 21:16:16', NULL, NULL, NULL, NULL, NULL),
-(124, 1, 5, 7, '2026-05-11 21:16:16', NULL, NULL, NULL, NULL, NULL),
-(125, 1, 5, 7, '2026-05-11 21:16:16', NULL, NULL, NULL, NULL, NULL),
-(126, 1, 5, 7, '2026-05-11 21:16:16', NULL, NULL, NULL, NULL, NULL),
-(127, 1, 5, 7, '2026-05-11 21:16:16', NULL, NULL, NULL, NULL, NULL),
-(128, 1, 5, 7, '2026-05-11 21:16:17', NULL, NULL, NULL, NULL, NULL),
-(129, 1, 5, 7, '2026-05-11 21:16:17', NULL, NULL, NULL, NULL, NULL),
-(130, 1, 5, 7, '2026-05-11 21:16:18', NULL, NULL, NULL, NULL, NULL),
-(131, 1, 5, 7, '2026-05-11 21:16:18', NULL, NULL, NULL, NULL, NULL),
-(132, 1, 5, 7, '2026-05-11 21:16:19', NULL, NULL, NULL, NULL, NULL),
-(133, 1, 5, 7, '2026-05-11 21:16:19', NULL, NULL, NULL, NULL, NULL),
-(134, 1, 5, 7, '2026-05-11 21:16:19', NULL, NULL, NULL, NULL, NULL),
-(135, 1, 5, 7, '2026-05-11 21:16:19', NULL, NULL, NULL, NULL, NULL),
-(136, 1, 5, 7, '2026-05-11 21:16:19', NULL, NULL, NULL, NULL, NULL),
-(137, 1, 5, 7, '2026-05-11 21:16:19', NULL, NULL, NULL, NULL, NULL),
-(138, 1, 5, 7, '2026-05-11 21:16:19', NULL, NULL, NULL, NULL, NULL),
-(139, 1, 5, 7, '2026-05-11 21:16:20', NULL, NULL, NULL, NULL, NULL),
-(140, 1, 5, 7, '2026-05-11 21:16:20', NULL, NULL, NULL, NULL, NULL),
-(141, 1, 5, 7, '2026-05-11 21:16:20', NULL, NULL, NULL, NULL, NULL),
-(142, 1, 5, 7, '2026-05-11 21:16:20', NULL, NULL, NULL, NULL, NULL),
-(143, 1, 5, 7, '2026-05-11 21:16:20', NULL, NULL, NULL, NULL, NULL),
-(144, 1, 5, 7, '2026-05-11 21:16:20', NULL, NULL, NULL, NULL, NULL),
-(145, 1, 5, 7, '2026-05-11 21:16:21', NULL, NULL, NULL, NULL, NULL),
-(146, 1, 5, 7, '2026-05-11 21:16:21', NULL, NULL, NULL, NULL, NULL),
-(147, 1, 5, 7, '2026-05-11 21:16:21', NULL, NULL, NULL, NULL, NULL),
-(148, 1, 5, 7, '2026-05-11 21:16:21', NULL, NULL, NULL, NULL, NULL),
-(149, 1, 5, 7, '2026-05-11 21:16:21', NULL, NULL, NULL, NULL, NULL),
-(150, 1, 5, 7, '2026-05-11 21:16:21', NULL, NULL, NULL, NULL, NULL),
-(151, 1, 6, 7, '2026-05-11 21:16:22', NULL, NULL, NULL, NULL, NULL),
-(152, 1, 5, 7, '2026-05-11 21:16:23', NULL, NULL, NULL, NULL, NULL),
-(153, 1, 5, 7, '2026-05-11 21:16:23', NULL, NULL, NULL, NULL, NULL),
-(154, 1, 5, 7, '2026-05-11 21:16:23', NULL, NULL, NULL, NULL, NULL),
-(155, 1, 5, 7, '2026-05-11 21:16:24', NULL, NULL, NULL, NULL, NULL),
-(156, 1, 5, 7, '2026-05-11 21:26:29', NULL, NULL, NULL, NULL, NULL),
-(157, 1, 5, 7, '2026-05-11 21:31:33', NULL, NULL, NULL, NULL, NULL),
-(158, 1, 5, 7, '2026-05-11 21:32:59', NULL, NULL, NULL, NULL, NULL),
-(159, 1, 5, 7, '2026-05-11 21:33:21', NULL, NULL, NULL, NULL, NULL),
-(160, 1, 6, 7, '2026-05-11 21:33:24', NULL, NULL, NULL, NULL, NULL),
-(161, 1, 5, 7, '2026-05-11 21:34:23', NULL, NULL, NULL, NULL, NULL),
-(162, 1, 5, 7, '2026-05-11 21:35:27', NULL, NULL, NULL, NULL, NULL),
-(163, 1, 5, 7, '2026-05-11 21:36:15', NULL, NULL, NULL, NULL, NULL),
-(164, 1, 5, 7, '2026-05-11 21:36:43', NULL, NULL, NULL, NULL, NULL),
-(165, 1, 5, 7, '2026-05-11 21:45:34', NULL, NULL, NULL, NULL, NULL),
-(166, 1, 5, 7, '2026-05-11 21:45:48', NULL, NULL, NULL, NULL, NULL),
-(167, 1, 5, 7, '2026-05-11 21:46:53', NULL, NULL, NULL, NULL, NULL),
-(168, 1, 5, 2, '2026-05-11 21:50:08', NULL, NULL, NULL, NULL, NULL),
-(169, 1, 6, 2, '2026-05-11 21:50:20', NULL, NULL, NULL, NULL, NULL);
+(191, 1, 5, 2, '2026-05-11 22:27:51', 3, NULL, NULL, NULL, NULL),
+(193, 1, 9, 2, '2026-05-11 22:27:51', 3, NULL, NULL, NULL, NULL),
+(199, 1, 6, 2, '2026-05-12 21:17:06', 3, NULL, NULL, NULL, NULL),
+(200, 1, 10, 2, '2026-05-12 21:17:06', 3, NULL, NULL, NULL, NULL),
+(201, 1, 11, 2, '2026-05-12 21:17:06', 3, NULL, NULL, NULL, NULL),
+(202, 1, 12, 2, '2026-05-12 21:17:06', 3, NULL, NULL, NULL, NULL),
+(203, 1, 13, 2, '2026-05-12 21:17:06', 3, NULL, NULL, NULL, NULL),
+(204, 1, 17, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL),
+(205, 1, 16, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL),
+(206, 1, 15, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL),
+(207, 1, 14, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL),
+(208, 1, 18, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -482,6 +333,20 @@ CREATE TABLE `2b3_peta_pemenuhan_cpl` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `2b3_peta_pemenuhan_cpl`
+--
+
+INSERT INTO `2b3_peta_pemenuhan_cpl` (`id_2b3`, `id_cpl`, `id_cpmk`, `id_mk`, `id_tahun`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
+(21, 1, 1, 1, 81, '2026-05-12 21:08:13', 1, '2026-05-12 21:08:49', NULL, '2026-05-12 21:08:49', 1),
+(22, 1, 1, 2, 81, '2026-05-12 21:08:13', 1, '2026-05-12 21:08:43', NULL, '2026-05-12 21:08:43', 1),
+(23, 1, 2, 5, 81, '2026-05-12 21:08:13', 1, '2026-05-12 21:10:12', NULL, '2026-05-12 21:10:12', 1),
+(24, 1, 2, 6, 81, '2026-05-12 21:08:13', 1, '2026-05-12 21:10:12', NULL, '2026-05-12 21:10:12', 1),
+(25, 1, 1, 1, 2, '2026-05-12 21:25:17', 1, NULL, NULL, NULL, NULL),
+(26, 1, 1, 9, 2, '2026-05-12 21:25:17', 1, NULL, NULL, NULL, NULL),
+(27, 1, 2, 2, 2, '2026-05-12 21:25:17', 1, NULL, NULL, NULL, NULL),
+(28, 1, 2, 11, 2, '2026-05-12 21:25:17', 1, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -509,7 +374,7 @@ CREATE TABLE `2b4_masa_tunggu` (
 --
 
 INSERT INTO `2b4_masa_tunggu` (`id_2b4`, `id_prodi`, `id_tahun`, `jumlah_lulusan`, `jumlah_terlacak`, `rata_tunggu`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(1, 1, 3, 50, 20, '4.51', '2026-04-21 04:45:44', 3, '2026-04-22 04:19:45', 3, NULL, NULL);
+(1, 1, 3, 50, 20, '4.51', '2026-04-21 04:45:44', 3, '2026-05-13 18:11:26', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -538,7 +403,7 @@ CREATE TABLE `2b5_kesesuaian_kerja` (
 --
 
 INSERT INTO `2b5_kesesuaian_kerja` (`id_2b5`, `id_2b4`, `profesi_infokom`, `profesi_non_infokom`, `lingkup_multinasional`, `lingkup_nasional`, `lingkup_wirausaha`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(2, 1, 5, 15, 4, 15, 1, '2026-04-22 04:15:32', 3, '2026-04-22 04:20:01', NULL, NULL, NULL);
+(2, 1, 5, 15, 4, 15, 1, '2026-04-22 04:15:32', 3, '2026-05-13 18:11:26', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -569,13 +434,13 @@ CREATE TABLE `2b6_kepuasan_pengguna` (
 --
 
 INSERT INTO `2b6_kepuasan_pengguna` (`id_2b6`, `id_prodi`, `id_tahun`, `jenis_kemampuan`, `sangat_baik`, `baik`, `cukup`, `kurang`, `rencana_tindak_lanjut`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(1, 1, 3, 'Kerjasama Tim', '50.00', '10.00', '20.00', '20.00', 'eaa', '2026-04-22 07:54:49', 3, NULL, NULL, NULL, NULL),
-(2, 1, 3, 'Keahlian di Bidang Prodi', '60.00', '20.00', '5.00', '15.00', 'eaa', '2026-04-22 07:54:49', 3, NULL, NULL, NULL, NULL),
-(3, 1, 3, 'Kemampuan Berbahasa Asing (Inggris)', '70.00', '10.00', '10.00', '10.00', 'ea', '2026-04-22 07:54:49', 3, NULL, NULL, NULL, NULL),
-(4, 1, 3, 'Kemampuan Berkomunikasi', '50.00', '20.00', '10.00', '20.00', 'eaaaa', '2026-04-22 07:54:49', 3, NULL, NULL, NULL, NULL),
-(5, 1, 3, 'Pengembangan Diri', '40.00', '20.00', '20.00', '20.00', 'aaaa', '2026-04-22 07:54:49', 3, NULL, NULL, NULL, NULL),
-(6, 1, 3, 'Kepemimpinan', '60.00', '5.00', '15.00', '20.00', 'eee', '2026-04-22 07:54:49', 3, NULL, NULL, NULL, NULL),
-(7, 1, 3, 'Etos Kerja', '30.00', '50.00', '10.00', '10.00', 'aaaa', '2026-04-22 07:54:49', 3, '2026-04-22 08:11:14', NULL, NULL, NULL);
+(1, 1, 3, 'Kerjasama Tim', '50.00', '10.00', '20.00', '20.00', 'eaa', '2026-04-22 07:54:49', 3, '2026-05-13 18:10:51', 3, NULL, NULL),
+(2, 1, 3, 'Keahlian di Bidang Prodi', '60.00', '20.00', '5.00', '15.00', 'eaa', '2026-04-22 07:54:49', 3, '2026-05-13 15:11:35', 3, NULL, NULL),
+(3, 1, 3, 'Kemampuan Berbahasa Asing (Inggris)', '70.00', '10.00', '10.00', '10.00', 'ea', '2026-04-22 07:54:49', 3, '2026-05-13 15:11:35', 3, NULL, NULL),
+(4, 1, 3, 'Kemampuan Berkomunikasi', '50.00', '20.00', '10.00', '20.00', 'eaaaa', '2026-04-22 07:54:49', 3, '2026-05-13 15:11:35', 3, NULL, NULL),
+(5, 1, 3, 'Pengembangan Diri', '40.00', '20.00', '20.00', '20.00', 'aaaa', '2026-04-22 07:54:49', 3, '2026-05-13 15:11:35', 3, NULL, NULL),
+(6, 1, 3, 'Kepemimpinan', '60.00', '5.00', '15.00', '20.00', 'eee', '2026-04-22 07:54:49', 3, '2026-05-13 15:11:35', 3, NULL, NULL),
+(7, 1, 3, 'Etos Kerja', '30.00', '50.00', '10.00', '10.00', 'aaaa', '2026-04-22 07:54:49', 3, '2026-05-13 15:11:35', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -598,7 +463,28 @@ CREATE TABLE `2b6_metadata_lulusan` (
 --
 
 INSERT INTO `2b6_metadata_lulusan` (`id_metadata`, `id_prodi`, `id_tahun`, `jml_alumni_3_tahun`, `jml_responden`, `jml_mhs_aktif_ts`, `updated_at`) VALUES
-(1, 1, 3, 50, 30, 0, NULL);
+(1, 1, 3, 50, 30, 0, '2026-05-13 15:12:42');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `2c_fleksibilitas_pembelajaran`
+--
+
+CREATE TABLE `2c_fleksibilitas_pembelajaran` (
+  `id_2c` int NOT NULL,
+  `id_prodi` int NOT NULL,
+  `id_tahun` int NOT NULL,
+  `id_bentuk` int NOT NULL,
+  `jumlah_mhs` int DEFAULT '0',
+  `link_bukti` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL,
+  `updated_by` int DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `deleted_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -649,9 +535,14 @@ CREATE TABLE `2d_rekognisi_lulusan` (
 --
 
 INSERT INTO `2d_rekognisi_lulusan` (`id_2d`, `id_prodi`, `id_tahun`, `id_ref_sumber`, `jenis_rekognisi`, `link_bukti`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(1, 1, 3, 1, 'Koding bersama STIKOM BALI', 'https://ghedug', '2026-04-24 07:47:55', 3, NULL, NULL, NULL, NULL),
-(2, 1, 3, 2, 'Koding bersama STIKOM BANDUNG', 'https://ghedug', '2026-04-24 07:49:36', 3, NULL, NULL, NULL, NULL),
-(3, 1, 1, 4, 'Koding bersama STIKOM Bnyuwangi', 'https://ghedug', '2026-04-24 07:50:13', 3, '2026-04-24 08:01:25', NULL, '2026-04-24 08:01:25', 3);
+(1, 1, 3, 1, 'Juara 1 Lomba Web Design Nasional', 'https://sertifikat.com/123', '2026-05-13 17:07:16', 1, NULL, NULL, NULL, NULL),
+(2, 1, 3, 2, 'Pengembang Utama Aplikasi Startup', 'https://portofolio.com/456', '2026-05-13 17:07:16', 1, NULL, NULL, NULL, NULL),
+(3, 1, 3, 3, 'Technical Writer untuk Tech In Asia', 'https://techinasia.com/author', '2026-05-13 17:07:16', 1, NULL, NULL, NULL, NULL),
+(4, 1, 2, 4, 'Internship Software Engineer GoTo', 'https://linkedin.com/post/789', '2026-05-13 17:07:16', 1, NULL, NULL, NULL, NULL),
+(5, 1, 2, 1, 'Juara 2 Hackathon BEM SI', 'https://kampus.ac.id/berita-1', '2026-05-13 17:07:16', 1, NULL, NULL, NULL, NULL),
+(6, 1, 2, 2, 'Data Analyst Freelance PT ABC', 'https://upwork.com/freelancer', '2026-05-13 17:07:16', 1, NULL, NULL, NULL, NULL),
+(8, 1, 1, 4, 'Penerima Beasiswa LPDP', 'https://lpdp.go.id/awardee', '2026-05-13 17:07:16', 1, NULL, NULL, NULL, NULL),
+(9, 1, 1, 3, 'Juara 1 makan krupuk', 'https://www.youtube.com/watch?v=XjAiEkslZU8&list=RDXjAiEkslZU8&start_radio=1', '2026-05-13 17:37:07', 3, '2026-05-13 18:10:26', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -683,7 +574,7 @@ CREATE TABLE `3a1_sarana_prasarana_penelitian` (
 --
 
 INSERT INTO `3a1_sarana_prasarana_penelitian` (`id_3a1`, `id_prodi`, `nama_prasarana`, `daya_tampung`, `luas_ruang`, `status_milik`, `status_lisensi`, `perangkat`, `info_tambahan`, `link_bukti`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(1, 1, 'Laboratorium AI/Citra', 30, '100.00', 'M', 'L', 'PC HP', 'info info', 'https://ghhjh.gdrive', '2026-04-16 07:59:41', 3, NULL, NULL, NULL, NULL);
+(1, 1, 'Laboratorium AI/Citra', 30, '100.00', 'M', 'L', 'PC, HP', 'info info', 'https://ghhjh.gdrive', '2026-04-16 07:59:41', 3, '2026-05-13 17:54:39', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -711,6 +602,19 @@ CREATE TABLE `3a2_penelitian_dtpr` (
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `3a2_penelitian_dtpr`
+--
+
+INSERT INTO `3a2_penelitian_dtpr` (`id_3a2`, `id_dosen`, `id_tahun`, `id_roadmap`, `judul_penelitian`, `jumlah_mahasiswa`, `jenis_hibah`, `sumber`, `durasi`, `jumlah_dana`, `link_bukti`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(2, 1, 81, 2, 'Pengembangan Sistem Cerdas Berbasis AI untuk Pertanian 2100', 2, 'Hibah DIKTI', 'Perguruan Tinggi Mandiri', 12, 50000000, 'https://example.com/bukti-0', '2026-05-13 18:18:23', '2026-05-13 20:45:30', NULL, 4, 3, NULL),
+(3, 1, 80, 2, 'Analisis Algoritma Machine Learning pada Big Data 2099', 3, 'Mandiri', 'Internasional', 6, 15000000, 'https://example.com/bukti-1', '2026-05-13 18:18:23', '2026-05-13 20:27:12', NULL, 4, NULL, NULL),
+(4, 1, 79, 2, 'Keamanan Jaringan Menggunakan Blockchain 2098', 1, 'Kerjasama Internasional', 'Lokal/Wilayah', 24, 120000000, 'https://example.com/bukti-2', '2026-05-13 18:18:23', '2026-05-13 20:31:14', NULL, 4, NULL, NULL),
+(5, 2, 81, 2, 'Implementasi IoT untuk Smart City 2100', 4, 'Hibah Internal', 'Internasional', 12, 20000000, 'https://example.com/bukti-3', '2026-05-13 18:18:23', '2026-05-13 20:27:15', NULL, 4, NULL, NULL),
+(6, 2, 80, 2, 'Sistem Rekomendasi E-Commerce dengan Collaborative Filtering 2099', 2, 'Hibah Perusahaan', 'Lokal/Wilayah', 6, 30000000, 'https://example.com/bukti-4', '2026-05-13 18:18:23', '2026-05-13 20:31:17', NULL, 4, NULL, NULL),
+(7, 2, 79, 2, 'Pengembangan Sistem Cerdas Berbasis AI untuk Pertanian 2098', 2, 'Hibah DIKTI', 'Internasional', 12, 50000000, 'https://example.com/bukti-0', '2026-05-13 18:18:23', '2026-05-13 20:27:33', NULL, 4, NULL, NULL),
+(8, 1, 81, 2, 'Pengembangan Sistem Cerdas Berbasis AI untuk Pertanian 2100', 2, 'Hibah DIKTI', 'Lokal/Wilayah', 12, 50000000, 'https://example.com/bukti-0', '2026-05-13 20:25:54', '2026-05-13 20:31:19', NULL, 3, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -737,8 +641,8 @@ CREATE TABLE `3a3_pengembangan_dtpr` (
 --
 
 INSERT INTO `3a3_pengembangan_dtpr` (`id_pengembangan`, `id_dosen`, `jenis_pengembangan`, `nama_pengembangan`, `link_bukti`, `id_tahun`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(1, 2, 'sertifikasi auditor', 'auditor nasional indonesia raya', 'https://ghhjh.gdrive', 3, '2026-04-09 03:19:19', 3, '2026-04-09 03:19:41', NULL, NULL, NULL),
-(2, 2, 'sertifikasi marah marah', 'auditor marah marah', 'https://ghhjh.gdrive', 2, '2026-04-09 03:25:04', 3, NULL, NULL, NULL, NULL);
+(1, 2, 'sertifikasi auditor', 'auditor nasional indonesia raya', 'https://ghhjh.gdrive', 3, '2026-04-09 03:19:19', 3, '2026-05-13 18:12:13', NULL, '2026-05-13 18:12:13', 3),
+(2, 2, 'sertifikasi marah marah', 'auditor marah marah', 'https://ghhjh.gdrive', 3, '2026-04-09 03:25:04', 3, '2026-05-13 18:07:54', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -764,6 +668,19 @@ CREATE TABLE `3c1_kerjasama_penelitian` (
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `3c1_kerjasama_penelitian`
+--
+
+INSERT INTO `3c1_kerjasama_penelitian` (`id_3c1`, `id_3a2`, `id_tahun`, `judul_kerjasama`, `mitra_kerja_sama`, `sumber`, `durasi`, `jumlah_dana`, `link_bukti`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(2, 7, 81, 'Kerjasama AI Research 2', 'Universitas Gadjah Mada', 'Nasional', 2, 30000000, 'https://example.com/kerjasama-2', '2026-05-13 19:42:58', '2026-05-13 19:55:45', NULL, 4, NULL, NULL),
+(3, 6, 80, 'Smart Farming Partnership 3', 'BRIN Indonesia', 'Internasional', 1, 80000000, 'https://example.com/kerjasama-3', '2026-05-13 19:42:58', '2026-05-13 19:55:53', NULL, 4, NULL, NULL),
+(4, 5, 79, 'Kerjasama AI Research 4', 'Universitas Gadjah Mada', 'Lokal/Wilayah', 2, 30000000, 'https://example.com/kerjasama-4', '2026-05-13 19:42:58', '2026-05-13 20:30:33', NULL, 4, NULL, NULL),
+(5, 4, 81, 'Smart Farming Partnership 5', 'BRIN Indonesia', 'Internasional', 1, 80000000, 'https://example.com/kerjasama-5', '2026-05-13 19:42:58', '2026-05-13 19:56:02', NULL, 4, NULL, NULL),
+(7, 5, 79, 'Smart Farming Partnership 7', 'BRIN Indonesia', 'Lokal/Wilayah', 1, 80000000, 'https://example.com/kerjasama-7', '2026-05-13 19:42:58', '2026-05-13 20:30:38', NULL, 4, NULL, NULL),
+(8, 8, 81, 'Kerjasama AI Research 6', 'Universitas Gadjah Mada', 'Nasional', 2, 30000000, 'https://example.com/kerjasama-6', '2026-05-13 20:25:54', '2026-05-13 20:25:54', NULL, 3, NULL, NULL),
+(10, 2, 81, 'Kerjasama AI Research 6', 'Universitas Gadjah Mada', 'Internasional', 2, 30000000, 'https://example.com/kerjasama-6', '2026-05-13 20:45:30', '2026-05-13 20:45:30', NULL, 3, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -785,6 +702,19 @@ CREATE TABLE `3c2_publikasi_penelitian` (
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `3c2_publikasi_penelitian`
+--
+
+INSERT INTO `3c2_publikasi_penelitian` (`id_3c2`, `id_3a2`, `id_tahun`, `judul_publikasi`, `jenis_publikasi`, `link_bukti`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(2, 3, 80, 'Blockchain Security: A Systematic Review (3)', 'IB', 'https://example.com/publikasi-3', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(3, 4, 79, 'IoT-based Smart Monitoring System (4)', 'S2', 'https://example.com/publikasi-4', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(4, 5, 81, 'Implementasi Deep Learning untuk Klasifikasi Tanaman (5)', 'S1', 'https://example.com/publikasi-5', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(5, 6, 80, 'Blockchain Security: A Systematic Review (6)', 'IB', 'https://example.com/publikasi-6', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(6, 7, 79, 'IoT-based Smart Monitoring System (7)', 'S2', 'https://example.com/publikasi-7', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(7, 8, 81, 'Implementasi Deep Learning untuk Klasifikasi Tanaman (2)', 'S1', 'https://example.com/publikasi-2', '2026-05-13 20:25:54', '2026-05-13 20:25:54', NULL, 3, NULL, NULL),
+(9, 2, 81, 'Implementasi Deep Learning untuk Klasifikasi Tanaman (2)', 'S1', 'https://example.com/publikasi-2', '2026-05-13 20:45:30', '2026-05-13 20:45:30', NULL, 3, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -805,6 +735,19 @@ CREATE TABLE `3c3_perolehan_hki` (
   `updated_by` int DEFAULT NULL,
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `3c3_perolehan_hki`
+--
+
+INSERT INTO `3c3_perolehan_hki` (`id_3c3`, `id_3a2`, `id_tahun`, `judul_hki`, `jenis_hki`, `link_bukti`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(2, 3, 80, 'Modul Pembelajaran Berbasis AI #3', 'Hak Cipta', 'https://example.com/hki-3', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(3, 4, 79, 'Sistem Klasifikasi Gambar Berbasis CNN #4', 'Paten', 'https://example.com/hki-4', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(4, 5, 81, 'Modul Pembelajaran Berbasis AI #5', 'Hak Cipta', 'https://example.com/hki-5', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(5, 6, 80, 'Sistem Klasifikasi Gambar Berbasis CNN #6', 'Paten', 'https://example.com/hki-6', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(6, 7, 79, 'Modul Pembelajaran Berbasis AI #7', 'Hak Cipta', 'https://example.com/hki-7', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
+(7, 8, 81, 'Sistem Klasifikasi Gambar Berbasis CNN #2', 'Paten', 'https://example.com/hki-2', '2026-05-13 20:25:54', '2026-05-13 20:25:54', NULL, 3, NULL, NULL),
+(9, 2, 81, 'Sistem Klasifikasi Gambar Berbasis CNN #2', 'Paten', 'https://example.com/hki-2', '2026-05-13 20:45:30', '2026-05-13 20:45:30', NULL, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -864,6 +807,14 @@ CREATE TABLE `4a2_pkm_dtpr` (
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `4a2_pkm_dtpr`
+--
+
+INSERT INTO `4a2_pkm_dtpr` (`id_4a2`, `id_dosen`, `id_tahun`, `id_roadmap`, `judul_pkm`, `jumlah_mahasiswa`, `jenis_hibah`, `sumber`, `durasi`, `jumlah_dana`, `link_bukti`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(1, 1, 81, 2, 'Pelatihan Literasi Digital untuk Masyarakat Pedesaan', 4, 'Mandiri', 'Perguruan Tinggi Mandiri', 1, 22000000, 'https://example.com/pkm-1', '2026-05-13 19:45:51', '2026-05-13 19:45:51', NULL, 4, NULL, NULL),
+(2, 2, 81, 2, 'Pemberdayaan UMKM Melalui Teknologi E-Commerce', 1, 'Hibah Dikti', 'Lembaga Dalam Negeri', 1, 21000000, 'https://example.com/pkm-2', '2026-05-13 19:45:51', '2026-05-13 19:45:51', NULL, 4, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -887,6 +838,14 @@ CREATE TABLE `4c1_kerjasama_pkm` (
   `updated_by` int DEFAULT NULL,
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `4c1_kerjasama_pkm`
+--
+
+INSERT INTO `4c1_kerjasama_pkm` (`id_4c1`, `id_4a2`, `id_tahun`, `judul_kerjasama`, `mitra_kerja_sama`, `sumber`, `durasi`, `jumlah_dana`, `link_bukti`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(1, 1, 81, 'Kerjasama Pelatihan Digital Bersama #1', 'Dinas Koperasi Banyuwangi', 'Lokal/Wilayah', 1, 10000000, 'https://example.com/kerjasama-pkm-1', '2026-05-13 19:45:51', '2026-05-13 20:30:14', NULL, 4, NULL, NULL),
+(2, 2, 81, 'Pemberdayaan UMKM via Platform Digital #2', 'Kementerian UMKM', 'Nasional', 2, 25000000, 'https://example.com/kerjasama-pkm-2', '2026-05-13 19:45:52', '2026-05-13 19:45:52', NULL, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1057,6 +1016,30 @@ INSERT INTO `jabatan_struktural` (`id_jabatan_struktural`, `nama_jabatan`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `master_bentuk_pembelajaran`
+--
+
+CREATE TABLE `master_bentuk_pembelajaran` (
+  `id_bentuk` int NOT NULL,
+  `nama_bentuk` varchar(255) NOT NULL,
+  `keterangan` text,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `master_bentuk_pembelajaran`
+--
+
+INSERT INTO `master_bentuk_pembelajaran` (`id_bentuk`, `nama_bentuk`, `keterangan`, `created_at`) VALUES
+(1, 'Micro-credensial', NULL, '2026-05-13 16:31:51'),
+(2, 'RPL tipe A-2', NULL, '2026-05-13 16:31:51'),
+(3, 'Pembelajaran di PS lain', NULL, '2026-05-13 16:31:51'),
+(4, 'Pembelajaran di PT lain', NULL, '2026-05-13 16:31:51'),
+(5, 'CBL/ PBL', NULL, '2026-05-13 16:31:51');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `master_cpl`
 --
 
@@ -1076,7 +1059,7 @@ INSERT INTO `master_cpl` (`id_cpl`, `id_prodi`, `kode_cpl`, `deskripsi_cpl`) VAL
 (2, 1, 'CPL-02', 'Mampu menganalisis kebutuhan sistem dan desain arsitektur perangkat lunak'),
 (3, 2, 'CPL-03', 'Mampu mengelola sistem informasi berbasis komputer'),
 (4, 2, 'CPL-04', 'Mampu menganalisis proses bisnis dan mengimplementasikan solusi TI'),
-(5, 1, 'CPL-05', 'Mampu menerapkan konsep basis data tingkat lanjut'),
+(5, 1, 'CPL-05', 'Bertaqwa kepada Tuhan Yang Maha Esa dan mampu menunjukkan sikap religius serta menjunjung tinggi nilai-nilai kemanusiaan dalam menjalankan tugas berdasarkan agama, moral, dan etika.'),
 (6, 1, 'CPL-06', 'Mampu mengelola proyek perangkat lunak dengan metode agile'),
 (7, 1, 'CPL-07', 'Mampu merancang antarmuka pengguna yang interaktif (UI/UX)'),
 (8, 1, 'CPL-08', 'Mampu mengimplementasikan kecerdasan buatan dalam aplikasi'),
@@ -1110,6 +1093,21 @@ CREATE TABLE `master_cpmk` (
   `deskripsi_cpmk` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `master_cpmk`
+--
+
+INSERT INTO `master_cpmk` (`id_cpmk`, `id_prodi`, `kode_cpmk`, `deskripsi_cpmk`) VALUES
+(1, 1, 'CPMK-01', 'Mampu menguasai konsep teoritis bidang pengetahuan Ilmu Komputer secara umum dan konsep teoritis bagian khusus dalam bidang pengetahuan tersebut secara mendalam.'),
+(2, 1, 'CPMK-02', 'Mampu memformulasikan penyelesaian masalah prosedural dan memanfaatkan prinsip-prinsip rekayasa perangkat lunak.'),
+(3, 1, 'CPMK-03', 'Mampu menerapkan pemikiran logis, kritis, sistematis, dan inovatif dalam konteks pengembangan atau implementasi ilmu pengetahuan dan teknologi.'),
+(4, 1, 'CPMK-04', 'Mampu menunjukkan kinerja mandiri, bermutu, dan terukur.'),
+(5, 1, 'CPMK-05', 'Mampu merancang dan mengembangkan sistem informasi yang memenuhi kebutuhan pengguna dan bisnis.'),
+(6, 1, 'CPMK-06', 'Mampu menganalisis dan mendesain basis data untuk menyimpan dan mengelola data organisasi dengan efisien.'),
+(7, 2, 'CPMK-01', 'Mampu memahami konsep dasar jaringan komputer dan penerapannya.'),
+(8, 2, 'CPMK-02', 'Mampu mengkonfigurasi dan mengelola infrastruktur jaringan dan sistem keamanan.'),
+(9, 2, 'CPMK-03', 'Mampu mendeteksi dan menyelesaikan permasalahan keamanan siber secara mandiri.');
+
 -- --------------------------------------------------------
 
 --
@@ -1137,7 +1135,19 @@ INSERT INTO `master_mata_kuliah` (`id_mk`, `id_prodi`, `kode_mk`, `nama_mk`, `sk
 (5, 1, 'IF101', 'Algoritma dan Pemrograman', 3, 1),
 (6, 1, 'IF102', 'Struktur Data', 3, 2),
 (7, 2, 'MI101', 'Pengantar Manajemen', 3, 1),
-(8, 2, 'MI102', 'Sistem Informasi Manajemen', 3, 2);
+(8, 2, 'MI102', 'Sistem Informasi Manajemen', 3, 2),
+(9, 1, 'IF201', 'Basis Data', 3, 3),
+(10, 2, 'MI201', 'Analisis dan Perancangan Sistem', 3, 3),
+(11, 1, 'IF202', 'Pemrograman Berorientasi Objek', 3, 4),
+(12, 2, 'MI202', 'Manajemen Basis Data', 3, 4),
+(13, 1, 'IF301', 'Jaringan Komputer', 3, 5),
+(14, 2, 'MI301', 'E-Business', 3, 5),
+(15, 1, 'IF302', 'Rekayasa Perangkat Lunak', 3, 6),
+(16, 2, 'MI302', 'Audit Sistem Informasi', 3, 6),
+(17, 1, 'IF401', 'Kecerdasan Buatan', 3, 7),
+(18, 2, 'MI401', 'Metodologi Penelitian', 2, 6),
+(19, 1, 'IF402', 'Skripsi / Tugas Akhir', 6, 8),
+(20, 2, 'MI402', 'Skripsi / Tugas Akhir', 6, 6);
 
 -- --------------------------------------------------------
 
@@ -1274,6 +1284,13 @@ CREATE TABLE `roadmap_lppm` (
   `updated_by` int DEFAULT NULL,
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `roadmap_lppm`
+--
+
+INSERT INTO `roadmap_lppm` (`id_roadmap`, `id_prodi`, `id_tahun`, `jenis_roadmap`, `link_dokumen`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(2, 1, 81, 'Penelitian Berbasis Teknologi AI', 'https://example.com/roadmap-ai', '2026-05-13 18:18:23', '2026-05-13 20:20:33', NULL, 4, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1564,6 +1581,15 @@ ALTER TABLE `2b6_metadata_lulusan`
   ADD PRIMARY KEY (`id_metadata`);
 
 --
+-- Indexes for table `2c_fleksibilitas_pembelajaran`
+--
+ALTER TABLE `2c_fleksibilitas_pembelajaran`
+  ADD PRIMARY KEY (`id_2c`),
+  ADD UNIQUE KEY `unique_2c` (`id_prodi`,`id_tahun`,`id_bentuk`),
+  ADD KEY `id_tahun` (`id_tahun`),
+  ADD KEY `id_bentuk` (`id_bentuk`);
+
+--
 -- Indexes for table `2d_ref_sumber_rekognisi`
 --
 ALTER TABLE `2d_ref_sumber_rekognisi`
@@ -1605,21 +1631,24 @@ ALTER TABLE `3a3_pengembangan_dtpr`
 --
 ALTER TABLE `3c1_kerjasama_penelitian`
   ADD PRIMARY KEY (`id_3c1`),
-  ADD KEY `id_3a2` (`id_3a2`);
+  ADD KEY `id_3a2` (`id_3a2`),
+  ADD KEY `fk_3c1_tahun` (`id_tahun`);
 
 --
 -- Indexes for table `3c2_publikasi_penelitian`
 --
 ALTER TABLE `3c2_publikasi_penelitian`
   ADD PRIMARY KEY (`id_3c2`),
-  ADD KEY `id_3a2` (`id_3a2`);
+  ADD KEY `id_3a2` (`id_3a2`),
+  ADD KEY `fk_3c2_tahun` (`id_tahun`);
 
 --
 -- Indexes for table `3c3_perolehan_hki`
 --
 ALTER TABLE `3c3_perolehan_hki`
   ADD PRIMARY KEY (`id_3c3`),
-  ADD KEY `id_3a2` (`id_3a2`);
+  ADD KEY `id_3a2` (`id_3a2`),
+  ADD KEY `fk_3c3_tahun` (`id_tahun`);
 
 --
 -- Indexes for table `4a1_sarana_prasarana_pkm`
@@ -1640,21 +1669,24 @@ ALTER TABLE `4a2_pkm_dtpr`
 --
 ALTER TABLE `4c1_kerjasama_pkm`
   ADD PRIMARY KEY (`id_4c1`),
-  ADD KEY `id_4a2` (`id_4a2`);
+  ADD KEY `id_4a2` (`id_4a2`),
+  ADD KEY `fk_4c1_tahun` (`id_tahun`);
 
 --
 -- Indexes for table `4c2_diseminasi_hasil_pkm`
 --
 ALTER TABLE `4c2_diseminasi_hasil_pkm`
   ADD PRIMARY KEY (`id_4c2`),
-  ADD KEY `id_4a2` (`id_4a2`);
+  ADD KEY `id_4a2` (`id_4a2`),
+  ADD KEY `fk_4c2_tahun` (`id_tahun`);
 
 --
 -- Indexes for table `4c3_perolehan_hki_pkm`
 --
 ALTER TABLE `4c3_perolehan_hki_pkm`
   ADD PRIMARY KEY (`id_4c3`),
-  ADD KEY `id_4a2` (`id_4a2`);
+  ADD KEY `id_4a2` (`id_4a2`),
+  ADD KEY `fk_4c3_tahun` (`id_tahun`);
 
 --
 -- Indexes for table `5_2_sarana_prasarana_pendidikan`
@@ -1692,6 +1724,12 @@ ALTER TABLE `jabatan_fungsional`
 --
 ALTER TABLE `jabatan_struktural`
   ADD PRIMARY KEY (`id_jabatan_struktural`);
+
+--
+-- Indexes for table `master_bentuk_pembelajaran`
+--
+ALTER TABLE `master_bentuk_pembelajaran`
+  ADD PRIMARY KEY (`id_bentuk`);
 
 --
 -- Indexes for table `master_cpl`
@@ -1821,25 +1859,25 @@ ALTER TABLE `1b_unit_spmi_dan_sdm`
 -- AUTO_INCREMENT for table `2a1_data_mahasiswa`
 --
 ALTER TABLE `2a1_data_mahasiswa`
-  MODIFY `id_2a1` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_2a1` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `2b1_isi_pembelajaran`
 --
 ALTER TABLE `2b1_isi_pembelajaran`
-  MODIFY `id_2b1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_2b1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `2b2_pemetaan_cpl_pl`
 --
 ALTER TABLE `2b2_pemetaan_cpl_pl`
-  MODIFY `id_2b2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id_2b2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
 
 --
 -- AUTO_INCREMENT for table `2b3_peta_pemenuhan_cpl`
 --
 ALTER TABLE `2b3_peta_pemenuhan_cpl`
-  MODIFY `id_2b3` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_2b3` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `2b4_masa_tunggu`
@@ -1866,16 +1904,22 @@ ALTER TABLE `2b6_metadata_lulusan`
   MODIFY `id_metadata` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `2c_fleksibilitas_pembelajaran`
+--
+ALTER TABLE `2c_fleksibilitas_pembelajaran`
+  MODIFY `id_2c` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `2d_ref_sumber_rekognisi`
 --
 ALTER TABLE `2d_ref_sumber_rekognisi`
-  MODIFY `id_ref_sumber` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ref_sumber` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `2d_rekognisi_lulusan`
 --
 ALTER TABLE `2d_rekognisi_lulusan`
-  MODIFY `id_2d` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_2d` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `3a1_sarana_prasarana_penelitian`
@@ -1887,7 +1931,7 @@ ALTER TABLE `3a1_sarana_prasarana_penelitian`
 -- AUTO_INCREMENT for table `3a2_penelitian_dtpr`
 --
 ALTER TABLE `3a2_penelitian_dtpr`
-  MODIFY `id_3a2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_3a2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `3a3_pengembangan_dtpr`
@@ -1899,19 +1943,19 @@ ALTER TABLE `3a3_pengembangan_dtpr`
 -- AUTO_INCREMENT for table `3c1_kerjasama_penelitian`
 --
 ALTER TABLE `3c1_kerjasama_penelitian`
-  MODIFY `id_3c1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_3c1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `3c2_publikasi_penelitian`
 --
 ALTER TABLE `3c2_publikasi_penelitian`
-  MODIFY `id_3c2` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_3c2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `3c3_perolehan_hki`
 --
 ALTER TABLE `3c3_perolehan_hki`
-  MODIFY `id_3c3` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_3c3` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `4a1_sarana_prasarana_pkm`
@@ -1923,13 +1967,13 @@ ALTER TABLE `4a1_sarana_prasarana_pkm`
 -- AUTO_INCREMENT for table `4a2_pkm_dtpr`
 --
 ALTER TABLE `4a2_pkm_dtpr`
-  MODIFY `id_4a2` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_4a2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `4c1_kerjasama_pkm`
 --
 ALTER TABLE `4c1_kerjasama_pkm`
-  MODIFY `id_4c1` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_4c1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `4c2_diseminasi_hasil_pkm`
@@ -1974,28 +2018,34 @@ ALTER TABLE `jabatan_struktural`
   MODIFY `id_jabatan_struktural` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `master_bentuk_pembelajaran`
+--
+ALTER TABLE `master_bentuk_pembelajaran`
+  MODIFY `id_bentuk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `master_cpl`
 --
 ALTER TABLE `master_cpl`
-  MODIFY `id_cpl` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_cpl` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `master_cpmk`
 --
 ALTER TABLE `master_cpmk`
-  MODIFY `id_cpmk` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cpmk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `master_mata_kuliah`
 --
 ALTER TABLE `master_mata_kuliah`
-  MODIFY `id_mk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_mk` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `master_profil_lulusan`
 --
 ALTER TABLE `master_profil_lulusan`
-  MODIFY `id_pl` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_pl` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `master_sks_jabatan`
@@ -2019,7 +2069,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT for table `roadmap_lppm`
 --
 ALTER TABLE `roadmap_lppm`
-  MODIFY `id_roadmap` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_roadmap` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tahun_akademik`
@@ -2137,6 +2187,14 @@ ALTER TABLE `2b5_kesesuaian_kerja`
   ADD CONSTRAINT `fk_2b5_to_2b4` FOREIGN KEY (`id_2b4`) REFERENCES `2b4_masa_tunggu` (`id_2b4`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `2c_fleksibilitas_pembelajaran`
+--
+ALTER TABLE `2c_fleksibilitas_pembelajaran`
+  ADD CONSTRAINT `2c_fleksibilitas_pembelajaran_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id_prodi`),
+  ADD CONSTRAINT `2c_fleksibilitas_pembelajaran_ibfk_2` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`),
+  ADD CONSTRAINT `2c_fleksibilitas_pembelajaran_ibfk_3` FOREIGN KEY (`id_bentuk`) REFERENCES `master_bentuk_pembelajaran` (`id_bentuk`);
+
+--
 -- Constraints for table `2d_rekognisi_lulusan`
 --
 ALTER TABLE `2d_rekognisi_lulusan`
@@ -2167,19 +2225,22 @@ ALTER TABLE `3a3_pengembangan_dtpr`
 -- Constraints for table `3c1_kerjasama_penelitian`
 --
 ALTER TABLE `3c1_kerjasama_penelitian`
-  ADD CONSTRAINT `3c1_kerjasama_penelitian_ibfk_1` FOREIGN KEY (`id_3a2`) REFERENCES `3a2_penelitian_dtpr` (`id_3a2`) ON DELETE CASCADE;
+  ADD CONSTRAINT `3c1_kerjasama_penelitian_ibfk_1` FOREIGN KEY (`id_3a2`) REFERENCES `3a2_penelitian_dtpr` (`id_3a2`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_3c1_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Constraints for table `3c2_publikasi_penelitian`
 --
 ALTER TABLE `3c2_publikasi_penelitian`
-  ADD CONSTRAINT `3c2_publikasi_penelitian_ibfk_1` FOREIGN KEY (`id_3a2`) REFERENCES `3a2_penelitian_dtpr` (`id_3a2`) ON DELETE CASCADE;
+  ADD CONSTRAINT `3c2_publikasi_penelitian_ibfk_1` FOREIGN KEY (`id_3a2`) REFERENCES `3a2_penelitian_dtpr` (`id_3a2`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_3c2_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Constraints for table `3c3_perolehan_hki`
 --
 ALTER TABLE `3c3_perolehan_hki`
-  ADD CONSTRAINT `3c3_perolehan_hki_ibfk_1` FOREIGN KEY (`id_3a2`) REFERENCES `3a2_penelitian_dtpr` (`id_3a2`) ON DELETE CASCADE;
+  ADD CONSTRAINT `3c3_perolehan_hki_ibfk_1` FOREIGN KEY (`id_3a2`) REFERENCES `3a2_penelitian_dtpr` (`id_3a2`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_3c3_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Constraints for table `4a1_sarana_prasarana_pkm`
@@ -2197,19 +2258,22 @@ ALTER TABLE `4a2_pkm_dtpr`
 -- Constraints for table `4c1_kerjasama_pkm`
 --
 ALTER TABLE `4c1_kerjasama_pkm`
-  ADD CONSTRAINT `4c1_kerjasama_pkm_ibfk_1` FOREIGN KEY (`id_4a2`) REFERENCES `4a2_pkm_dtpr` (`id_4a2`) ON DELETE CASCADE;
+  ADD CONSTRAINT `4c1_kerjasama_pkm_ibfk_1` FOREIGN KEY (`id_4a2`) REFERENCES `4a2_pkm_dtpr` (`id_4a2`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_4c1_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Constraints for table `4c2_diseminasi_hasil_pkm`
 --
 ALTER TABLE `4c2_diseminasi_hasil_pkm`
-  ADD CONSTRAINT `4c2_diseminasi_hasil_pkm_ibfk_1` FOREIGN KEY (`id_4a2`) REFERENCES `4a2_pkm_dtpr` (`id_4a2`) ON DELETE CASCADE;
+  ADD CONSTRAINT `4c2_diseminasi_hasil_pkm_ibfk_1` FOREIGN KEY (`id_4a2`) REFERENCES `4a2_pkm_dtpr` (`id_4a2`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_4c2_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Constraints for table `4c3_perolehan_hki_pkm`
 --
 ALTER TABLE `4c3_perolehan_hki_pkm`
-  ADD CONSTRAINT `4c3_perolehan_hki_pkm_ibfk_1` FOREIGN KEY (`id_4a2`) REFERENCES `4a2_pkm_dtpr` (`id_4a2`) ON DELETE CASCADE;
+  ADD CONSTRAINT `4c3_perolehan_hki_pkm_ibfk_1` FOREIGN KEY (`id_4a2`) REFERENCES `4a2_pkm_dtpr` (`id_4a2`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_4c3_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 --
 -- Constraints for table `5_2_sarana_prasarana_pendidikan`
@@ -2284,18 +2348,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
---
--- Dumping data for table `master_cpmk`
---
-
-INSERT INTO `master_cpmk` (`id_prodi`, `kode_cpmk`, `deskripsi_cpmk`) VALUES
-(1, 'CPMK-01', 'Mampu menguasai konsep teoritis bidang pengetahuan Ilmu Komputer secara umum dan konsep teoritis bagian khusus dalam bidang pengetahuan tersebut secara mendalam.'),
-(1, 'CPMK-02', 'Mampu memformulasikan penyelesaian masalah prosedural dan memanfaatkan prinsip-prinsip rekayasa perangkat lunak.'),
-(1, 'CPMK-03', 'Mampu menerapkan pemikiran logis, kritis, sistematis, dan inovatif dalam konteks pengembangan atau implementasi ilmu pengetahuan dan teknologi.'),
-(1, 'CPMK-04', 'Mampu menunjukkan kinerja mandiri, bermutu, dan terukur.'),
-(1, 'CPMK-05', 'Mampu merancang dan mengembangkan sistem informasi yang memenuhi kebutuhan pengguna dan bisnis.'),
-(1, 'CPMK-06', 'Mampu menganalisis dan mendesain basis data untuk menyimpan dan mengelola data organisasi dengan efisien.'),
-(2, 'CPMK-01', 'Mampu memahami konsep dasar jaringan komputer dan penerapannya.'),
-(2, 'CPMK-02', 'Mampu mengkonfigurasi dan mengelola infrastruktur jaringan dan sistem keamanan.'),
-(2, 'CPMK-03', 'Mampu mendeteksi dan menyelesaikan permasalahan keamanan siber secara mandiri.');

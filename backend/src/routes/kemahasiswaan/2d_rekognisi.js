@@ -8,6 +8,7 @@ router.use(verifyToken, authorize('MHS', 'ADMIN'));
 // Data Aktif
 router.get('/', controller2d.index);
 router.post('/', controller2d.store);
+router.put('/:id', controller2d.update);
 
 // Trash
 router.get('/trash', controller2d.trash);

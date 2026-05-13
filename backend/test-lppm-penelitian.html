@@ -136,6 +136,10 @@
             </div>
             <div class="input-row">
                 <div class="input-group">
+                    <label>Tahun Pelaksanaan</label>
+                    <input type="number" id="k_tahun" placeholder="Opsional (Otomatis ikuti Induk)">
+                </div>
+                <div class="input-group">
                     <label>Sumber</label>
                     <select id="k_sumber">
                         <option value="Lokal/Wilayah">Lokal/Wilayah</option>
@@ -167,6 +171,10 @@
                     <input type="text" id="p_judul" placeholder="Kosongkan jika tidak ada">
                 </div>
                 <div class="input-group">
+                    <label>Tahun Terbit</label>
+                    <input type="number" id="p_tahun" placeholder="Opsional (Otomatis ikuti Induk)">
+                </div>
+                <div class="input-group">
                     <label>Jenis</label>
                     <select id="p_jenis">
                         <option value="S1">Sinta 1 (S1)</option>
@@ -192,6 +200,10 @@
                 <div class="input-group">
                     <label>Judul HKI</label>
                     <input type="text" id="h_judul" placeholder="Kosongkan jika tidak ada">
+                </div>
+                <div class="input-group">
+                    <label>Tahun Perolehan</label>
+                    <input type="number" id="h_tahun" placeholder="Opsional (Otomatis ikuti Induk)">
                 </div>
                 <div class="input-group">
                     <label>Jenis HKI</label>
@@ -261,13 +273,19 @@
                 <table id="tableKerjasama">
                     <thead>
                         <tr>
-                            <th>ID 3A2</th>
-                            <th>Dosen</th>
-                            <th>Judul Penelitian</th>
-                            <th>Judul Kegiatan Kerjasama</th>
-                            <th>Mitra Kerja Sama</th>
-                            <th>Durasi</th>
-                            <th>Dana (Juta)</th>
+                            <th rowspan="2">No</th>
+                            <th rowspan="2">Judul Kerjasama</th>
+                            <th rowspan="2">Mitra Kerja Sama</th>
+                            <th>Sumber</th>
+                            <th rowspan="2">Durasi (Tahun)</th>
+                            <th colspan="3">Pendanaan (Rp Juta)</th>
+                            <th rowspan="2">Link Bukti</th>
+                        </tr>
+                        <tr>
+                            <th>L/N/I</th>
+                            <th>TS-2</th>
+                            <th>TS-1</th>
+                            <th>TS</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyKerjasama"></tbody>
@@ -279,12 +297,17 @@
                 <table id="tablePublikasi">
                     <thead>
                         <tr>
-                            <th>ID 3A2</th>
-                            <th>Dosen</th>
-                            <th>Judul Penelitian</th>
-                            <th>Judul Publikasi</th>
-                            <th>Jenis Publikasi / Sinta</th>
-                            <th>Link Bukti</th>
+                            <th rowspan="2">No</th>
+                            <th rowspan="2">Nama DTPR</th>
+                            <th rowspan="2">Judul Publikasi</th>
+                            <th rowspan="2">Jenis Publikasi<br>(IB/I/S1,S2,S3,S4,T)</th>
+                            <th colspan="3">Tahun Terbit (beri tanda &radic;)</th>
+                            <th rowspan="2">Link Bukti</th>
+                        </tr>
+                        <tr>
+                            <th>TS-2</th>
+                            <th>TS-1</th>
+                            <th>TS</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyPublikasi"></tbody>
@@ -296,12 +319,17 @@
                 <table id="tableHKI">
                     <thead>
                         <tr>
-                            <th>ID 3A2</th>
-                            <th>Dosen</th>
-                            <th>Judul Penelitian</th>
-                            <th>Judul HKI</th>
-                            <th>Jenis HKI</th>
-                            <th>Link Bukti</th>
+                            <th rowspan="2">No</th>
+                            <th rowspan="2">Judul</th>
+                            <th rowspan="2">Jenis HKI</th>
+                            <th rowspan="2">Nama DTPR</th>
+                            <th colspan="3">Tahun Perolehan (Beri Tanda &radic;)</th>
+                            <th rowspan="2">Link Bukti</th>
+                        </tr>
+                        <tr>
+                            <th>TS-2</th>
+                            <th>TS-1</th>
+                            <th>TS</th>
                         </tr>
                     </thead>
                     <tbody id="tbodyHKI"></tbody>
@@ -381,7 +409,7 @@
                 sumber: document.getElementById('k_sumber').value,
                 durasi: parseInt(document.getElementById('k_durasi').value) || 0,
                 jumlah_dana: parseInt(document.getElementById('k_dana').value) || 0,
-                id_tahun: id_tahun_induk,
+                id_tahun: parseInt(document.getElementById('k_tahun').value) || id_tahun_induk,
                 link_bukti: document.getElementById('k_link').value
             });
         }
@@ -389,7 +417,7 @@
             payload.publikasi.push({
                 judul_publikasi: document.getElementById('p_judul').value,
                 jenis_publikasi: document.getElementById('p_jenis').value,
-                id_tahun: id_tahun_induk,
+                id_tahun: parseInt(document.getElementById('p_tahun').value) || id_tahun_induk,
                 link_bukti: document.getElementById('p_link').value
             });
         }
@@ -397,7 +425,7 @@
             payload.hki.push({
                 judul_hki: document.getElementById('h_judul').value,
                 jenis_hki: document.getElementById('h_jenis').value,
-                id_tahun: id_tahun_induk,
+                id_tahun: parseInt(document.getElementById('h_tahun').value) || id_tahun_induk,
                 link_bukti: document.getElementById('h_link').value
             });
         }
@@ -479,6 +507,9 @@
                     let hasKerjasama = false;
                     let hasPublikasi = false;
                     let hasHKI = false;
+                    let countK = 1;
+                    let countP = 1;
+                    let countH = 1;
 
                     result.data.forEach((item, index) => {
                         const targetTS = parseInt(tahun);
@@ -522,15 +553,24 @@
                         if(item.kerjasama && item.kerjasama.length > 0) {
                             hasKerjasama = true;
                             item.kerjasama.forEach(k => {
+                                const kts2 = k.id_tahun === targetTS - 2 ? k.jumlah_dana : 0;
+                                const kts1 = k.id_tahun === targetTS - 1 ? k.jumlah_dana : 0;
+                                const kts = k.id_tahun === targetTS ? k.jumlah_dana : 0;
+                                
                                 tbodyKerjasama.innerHTML += `
                                     <tr>
-                                        <td>${item.id_3a2}</td>
-                                        <td>${item.nama_dosen}</td>
-                                        <td style="max-width: 150px; white-space: normal;">${item.judul_penelitian}</td>
-                                        <td style="max-width: 150px; white-space: normal;">${k.judul_kerjasama}</td>
-                                        <td>${k.mitra_kerja_sama}</td>
-                                        <td>${k.durasi} tahun</td>
-                                        <td>Rp ${k.jumlah_dana || 0} Jt</td>
+                                        <td style="text-align:center">${countK++}</td>
+                                        <td style="max-width: 150px; white-space: normal;">
+                                            <b>${k.judul_kerjasama || '-'}</b>
+                                            <br><small style="color:gray;">Ref: ${item.judul_penelitian}</small>
+                                        </td>
+                                        <td>${k.mitra_kerja_sama || '-'}</td>
+                                        <td style="text-align:center">${formatSumber(k.sumber)}</td>
+                                        <td style="text-align:center">${k.durasi || 0}</td>
+                                        <td style="text-align:right">${kts2}</td>
+                                        <td style="text-align:right">${kts1}</td>
+                                        <td style="text-align:right">${kts}</td>
+                                        <td>${k.link_bukti ? `<a href="${k.link_bukti}" target="_blank">Lihat Bukti</a>` : '-'}</td>
                                     </tr>
                                 `;
                             });
@@ -540,14 +580,23 @@
                         if(item.publikasi && item.publikasi.length > 0) {
                             hasPublikasi = true;
                             item.publikasi.forEach(p => {
+                                const isTS2 = p.id_tahun === targetTS - 2;
+                                const isTS1 = p.id_tahun === targetTS - 1;
+                                const isTS = p.id_tahun === targetTS;
+
                                 tbodyPublikasi.innerHTML += `
                                     <tr>
-                                        <td>${item.id_3a2}</td>
+                                        <td style="text-align:center">${countP++}</td>
                                         <td>${item.nama_dosen}</td>
-                                        <td style="max-width: 150px; white-space: normal;">${item.judul_penelitian}</td>
-                                        <td style="max-width: 150px; white-space: normal;">${p.judul_publikasi}</td>
-                                        <td><span style="padding: 3px 6px; background: #3498db; color: #fff; border-radius: 4px;">${p.jenis_publikasi}</span></td>
-                                        <td>${p.link_bukti ? `<a href="${p.link_bukti}" target="_blank">Lihat</a>` : '-'}</td>
+                                        <td style="max-width: 150px; white-space: normal;">
+                                            <b>${p.judul_publikasi || '-'}</b>
+                                            <br><small style="color:gray;">Ref: ${item.judul_penelitian}</small>
+                                        </td>
+                                        <td style="text-align:center">${p.jenis_publikasi || '-'}</td>
+                                        <td style="text-align:center">${isTS2 ? '√' : ''}</td>
+                                        <td style="text-align:center">${isTS1 ? '√' : ''}</td>
+                                        <td style="text-align:center">${isTS ? '√' : ''}</td>
+                                        <td>${p.link_bukti ? `<a href="${p.link_bukti}" target="_blank">Lihat Bukti</a>` : '-'}</td>
                                     </tr>
                                 `;
                             });
@@ -557,14 +606,23 @@
                         if(item.hki && item.hki.length > 0) {
                             hasHKI = true;
                             item.hki.forEach(h => {
+                                const isTS2 = h.id_tahun === targetTS - 2;
+                                const isTS1 = h.id_tahun === targetTS - 1;
+                                const isTS = h.id_tahun === targetTS;
+
                                 tbodyHKI.innerHTML += `
                                     <tr>
-                                        <td>${item.id_3a2}</td>
+                                        <td style="text-align:center">${countH++}</td>
+                                        <td style="max-width: 150px; white-space: normal;">
+                                            <b>${h.judul_hki || '-'}</b>
+                                            <br><small style="color:gray;">Ref: ${item.judul_penelitian}</small>
+                                        </td>
+                                        <td style="text-align:center">${h.jenis_hki || '-'}</td>
                                         <td>${item.nama_dosen}</td>
-                                        <td style="max-width: 150px; white-space: normal;">${item.judul_penelitian}</td>
-                                        <td style="max-width: 150px; white-space: normal;">${h.judul_hki}</td>
-                                        <td><span style="padding: 3px 6px; background: #8e44ad; color: #fff; border-radius: 4px;">${h.jenis_hki}</span></td>
-                                        <td>${h.link_bukti ? `<a href="${h.link_bukti}" target="_blank">Lihat</a>` : '-'}</td>
+                                        <td style="text-align:center">${isTS2 ? '√' : ''}</td>
+                                        <td style="text-align:center">${isTS1 ? '√' : ''}</td>
+                                        <td style="text-align:center">${isTS ? '√' : ''}</td>
+                                        <td>${h.link_bukti ? `<a href="${h.link_bukti}" target="_blank">Lihat Bukti</a>` : '-'}</td>
                                     </tr>
                                 `;
                             });
@@ -707,13 +765,20 @@
         })
         .then(res => {
             if(!res.ok) throw new Error("Gagal mengunduh file Excel dari server");
-            return res.blob();
+            // Ambil nama file dari header Content-Disposition milik backend
+            const disposition = res.headers.get('Content-Disposition');
+            let filename = `LKPS_3A2_Penelitian_Prodi_${prodi}_Tahun_${tahun}.xlsx`; // fallback
+            if (disposition) {
+                const match = disposition.match(/filename=([^;]+)/);
+                if (match) filename = match[1].replace(/"/g, '');
+            }
+            return res.blob().then(blob => ({ blob, filename }));
         })
-        .then(blob => {
+        .then(({ blob, filename }) => {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `LKPS_3A2_Penelitian_Prodi_${prodi}.xlsx`;
+            a.download = filename;
             document.body.appendChild(a);
             a.click();
             a.remove();

@@ -98,18 +98,19 @@ const Model2a1 = {
             (prodi_id_prodi, tahun_akademik_id_tahun, daya_tampung, pendaftar, pendaftar_afirmasi, pendaftar_khusus, 
              maba_reg_diterima, maba_reg_afirmasi, maba_reg_khusus, maba_rpl_diterima, maba_rpl_afirmasi, maba_rpl_khusus, created_by)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            AS new_data
             ON DUPLICATE KEY UPDATE 
-            daya_tampung = VALUES(daya_tampung), 
-            pendaftar = VALUES(pendaftar),
-            pendaftar_afirmasi = VALUES(pendaftar_afirmasi),
-            pendaftar_khusus = VALUES(pendaftar_khusus),
-            maba_reg_diterima = VALUES(maba_reg_diterima),
-            maba_reg_afirmasi = VALUES(maba_reg_afirmasi),
-            maba_reg_khusus = VALUES(maba_reg_khusus),
-            maba_rpl_diterima = VALUES(maba_rpl_diterima),
-            maba_rpl_afirmasi = VALUES(maba_rpl_afirmasi),
-            maba_rpl_khusus = VALUES(maba_rpl_khusus),
-            updated_by = VALUES(created_by),
+            daya_tampung = new_data.daya_tampung, 
+            pendaftar = new_data.pendaftar,
+            pendaftar_afirmasi = new_data.pendaftar_afirmasi,
+            pendaftar_khusus = new_data.pendaftar_khusus,
+            maba_reg_diterima = new_data.maba_reg_diterima,
+            maba_reg_afirmasi = new_data.maba_reg_afirmasi,
+            maba_reg_khusus = new_data.maba_reg_khusus,
+            maba_rpl_diterima = new_data.maba_rpl_diterima,
+            maba_rpl_afirmasi = new_data.maba_rpl_afirmasi,
+            maba_rpl_khusus = new_data.maba_rpl_khusus,
+            updated_by = new_data.created_by,
             pmb_deleted_at = NULL
         `;
         return db.execute(query, data); // Tidak perlu Object.values jika data sudah Array
@@ -121,14 +122,15 @@ const Model2a1 = {
             (prodi_id_prodi, tahun_akademik_id_tahun, aktif_reg_diterima, aktif_reg_afirmasi, aktif_reg_khusus, 
              aktif_rpl_diterima, aktif_rpl_afirmasi, aktif_rpl_khusus, created_by)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            AS new_data
             ON DUPLICATE KEY UPDATE 
-            aktif_reg_diterima = VALUES(aktif_reg_diterima),
-            aktif_reg_afirmasi = VALUES(aktif_reg_afirmasi),
-            aktif_reg_khusus = VALUES(aktif_reg_khusus),
-            aktif_rpl_diterima = VALUES(aktif_rpl_diterima),
-            aktif_rpl_afirmasi = VALUES(aktif_rpl_afirmasi),
-            aktif_rpl_khusus = VALUES(aktif_rpl_khusus),
-            updated_by = VALUES(created_by),
+            aktif_reg_diterima = new_data.aktif_reg_diterima,
+            aktif_reg_afirmasi = new_data.aktif_reg_afirmasi,
+            aktif_reg_khusus = new_data.aktif_reg_khusus,
+            aktif_rpl_diterima = new_data.aktif_rpl_diterima,
+            aktif_rpl_afirmasi = new_data.aktif_rpl_afirmasi,
+            aktif_rpl_khusus = new_data.aktif_rpl_khusus,
+            updated_by = new_data.created_by,
             ala_deleted_at = NULL
         `;
         return db.execute(query, data);

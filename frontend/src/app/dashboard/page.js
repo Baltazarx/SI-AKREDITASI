@@ -42,10 +42,12 @@ export default function DashboardPage() {
     { icon: Target, label: '(2.B.3) Peta Pemenuhan CPL', href: '/dashboard/peta-pemenuhan-cpl', emoji: '🎯', color: 'lime' },
     { icon: Users2, label: '(2.B.4-2.B.5) Alumni', href: '/dashboard/alumni', emoji: '🎓', color: 'indigo' },
     { icon: CheckCircle, label: '(2.B.6) Accuracy', href: '/dashboard/accuracy', emoji: '✅', color: 'emerald' },
-    { icon: Award, label: '(2.D) Recognisi', href: '/dashboard/recognisi', emoji: '🏆', color: 'purple' },
+    { icon: Award, label: '(2.D) Rekognisi', href: '/dashboard/rekognisi', emoji: '🏆', color: 'purple' },
     { icon: Sparkles, label: '(3.A.1) Sarpras Penelitian', href: '/dashboard/sarpras-penelitian', emoji: '🔬', color: 'purple' },
+    { icon: BookOpen, label: '(3.A.2) Penelitian DTPR', href: '/dashboard/penelitian-dtpr', emoji: '🔬', color: 'blue' },
     { icon: TrendingUp, label: '(3.A.3) Pengembangan', href: '/dashboard/pengembangan', emoji: '🎯', color: 'violet' },
     { icon: UserPlus, label: '(4.A.1) Sarpras PkM', href: '/dashboard/sarpras-pkm', emoji: '🤝', color: 'pink' },
+    { icon: Activity, label: '(4.A.2) PkM DTPR', href: '/dashboard/pkm-dtpr', emoji: '🤝', color: 'orange' },
     { icon: Building2, label: '(5.2) Sarpras Pendidikan', href: '/dashboard/sarpras-pendidikan', emoji: '🏫', color: 'rose' },
     { icon: FileText, label: '(6) Visi Misi', href: '/dashboard/visi-misi', emoji: '📝', color: 'orange' },
   ];

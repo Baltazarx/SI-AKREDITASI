@@ -69,7 +69,9 @@ const route2a1_pmb = require('./routes/pmb/2a1_data_mahasiswa');
 const route2a1_ala = require('./routes/ala/2a1_data_mahasiswa');
 
 // 2. Middleware Global
-app.use(cors()); 
+app.use(cors({
+    exposedHeaders: ['Content-Disposition']
+})); 
 app.use(express.json()); 
 
 // 3. Definisi Route Utama

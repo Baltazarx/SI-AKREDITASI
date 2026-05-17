@@ -8,7 +8,7 @@ const { verifyToken, authorize } = require('../../middlewares/auth');
  * Role: MHS (Operator Kemahasiswaan) & ADMIN
  */
 
-router.use(verifyToken, authorize('MHS', 'ADMIN'));
+router.use(verifyToken, authorize('KEMAHASISWAAN', 'ADMIN'));
 
 // --- Data Aktif & Metadata ---
 router.get('/', controller2b6.index);      // Ambil 7 baris + auto-statistik alumni

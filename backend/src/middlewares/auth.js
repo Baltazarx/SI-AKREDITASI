@@ -53,12 +53,16 @@ const authorize = (...allowedUnits) => {
 
         // 1. ADMIN (Unit 13) selalu punya akses ke semua tabel (Master Key)
         // 2. Cek apakah unit user ada dalam daftar unit yang diizinkan
-        const hasAccess = req.user.nama_unit === 'ADMIN' || allowedUnits.includes(req.user.nama_unit);
+        // Gunakan trim() untuk menghindari masalah spasi yang tidak terlihat
+        const userUnit = req.user.nama_unit ? req.user.nama_unit.trim() : '';
+        const hasAccess = userUnit === 'ADMIN' || allowedUnits.some(unit => unit.trim() === userUnit);
+
+        console.log(`[AUTH] Path: ${req.originalUrl} | User Unit: "${userUnit}" | Allowed: ${JSON.stringify(allowedUnits)} | Access: ${hasAccess}`);
 
         if (!hasAccess) {
             return res.status(403).json({ 
                 success: false, 
-                message: `Akses dilarang! Unit ${req.user.nama_unit} tidak memiliki wewenang pada data ini.` 
+                message: `Akses dilarang! Unit ${userUnit} tidak memiliki wewenang pada data ini.` 
             });
         }
 

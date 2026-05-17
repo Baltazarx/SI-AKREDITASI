@@ -256,21 +256,21 @@ export default function AccuracyPage() {
   const avgTotal = ((parseFloat(avgSB) + parseFloat(avgB) + parseFloat(avgC) + parseFloat(avgK))).toFixed(2);
 
   return (
-    <div className="min-h-screen bg-gray-50/50 pb-20">
+    <div className="min-h-screen bg-gray-950/50 pb-20">
       <div className="max-w-7xl mx-auto p-6">
         {/* Header */}
         <div className="mb-8">
-          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-500 hover:text-gray-800 transition mb-4 group">
+          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition mb-4 group">
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Kembali ke Dashboard</span>
           </button>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Kepuasan Pengguna (2.B.6)</h1>
-              <p className="text-gray-500 mt-1 font-medium">Penilaian kemampuan lulusan dan rencana tindak lanjut</p>
+              <h1 className="text-3xl font-black text-white tracking-tight">Kepuasan Pengguna (2.B.6)</h1>
+              <p className="text-gray-400 mt-1 font-medium">Penilaian kemampuan lulusan dan rencana tindak lanjut</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button onClick={handleExport} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-200 font-bold text-sm">
+              <button onClick={handleExport} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-900/20 font-bold text-sm">
                 <Download size={18} /><span>Export Excel</span>
               </button>
             </div>
@@ -278,30 +278,30 @@ export default function AccuracyPage() {
         </div>
 
         {/* Filter */}
-        <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 mb-6 flex flex-wrap gap-4 items-end">
+        <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 mb-6 flex flex-wrap gap-4 items-end">
           <div className="flex-1 min-w-[200px]">
             <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Program Studi</label>
-            <select value={filterProdi} onChange={(e) => setFilterProdi(e.target.value)} className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl outline-none font-bold text-sm">
+            <select value={filterProdi} onChange={(e) => setFilterProdi(e.target.value)} className="w-full px-4 py-2.5 bg-gray-950/50 border border-gray-700 rounded-xl outline-none font-bold text-sm text-white">
               {prodiList.map(p => <option key={p.id_prodi} value={p.id_prodi}>{p.nama_prodi}</option>)}
             </select>
           </div>
           <div className="flex-1 min-w-[150px]">
             <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Tahun (TS)</label>
-            <select value={filterTahun} onChange={(e) => setFilterTahun(e.target.value)} className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl outline-none font-bold text-sm">
+            <select value={filterTahun} onChange={(e) => setFilterTahun(e.target.value)} className="w-full px-4 py-2.5 bg-gray-950/50 border border-gray-700 rounded-xl outline-none font-bold text-sm text-white">
               <option value="">Semua Tahun</option>
               {tahunList.map(t => <option key={t.id_tahun} value={t.id_tahun}>{t.tahun}</option>)}
             </select>
           </div>
-          <button onClick={viewMode === 'main' ? fetchData : fetchTrashData} className="p-2.5 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 text-gray-400 hover:text-blue-600">
+          <button onClick={viewMode === 'main' ? fetchData : fetchTrashData} className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl hover:bg-gray-950/50 text-gray-400 hover:text-blue-600">
             <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
           </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-gray-200 mb-6">
+        <div className="flex border-b border-gray-700 mb-6">
           <button onClick={() => setViewMode('main')} className={`px-6 py-3 font-bold text-sm uppercase ${viewMode === 'main' ? 'border-b-4 border-blue-600 text-blue-600' : 'text-gray-400'}`}>Formulir Penilaian</button>
           <button onClick={() => setViewMode('trash')} className={`px-6 py-3 font-bold text-sm uppercase flex items-center gap-2 ${viewMode === 'trash' ? 'border-b-4 border-red-600 text-red-600' : 'text-gray-400'}`}>
-            Trash <span className="bg-red-100 text-red-600 px-2 py-0.5 rounded-full text-xs font-black">{trashData.length}</span>
+            Trash <span className="bg-red-900/30 text-red-600 px-2 py-0.5 rounded-full text-xs font-black">{trashData.length}</span>
           </button>
         </div>
 
@@ -309,86 +309,86 @@ export default function AccuracyPage() {
         {viewMode === 'main' && (
           <div className="animate-in fade-in duration-500">
             {/* Metadata Panel */}
-            <div className="bg-white rounded-[2rem] p-6 shadow-xl shadow-gray-200/50 border border-gray-100 mb-8">
+            <div className="bg-gray-900 rounded-[2rem] p-6 shadow-xl shadow-gray-950/50 border border-gray-700 mb-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-blue-50/50 p-4 rounded-2xl border border-blue-100 flex items-center justify-between">
+                <div className="bg-blue-900/50 p-4 rounded-2xl border border-blue-900/50 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-1">Lulusan (3 Tahun Terakhir)</p>
-                    <p className="text-3xl font-black text-gray-900">{metadata.jml_alumni_3_tahun}</p>
+                    <p className="text-3xl font-black text-white">{metadata.jml_alumni_3_tahun}</p>
                   </div>
                 </div>
-                <div className="bg-purple-50/50 p-4 rounded-2xl border border-purple-100 flex items-center justify-between">
+                <div className="bg-purple-900/50 p-4 rounded-2xl border border-purple-900/50 flex items-center justify-between">
                   <div>
                     <p className="text-xs font-bold text-purple-600 uppercase tracking-widest mb-1">Mahasiswa Aktif (TS)</p>
-                    <p className="text-3xl font-black text-gray-900">{metadata.jml_mhs_aktif_ts}</p>
+                    <p className="text-3xl font-black text-white">{metadata.jml_mhs_aktif_ts}</p>
                   </div>
                 </div>
-                <div className="bg-amber-50/50 p-4 rounded-2xl border border-amber-200 relative overflow-hidden group">
+                <div className="bg-amber-950/50 p-4 rounded-2xl border border-amber-800 relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-2 h-full bg-amber-400"></div>
-                  <label className="block text-xs font-bold text-amber-700 uppercase tracking-widest mb-2">Jumlah Responden Lulusan</label>
-                  <input type="number" value={metadata.jml_responden} onChange={e => setMetadata({ ...metadata, jml_responden: e.target.value })} className="w-full bg-white px-4 py-2 rounded-xl border border-amber-200 font-bold text-xl outline-none focus:ring-4 ring-amber-100 transition shadow-sm" placeholder="Input..." />
+                  <label className="block text-xs font-bold text-amber-400 uppercase tracking-widest mb-2">Jumlah Responden Lulusan</label>
+                  <input type="number" value={metadata.jml_responden} onChange={e => setMetadata({ ...metadata, jml_responden: e.target.value })} className="w-full bg-gray-900 px-4 py-2 rounded-xl border border-amber-800 font-bold text-xl outline-none focus:ring-4 ring-amber-900/40 transition shadow-sm" placeholder="Input..." />
                 </div>
               </div>
             </div>
 
             {/* Validation Notification */}
             {!isAllRowsValid ? (
-              <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl mb-6 flex items-start gap-3">
+              <div className="bg-red-950/40 border-l-4 border-red-500 p-4 rounded-r-xl mb-6 flex items-start gap-3">
                 <AlertTriangle className="text-red-500 mt-0.5" size={20} />
                 <div>
-                  <p className="text-sm font-bold text-red-800">Terdapat Baris Penilaian Yang Belum 100%</p>
+                  <p className="text-sm font-bold text-red-300">Terdapat Baris Penilaian Yang Belum 100%</p>
                   <p className="text-xs text-red-600 mt-1">Pastikan total Persentase (SB + B + C + K) di setiap jenis kemampuan bernilai pas 100%. Tombol simpan dinonaktifkan hingga syarat terpenuhi.</p>
                 </div>
               </div>
             ) : !hasResponden ? (
-              <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl mb-6 flex items-start gap-3">
+              <div className="bg-amber-950/40 border-l-4 border-amber-500 p-4 rounded-r-xl mb-6 flex items-start gap-3">
                 <AlertTriangle className="text-amber-500 mt-0.5" size={20} />
-                <p className="text-sm font-bold text-amber-800">Jumlah responden belum diisi di atas.</p>
+                <p className="text-sm font-bold text-amber-300">Jumlah responden belum diisi di atas.</p>
               </div>
             ) : (
-              <div className="bg-emerald-50 border-l-4 border-emerald-500 p-4 rounded-r-xl mb-6 flex items-start gap-3">
+              <div className="bg-emerald-900/20 border-l-4 border-emerald-500 p-4 rounded-r-xl mb-6 flex items-start gap-3">
                 <CheckCircle2 className="text-emerald-500 mt-0.5" size={20} />
-                <p className="text-sm font-bold text-emerald-800">Semua baris valid 100%. Data siap disimpan.</p>
+                <p className="text-sm font-bold text-emerald-300">Semua baris valid 100%. Data siap disimpan.</p>
               </div>
             )}
 
             {/* Main Form Table */}
-            <div className="bg-white rounded-[2rem] shadow-xl shadow-gray-200/50 border border-gray-100 overflow-hidden relative">
+            <div className="bg-gray-900 rounded-[2rem] shadow-xl shadow-gray-950/50 border border-gray-700 overflow-hidden relative">
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500"></div>
 
               <div className="overflow-x-auto p-4">
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr>
-                      <th className="p-4 text-[11px] font-black text-gray-500 uppercase tracking-widest border-b-2 border-gray-100">Jenis Kemampuan</th>
-                      <th className="p-4 text-[11px] font-black text-center text-blue-600 bg-blue-50/50 uppercase tracking-widest border-b-2 border-blue-100 rounded-tl-xl w-24">SB (%)</th>
-                      <th className="p-4 text-[11px] font-black text-center text-emerald-600 bg-emerald-50/50 uppercase tracking-widest border-b-2 border-emerald-100 w-24">B (%)</th>
-                      <th className="p-4 text-[11px] font-black text-center text-amber-600 bg-amber-50/50 uppercase tracking-widest border-b-2 border-amber-100 w-24">C (%)</th>
-                      <th className="p-4 text-[11px] font-black text-center text-red-600 bg-red-50/50 uppercase tracking-widest border-b-2 border-red-100 rounded-tr-xl w-24">K (%)</th>
-                      <th className="p-4 text-[11px] font-black text-center text-gray-500 uppercase tracking-widest border-b-2 border-gray-100 w-28">Status</th>
-                      <th className="p-4 text-[11px] font-black text-gray-500 uppercase tracking-widest border-b-2 border-gray-100">Rencana Tindak Lanjut</th>
-                      <th className="p-4 text-[11px] font-black text-gray-500 uppercase tracking-widest border-b-2 border-gray-100 text-center">Hapus</th>
+                      <th className="p-4 text-[11px] font-black text-gray-300 uppercase tracking-widest border-b-2 border-gray-700">Jenis Kemampuan</th>
+                      <th className="p-4 text-[11px] font-black text-center text-blue-600 bg-blue-900/50 uppercase tracking-widest border-b-2 border-blue-900/50 rounded-tl-xl w-24">SB (%)</th>
+                      <th className="p-4 text-[11px] font-black text-center text-emerald-600 bg-emerald-900/50 uppercase tracking-widest border-b-2 border-emerald-900/50 w-24">B (%)</th>
+                      <th className="p-4 text-[11px] font-black text-center text-amber-600 bg-amber-950/50 uppercase tracking-widest border-b-2 border-amber-900/50 w-24">C (%)</th>
+                      <th className="p-4 text-[11px] font-black text-center text-red-600 bg-red-950/50 uppercase tracking-widest border-b-2 border-red-900/50 rounded-tr-xl w-24">K (%)</th>
+                      <th className="p-4 text-[11px] font-black text-center text-gray-300 uppercase tracking-widest border-b-2 border-gray-700 w-28">Status</th>
+                      <th className="p-4 text-[11px] font-black text-gray-300 uppercase tracking-widest border-b-2 border-gray-700">Rencana Tindak Lanjut</th>
+                      <th className="p-4 text-[11px] font-black text-gray-300 uppercase tracking-widest border-b-2 border-gray-700 text-center">Hapus</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-gray-800">
                     {penilaian.map((row, idx) => {
                       const total = (parseFloat(row.sangat_baik) || 0) + (parseFloat(row.baik) || 0) + (parseFloat(row.cukup) || 0) + (parseFloat(row.kurang) || 0);
                       const isValid = total === 100;
                       return (
-                        <tr key={idx} className="hover:bg-gray-50/50 transition">
-                          <td className="p-4 font-bold text-gray-800 text-sm whitespace-nowrap">{row.jenis_kemampuan}</td>
-                          <td className="p-2"><input type="number" step="0.1" value={row.sangat_baik} onChange={e => handleInputChange(idx, 'sangat_baik', e.target.value)} className="w-full text-center py-2 px-1 bg-gray-50 border border-gray-200 rounded-lg text-sm font-bold focus:ring-2 focus:ring-blue-400 outline-none" /></td>
-                          <td className="p-2"><input type="number" step="0.1" value={row.baik} onChange={e => handleInputChange(idx, 'baik', e.target.value)} className="w-full text-center py-2 px-1 bg-gray-50 border border-gray-200 rounded-lg text-sm font-bold focus:ring-2 focus:ring-emerald-400 outline-none" /></td>
-                          <td className="p-2"><input type="number" step="0.1" value={row.cukup} onChange={e => handleInputChange(idx, 'cukup', e.target.value)} className="w-full text-center py-2 px-1 bg-gray-50 border border-gray-200 rounded-lg text-sm font-bold focus:ring-2 focus:ring-amber-400 outline-none" /></td>
-                          <td className="p-2"><input type="number" step="0.1" value={row.kurang} onChange={e => handleInputChange(idx, 'kurang', e.target.value)} className="w-full text-center py-2 px-1 bg-gray-50 border border-gray-200 rounded-lg text-sm font-bold focus:ring-2 focus:ring-red-400 outline-none" /></td>
+                        <tr key={idx} className="hover:bg-gray-950/50 transition">
+                          <td className="p-4 font-bold text-gray-200 text-sm whitespace-nowrap">{row.jenis_kemampuan}</td>
+                          <td className="p-2"><input type="number" step="0.1" value={row.sangat_baik} onChange={e => handleInputChange(idx, 'sangat_baik', e.target.value)} className="w-full text-center py-2 px-1 bg-gray-950/50 border border-gray-700 rounded-lg text-sm font-bold focus:ring-2 focus:ring-blue-400 outline-none" /></td>
+                          <td className="p-2"><input type="number" step="0.1" value={row.baik} onChange={e => handleInputChange(idx, 'baik', e.target.value)} className="w-full text-center py-2 px-1 bg-gray-950/50 border border-gray-700 rounded-lg text-sm font-bold focus:ring-2 focus:ring-emerald-400 outline-none" /></td>
+                          <td className="p-2"><input type="number" step="0.1" value={row.cukup} onChange={e => handleInputChange(idx, 'cukup', e.target.value)} className="w-full text-center py-2 px-1 bg-gray-950/50 border border-gray-700 rounded-lg text-sm font-bold focus:ring-2 focus:ring-amber-400 outline-none" /></td>
+                          <td className="p-2"><input type="number" step="0.1" value={row.kurang} onChange={e => handleInputChange(idx, 'kurang', e.target.value)} className="w-full text-center py-2 px-1 bg-gray-950/50 border border-gray-700 rounded-lg text-sm font-bold focus:ring-2 focus:ring-red-400 outline-none" /></td>
 
                           <td className="p-4 text-center">
-                            <span className={`px-3 py-1 text-xs font-black rounded-full inline-block min-w-[60px] ${isValid ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>{total}%</span>
+                            <span className={`px-3 py-1 text-xs font-black rounded-full inline-block min-w-[60px] ${isValid ? 'bg-emerald-900/30 text-emerald-400' : 'bg-red-900/30 text-red-400'}`}>{total}%</span>
                           </td>
-                          <td className="p-2"><input type="text" value={row.rencana_tindak_lanjut} onChange={e => handleInputChange(idx, 'rencana_tindak_lanjut', e.target.value)} className="w-full py-2 px-3 bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-400 outline-none" placeholder="Tindak Lanjut..." /></td>
+                          <td className="p-2"><input type="text" value={row.rencana_tindak_lanjut} onChange={e => handleInputChange(idx, 'rencana_tindak_lanjut', e.target.value)} className="w-full py-2 px-3 bg-gray-950/50 border border-gray-700 rounded-lg text-sm font-medium focus:ring-2 focus:ring-blue-400 outline-none" placeholder="Tindak Lanjut..." /></td>
                           <td className="p-2 text-center">
                             {row.id_2b6 && (
-                              <button onClick={() => handleSoftDelete(row.id_2b6)} className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition" title="Pindah ke Trash"><Trash2 size={18} /></button>
+                              <button onClick={() => handleSoftDelete(row.id_2b6)} className="p-2 text-red-500 hover:bg-red-950/40 rounded-lg transition" title="Pindah ke Trash"><Trash2 size={18} /></button>
                             )}
                           </td>
                         </tr>
@@ -396,21 +396,21 @@ export default function AccuracyPage() {
                     })}
                   </tbody>
                   <tfoot>
-                    <tr className="bg-gray-100">
-                      <td className="p-4 font-black text-gray-700 text-sm text-right pr-6">RATA-RATA (%)</td>
-                      <td className="p-4 text-center font-black text-blue-700">{avgSB}</td>
-                      <td className="p-4 text-center font-black text-emerald-700">{avgB}</td>
-                      <td className="p-4 text-center font-black text-amber-700">{avgC}</td>
-                      <td className="p-4 text-center font-black text-red-700">{avgK}</td>
-                      <td className="p-4 text-center font-black text-gray-800">{avgTotal}%</td>
+                    <tr className="bg-gray-800">
+                      <td className="p-4 font-black text-gray-300 text-sm text-right pr-6">RATA-RATA (%)</td>
+                      <td className="p-4 text-center font-black text-blue-400">{avgSB}</td>
+                      <td className="p-4 text-center font-black text-emerald-400">{avgB}</td>
+                      <td className="p-4 text-center font-black text-amber-400">{avgC}</td>
+                      <td className="p-4 text-center font-black text-red-400">{avgK}</td>
+                      <td className="p-4 text-center font-black text-gray-200">{avgTotal}%</td>
                       <td colSpan="2" className="p-4"></td>
                     </tr>
                   </tfoot>
                 </table>
               </div>
 
-              <div className="p-6 bg-gray-50 border-t border-gray-100 flex justify-end">
-                <button onClick={handleSubmit} disabled={!isAllRowsValid || !hasResponden} className={`flex items-center gap-2 px-10 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition shadow-xl ${isAllRowsValid && hasResponden ? 'bg-blue-600 text-white shadow-blue-200 hover:bg-blue-700 hover:-translate-y-0.5' : 'bg-gray-200 text-gray-400 cursor-not-allowed shadow-transparent'}`}>
+              <div className="p-6 bg-gray-950/50 border-t border-gray-700 flex justify-end">
+                <button onClick={handleSubmit} disabled={!isAllRowsValid || !hasResponden} className={`flex items-center gap-2 px-10 py-4 rounded-2xl font-black text-sm uppercase tracking-widest transition shadow-xl ${isAllRowsValid && hasResponden ? 'bg-blue-600 text-white shadow-blue-900/20 hover:bg-blue-700 hover:-translate-y-0.5' : 'bg-gray-700 text-gray-400 cursor-not-allowed shadow-transparent'}`}>
                   <Save size={20} /> Simpan Seluruh Penilaian
                 </button>
               </div>
@@ -420,44 +420,44 @@ export default function AccuracyPage() {
 
         {/* Trash View */}
         {viewMode === 'trash' && (
-          <div className="bg-red-50 border border-red-100 rounded-[2.5rem] p-8 shadow-sm animate-in slide-in-from-bottom-4 duration-500">
+          <div className="bg-red-950/40 border border-red-900/50 rounded-[2.5rem] p-8 shadow-sm animate-in slide-in-from-bottom-4 duration-500">
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center"><Trash2 size={24} /></div>
+              <div className="w-12 h-12 bg-red-900/30 text-red-600 rounded-2xl flex items-center justify-center"><Trash2 size={24} /></div>
               <div>
-                <h3 className="text-xl font-black text-red-700">Keranjang Sampah</h3>
+                <h3 className="text-xl font-black text-red-400">Keranjang Sampah</h3>
                 <p className="text-sm font-medium text-red-500 mt-1">Baris penilaian yang dihapus sementara</p>
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl overflow-hidden shadow-xl shadow-red-100/50 border border-red-100">
+            <div className="bg-gray-900 rounded-3xl overflow-hidden shadow-xl shadow-red-100/50 border border-red-900/50">
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead className="bg-gray-50 text-[10px] text-gray-500 uppercase font-black tracking-widest border-b border-red-100">
+                  <thead className="bg-gray-800 text-[10px] text-gray-400 uppercase font-black tracking-widest border-b border-red-900/50">
                     <tr>
-                      <th className="p-5 border-r border-gray-100">Jenis Kemampuan</th>
-                      <th className="p-5 border-r border-gray-100">Tahun</th>
-                      <th className="p-5 border-r border-gray-100 text-center">Sangat Baik</th>
-                      <th className="p-5 border-r border-gray-100 text-center">Baik</th>
-                      <th className="p-5 border-r border-gray-100 text-center">Cukup</th>
-                      <th className="p-5 border-r border-gray-100 text-center">Kurang</th>
+                      <th className="p-5 border-r border-gray-700">Jenis Kemampuan</th>
+                      <th className="p-5 border-r border-gray-700">Tahun</th>
+                      <th className="p-5 border-r border-gray-700 text-center">Sangat Baik</th>
+                      <th className="p-5 border-r border-gray-700 text-center">Baik</th>
+                      <th className="p-5 border-r border-gray-700 text-center">Cukup</th>
+                      <th className="p-5 border-r border-gray-700 text-center">Kurang</th>
                       <th className="p-5 text-center">Aksi</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-gray-800">
                     {trashData.length === 0 ? (
                       <tr><td colSpan="7" className="p-10 text-center text-sm font-bold text-gray-400">Keranjang sampah kosong</td></tr>
                     ) : (
                       trashData.map(t => (
-                        <tr key={t.id_2b6} className="hover:bg-red-50/30 transition">
-                          <td className="p-5 font-black text-gray-800 border-r border-gray-50">{t.jenis_kemampuan}</td>
-                          <td className="p-5 font-bold text-gray-500 border-r border-gray-50">{t.nama_tahun || t.tahun}</td>
-                          <td className="p-5 text-center font-bold text-gray-600 border-r border-gray-50">{t.sangat_baik}%</td>
-                          <td className="p-5 text-center font-bold text-gray-600 border-r border-gray-50">{t.baik}%</td>
-                          <td className="p-5 text-center font-bold text-gray-600 border-r border-gray-50">{t.cukup}%</td>
-                          <td className="p-5 text-center font-bold text-gray-600 border-r border-gray-50">{t.kurang}%</td>
+                        <tr key={t.id_2b6} className="hover:bg-red-950/30 transition">
+                          <td className="p-5 font-black text-gray-200 border-r border-gray-700">{t.jenis_kemampuan}</td>
+                          <td className="p-5 font-bold text-gray-400 border-r border-gray-700">{t.nama_tahun || t.tahun}</td>
+                          <td className="p-5 text-center font-bold text-gray-400 border-r border-gray-700">{t.sangat_baik}%</td>
+                          <td className="p-5 text-center font-bold text-gray-400 border-r border-gray-700">{t.baik}%</td>
+                          <td className="p-5 text-center font-bold text-gray-400 border-r border-gray-700">{t.cukup}%</td>
+                          <td className="p-5 text-center font-bold text-gray-400 border-r border-gray-700">{t.kurang}%</td>
                           <td className="p-5 flex justify-center gap-3">
-                            <button onClick={() => handleRestore(t.id_2b6)} className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 uppercase shadow-md shadow-blue-200 transition">Restore</button>
-                            <button onClick={() => handleHardDelete(t.id_2b6)} className="px-4 py-2 bg-red-50 text-red-600 border border-red-100 rounded-xl text-xs font-bold hover:bg-red-600 hover:text-white uppercase transition">Permanen</button>
+                            <button onClick={() => handleRestore(t.id_2b6)} className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold hover:bg-blue-700 uppercase shadow-md shadow-blue-900/20 transition">Restore</button>
+                            <button onClick={() => handleHardDelete(t.id_2b6)} className="px-4 py-2 bg-red-950/40 text-red-600 border border-red-900/50 rounded-xl text-xs font-bold hover:bg-red-600 hover:text-white uppercase transition">Permanen</button>
                           </td>
                         </tr>
                       ))

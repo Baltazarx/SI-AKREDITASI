@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const pmbController = require('../../controllers/pmb/2a1_pmb_controller');
+const { verifyToken, authorize } = require('../../middlewares/auth');
+
+router.use(verifyToken, authorize('PMB', 'ADMIN'));
 
 // Ambil data aktif (IKU: RESTful API)
 router.get('/:id_prodi', pmbController.getData);

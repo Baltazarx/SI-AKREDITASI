@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Plus, Edit, Trash2, Download, RefreshCw, Eye, Target, Compass } from 'lucide-react';
 
@@ -15,12 +15,11 @@ export default function VisiMisiPage() {
   
   const [formData, setFormData] = useState({
     id_prodi: '',
-    visi: '',
-    misi: '',
-    tujuan: '',
-    sasaran: '',
-    strategi: '',
-    kebijakan: '',
+    visi_pt: '',
+    misi_pt: '',
+    visi_upps: '',
+    misi_upps: '',
+    visi_keilmuan_ps: '',
   });
 
   useEffect(() => {
@@ -105,15 +104,14 @@ export default function VisiMisiPage() {
   };
 
   const handleEdit = (item) => {
-    setEditingId(item.id_visi_misi);
+    setEditingId(item.id_vm);
     setFormData({
       id_prodi: item.id_prodi || '',
-      visi: item.visi || '',
-      misi: item.misi || '',
-      tujuan: item.tujuan || '',
-      sasaran: item.sasaran || '',
-      strategi: item.strategi || '',
-      kebijakan: item.kebijakan || '',
+      visi_pt: item.visi_pt || '',
+      misi_pt: item.misi_pt || '',
+      visi_upps: item.visi_upps || '',
+      misi_upps: item.misi_upps || '',
+      visi_keilmuan_ps: item.visi_keilmuan_ps || '',
     });
     setShowForm(true);
   };
@@ -137,12 +135,11 @@ export default function VisiMisiPage() {
   const resetForm = () => {
     setFormData({
       id_prodi: filterIdProdi,
-      visi: '',
-      misi: '',
-      tujuan: '',
-      sasaran: '',
-      strategi: '',
-      kebijakan: '',
+      visi_pt: '',
+      misi_pt: '',
+      visi_upps: '',
+      misi_upps: '',
+      visi_keilmuan_ps: '',
     });
     setEditingId(null);
     setShowForm(false);
@@ -154,25 +151,32 @@ export default function VisiMisiPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-gray-950/50 text-white">
       <div className="max-w-7xl mx-auto p-6">
         {/* Header Section */}
         <div className="mb-8">
-          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-500 hover:text-gray-800 transition mb-4 group">
+          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition mb-4 group">
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Kembali ke Dashboard</span>
           </button>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Visi Misi (Tabel 6)</h1>
-              <p className="text-gray-500 mt-1 font-medium">Visi, Misi, Tujuan, dan Sasaran UPPS</p>
+              <h1 className="text-3xl font-black text-white tracking-tight">Visi Misi (Tabel 6)</h1>
+              <p className="text-gray-400 mt-1 font-medium">Visi, Misi, UPPS, dan Visi Keilmuan PS</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 font-bold text-sm">
-                <Plus size={18} />
-                <span>{showForm ? 'Tutup Form' : 'Tambah Data'}</span>
-              </button>
-              <button onClick={handleExport} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-200 font-bold text-sm">
+              {!data.length && (
+                <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-900/20 font-bold text-sm">
+                  <Plus size={18} />
+                  <span>{showForm ? 'Tutup Form' : 'Tambah Data'}</span>
+                </button>
+              )}
+              {data.length > 0 && showForm && editingId && (
+                <button onClick={resetForm} className="flex items-center gap-2 bg-gray-700 text-white px-5 py-2.5 rounded-xl hover:bg-gray-600 transition font-bold text-sm">
+                  <span>Tutup Edit</span>
+                </button>
+              )}
+              <button onClick={handleExport} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-900/20 font-bold text-sm">
                 <Download size={18} />
                 <span>Export Excel</span>
               </button>
@@ -183,25 +187,25 @@ export default function VisiMisiPage() {
         {/* Stats & Filters */}
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
           <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-              <div className="p-3 bg-blue-50 text-blue-600 rounded-xl"><Eye size={24} /></div>
+            <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+              <div className="p-3 bg-blue-900/20 text-blue-600 rounded-xl"><Eye size={24} /></div>
               <div>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Visi</p>
-                <p className="text-2xl font-black text-gray-900">{data.length > 0 ? 'Tersedia' : '-'}</p>
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Visi PT</p>
+                <p className="text-xl font-black text-white">{data.length > 0 ? 'Tersedia' : '-'}</p>
               </div>
             </div>
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-              <div className="p-3 bg-purple-50 text-purple-600 rounded-xl"><Target size={24} /></div>
+            <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+              <div className="p-3 bg-purple-900/20 text-purple-600 rounded-xl"><Target size={24} /></div>
               <div>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Misi</p>
-                <p className="text-2xl font-black text-gray-900">{data.length > 0 ? 'Aktif' : '-'}</p>
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Visi UPPS</p>
+                <p className="text-xl font-black text-white">{data.length > 0 ? 'Aktif' : '-'}</p>
               </div>
             </div>
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-              <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl"><Compass size={24} /></div>
+            <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+              <div className="p-3 bg-emerald-900/20 text-emerald-600 rounded-xl"><Compass size={24} /></div>
               <div>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Strategi</p>
-                <p className="text-2xl font-black text-gray-900">{data.length > 0 ? 'Terkelola' : '-'}</p>
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Keilmuan PS</p>
+                <p className="text-xl font-black text-white">{data.length > 0 ? 'Terkelola' : '-'}</p>
               </div>
             </div>
           </div>
@@ -211,14 +215,14 @@ export default function VisiMisiPage() {
               <select 
                 value={filterIdProdi} 
                 onChange={(e) => setFilterIdProdi(e.target.value)} 
-                className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-sm transition appearance-none cursor-pointer"
+                className="w-full px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-900/40 outline-none font-bold text-sm transition appearance-none cursor-pointer text-white"
               >
                 {prodiList.map(prodi => (
-                  <option key={prodi.id_prodi} value={prodi.id_prodi}>{prodi.nama_prodi}</option>
+                  <option key={prodi.id_prodi} value={prodi.id_prodi} className="bg-gray-900 text-white">{prodi.nama_prodi}</option>
                 ))}
               </select>
             </div>
-            <button onClick={fetchData} className="p-2.5 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
+            <button onClick={fetchData} className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl hover:bg-gray-950/50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
               <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
             </button>
           </div>
@@ -226,59 +230,55 @@ export default function VisiMisiPage() {
 
         {/* Form Section */}
         {showForm && (
-          <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 mb-8 animate-in slide-in-from-top-4 duration-500">
-            <h2 className="text-xl font-black text-gray-900 mb-6">{editingId ? 'Edit Visi Misi' : 'Input Visi Misi Baru'}</h2>
+          <div className="bg-gray-900 rounded-3xl shadow-xl shadow-gray-950/50 border border-gray-700 p-8 mb-8 animate-in slide-in-from-top-4 duration-500">
+            <h2 className="text-xl font-black text-white mb-6">{editingId ? 'Edit Visi Misi' : 'Input Visi Misi Baru'}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Program Studi</label>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Program Studi (Sesuai Filter)</label>
                   <select 
                     value={formData.id_prodi} 
-                    onChange={(e) => setFormData({...formData, id_prodi: e.target.value})} 
-                    className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium"
-                    required
+                    disabled={true}
+                    className="w-full px-4 py-3 bg-gray-800/50 border-2 border-gray-700 text-gray-500 rounded-2xl outline-none transition font-black cursor-not-allowed appearance-none"
                   >
                     <option value="">Pilih Program Studi</option>
                     {prodiList.map(p => (
                       <option key={p.id_prodi} value={p.id_prodi}>{p.nama_prodi}</option>
                     ))}
                   </select>
+                  <p className="text-[10px] text-blue-500 mt-2 font-bold uppercase tracking-wider italic">* Mengikuti prodi yang Anda pilih di filter utama</p>
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Visi PT</label>
+                  <textarea value={formData.visi_pt} onChange={(e) => setFormData({...formData, visi_pt: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium text-white" rows="3" placeholder="Visi Perguruan Tinggi..." />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Misi PT</label>
+                  <textarea value={formData.misi_pt} onChange={(e) => setFormData({...formData, misi_pt: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium text-white" rows="3" placeholder="Misi Perguruan Tinggi..." />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Visi UPPS</label>
+                  <textarea value={formData.visi_upps} onChange={(e) => setFormData({...formData, visi_upps: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium text-white" rows="3" placeholder="Visi Unit Pengelola Program Studi..." />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Misi UPPS</label>
+                  <textarea value={formData.misi_upps} onChange={(e) => setFormData({...formData, misi_upps: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium text-white" rows="3" placeholder="Misi Unit Pengelola Program Studi..." />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Visi</label>
-                  <textarea value={formData.visi} onChange={(e) => setFormData({...formData, visi: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" rows="3" placeholder="Masukkan visi..." />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Misi</label>
-                  <textarea value={formData.misi} onChange={(e) => setFormData({...formData, misi: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" rows="3" placeholder="Masukkan misi..." />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Tujuan</label>
-                  <textarea value={formData.tujuan} onChange={(e) => setFormData({...formData, tujuan: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" rows="3" placeholder="Masukkan tujuan..." />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Sasaran</label>
-                  <textarea value={formData.sasaran} onChange={(e) => setFormData({...formData, sasaran: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" rows="3" placeholder="Masukkan sasaran..." />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Strategi</label>
-                  <textarea value={formData.strategi} onChange={(e) => setFormData({...formData, strategi: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" rows="3" placeholder="Masukkan strategi..." />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Kebijakan</label>
-                  <textarea value={formData.kebijakan} onChange={(e) => setFormData({...formData, kebijakan: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" rows="3" placeholder="Masukkan kebijakan..." />
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Visi Keilmuan Program Studi</label>
+                  <textarea value={formData.visi_keilmuan_ps} onChange={(e) => setFormData({...formData, visi_keilmuan_ps: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium text-white" rows="4" placeholder="Visi Keilmuan PS..." />
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <button type="button" onClick={resetForm} className="px-8 py-3 bg-gray-100 text-gray-600 rounded-2xl hover:bg-gray-200 transition font-bold">Batal</button>
-                <button type="submit" className="px-10 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black shadow-lg shadow-blue-200">{editingId ? 'Update Data' : 'Simpan Data'}</button>
+                <button type="button" onClick={resetForm} className="px-8 py-3 bg-gray-800 text-gray-400 rounded-2xl hover:bg-gray-700 transition font-bold">Batal</button>
+                <button type="submit" className="px-10 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black shadow-lg shadow-blue-900/20">{editingId ? 'Update Data' : 'Simpan Data'}</button>
               </div>
             </form>
           </div>
         )}
 
         {/* Table Section */}
-        <div className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/30 border border-gray-100 overflow-hidden transition-all duration-500">
+        <div className="bg-gray-900 rounded-3xl shadow-xl shadow-gray-950/30 border border-gray-700 overflow-hidden transition-all duration-500">
           {loading ? (
             <div className="p-20 text-center text-gray-400 font-bold">
               <RefreshCw className="animate-spin mx-auto mb-4 text-blue-500" size={48} />
@@ -290,35 +290,50 @@ export default function VisiMisiPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead className="bg-gray-50/50 border-b border-gray-100">
-                  <tr>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0 text-center w-20">ID</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0">Prodi</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0">Visi</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-50">
+              <table className="w-full text-left border-collapse">
+                <tbody className="divide-y divide-gray-800">
                   {data.map((item) => (
-                    <tr key={item.id_visi_misi} className="hover:bg-blue-50/30 transition-colors group">
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0 text-center">
-                        <span className="text-xs font-black text-gray-400">#{item.id_visi_misi}</span>
-                      </td>
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0">
-                        <div className="text-sm font-black text-gray-900 group-hover:text-blue-600 transition-colors uppercase tracking-tight">{item.nama_prodi || '-'}</div>
-                      </td>
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0">
-                        <div className="text-xs font-bold text-gray-700 line-clamp-2 max-w-lg">{item.visi || '-'}</div>
-                      </td>
-                      <td className="px-8 py-6">
-                        <div className="inline-flex items-center bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm transition-all group-hover:border-blue-200 group-hover:shadow-md">
-                          <button onClick={() => handleEdit(item)} className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit"><Edit size={16} /></button>
-                          <div className="w-px h-4 bg-gray-200 mx-2"></div>
-                          <button onClick={() => handleDelete(item.id_visi_misi)} className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus"><Trash2 size={16} /></button>
-                        </div>
-                      </td>
-                    </tr>
+                    <React.Fragment key={item.id_vm}>
+                      {/* Row 1: Visi Headers */}
+                      <tr className="bg-gray-800 border-b border-gray-700">
+                        <th className="px-6 py-4 text-[11px] font-black text-gray-300 uppercase tracking-widest border-r border-gray-700 w-1/3">Visi PT</th>
+                        <th className="px-6 py-4 text-[11px] font-black text-gray-300 uppercase tracking-widest border-r border-gray-700 w-1/3">Visi UPPS</th>
+                        <th className="px-6 py-4 text-[11px] font-black text-gray-300 uppercase tracking-widest w-1/3">Visi Keilmuan PS</th>
+                      </tr>
+                      {/* Row 2: Visi Content */}
+                      <tr className="border-b border-gray-800">
+                        <td className="px-6 py-6 border-r border-gray-800 align-top">
+                          <div className="text-sm font-bold text-white leading-relaxed">{item.visi_pt || '-'}</div>
+                        </td>
+                        <td className="px-6 py-6 border-r border-gray-800 align-top">
+                          <div className="text-sm font-bold text-white leading-relaxed">{item.visi_upps || '-'}</div>
+                        </td>
+                        <td className="px-6 py-6 align-top">
+                          <div className="text-sm font-bold text-white leading-relaxed">{item.visi_keilmuan_ps || '-'}</div>
+                        </td>
+                      </tr>
+                      {/* Row 3: Misi Headers */}
+                      <tr className="bg-gray-800 border-b border-gray-700">
+                        <th className="px-6 py-4 text-[11px] font-black text-gray-300 uppercase tracking-widest border-r border-gray-700">Misi PT</th>
+                        <th className="px-6 py-4 text-[11px] font-black text-gray-300 uppercase tracking-widest border-r border-gray-700">Misi UPPS</th>
+                        <th className="px-6 py-4 text-[11px] font-black text-gray-300 uppercase tracking-widest">Aksi Data</th>
+                      </tr>
+                      {/* Row 4: Misi Content & Actions */}
+                      <tr>
+                        <td className="px-6 py-6 border-r border-gray-800 align-top">
+                          <div className="text-sm font-medium text-gray-300 leading-relaxed">{item.misi_pt || '-'}</div>
+                        </td>
+                        <td className="px-6 py-6 border-r border-gray-800 align-top">
+                          <div className="text-sm font-medium text-gray-300 leading-relaxed">{item.misi_upps || '-'}</div>
+                        </td>
+                        <td className="px-6 py-6 align-middle text-center">
+                          <div className="flex justify-center gap-3">
+                            <button onClick={() => handleEdit(item)} className="px-6 py-2 bg-blue-900/20 text-blue-400 border border-blue-900/50 rounded-xl hover:bg-blue-600 hover:text-white transition font-black text-[10px] uppercase tracking-widest shadow-lg shadow-blue-900/10">Edit</button>
+                            <button onClick={() => handleDelete(item.id_vm)} className="px-6 py-2 bg-red-900/20 text-red-400 border border-red-900/50 rounded-xl hover:bg-red-600 hover:text-white transition font-black text-[10px] uppercase tracking-widest shadow-lg shadow-red-900/10">Hapus</button>
+                          </div>
+                        </td>
+                      </tr>
+                    </React.Fragment>
                   ))}
                 </tbody>
               </table>

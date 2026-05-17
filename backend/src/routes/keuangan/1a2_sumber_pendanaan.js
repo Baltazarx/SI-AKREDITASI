@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const controller1a2 = require('../../controllers/keuangan/1a2_sumber_pendanaan');
 const { verifyToken, authorize } = require('../../middlewares/auth');
+const { UNITS } = require('../../config/permissions');
 
 // Keamanan: Wajib Login & Role Keuangan/Admin/Waket2
-router.use(verifyToken, authorize('KEUANGAN', 'ADMIN', 'WAKET2'));
+router.use(verifyToken, authorize(UNITS.KEUANGAN, UNITS.ADMIN, UNITS.WAKET_2));
 
 // --- Rute Data Utama ---
 router.get('/', controller1a2.index);          // Ambil data aktif (Filter Prodi & Tahun)

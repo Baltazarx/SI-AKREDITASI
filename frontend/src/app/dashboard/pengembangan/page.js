@@ -258,25 +258,25 @@ export default function PengembanganPage() {
   }, [activeData, currentTSYear, tahunList]);
 
   return (
-    <div className="min-h-screen bg-gray-50/50 dark:bg-gray-950 transition-colors duration-500">
+    <div className="min-h-screen bg-gray-950/50 dark:bg-gray-950 transition-colors duration-500">
       <div className="max-w-7xl mx-auto p-6">
         {/* Header Section */}
         <div className="mb-8">
-          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition mb-4 group">
+          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-400 dark:text-gray-400 hover:text-gray-200 dark:hover:text-white transition mb-4 group">
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Kembali ke Dashboard</span>
           </button>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">Pengembangan DTPR (3.A.3)</h1>
-              <p className="text-gray-500 dark:text-gray-400 mt-1 font-medium">Monitoring pengembangan DTPR di bidang penelitian & pendidikan</p>
+              <h1 className="text-3xl font-black text-white dark:text-white tracking-tight">Pengembangan DTPR (3.A.3)</h1>
+              <p className="text-gray-400 dark:text-gray-400 mt-1 font-medium">Monitoring pengembangan DTPR di bidang penelitian & pendidikan</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 dark:shadow-blue-900/20 font-bold text-sm">
+              <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-900/20 dark:shadow-blue-900/20 font-bold text-sm">
                 <Plus size={18} />
                 <span>{showForm ? 'Tutup Form' : 'Tambah Pengembangan'}</span>
               </button>
-              <button onClick={handleExport} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-200 dark:shadow-emerald-900/20 font-bold text-sm">
+              <button onClick={handleExport} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-900/20 dark:shadow-emerald-900/20 font-bold text-sm">
                 <Download size={18} />
                 <span>Export Excel</span>
               </button>
@@ -285,7 +285,7 @@ export default function PengembanganPage() {
         </div>
 
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl mb-6 font-medium text-sm">
+          <div className="bg-red-950/40 dark:bg-red-900/20 border border-red-800 dark:border-red-900/30 text-red-600 dark:text-red-400 px-4 py-3 rounded-xl mb-6 font-medium text-sm">
             {error}
           </div>
         )}
@@ -293,45 +293,45 @@ export default function PengembanganPage() {
         {/* Stats & Filters */}
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
           <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 flex items-center gap-4 transition-colors">
-              <div className="p-3 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl"><BookOpen size={24} /></div>
+            <div className="bg-gray-900 dark:bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 dark:border-gray-700 flex items-center gap-4 transition-colors">
+              <div className="p-3 bg-blue-900/20 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl"><BookOpen size={24} /></div>
               <div>
-                <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Total Kegiatan</p>
-                <p className="text-2xl font-black text-gray-900 dark:text-white leading-none mt-1">{activeData.length}</p>
+                <p className="text-xs font-bold text-gray-400 dark:text-gray-400 uppercase tracking-wider">Total Kegiatan</p>
+                <p className="text-2xl font-black text-white dark:text-white leading-none mt-1">{activeData.length}</p>
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 flex items-center gap-4 transition-colors">
-              <div className="p-3 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-xl"><UserCheck size={24} /></div>
+            <div className="bg-gray-900 dark:bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 dark:border-gray-700 flex items-center gap-4 transition-colors">
+              <div className="p-3 bg-purple-900/20 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-xl"><UserCheck size={24} /></div>
               <div>
-                <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Dosen DTPR</p>
-                <p className="text-2xl font-black text-gray-900 dark:text-white leading-none mt-1">{statTS}</p>
+                <p className="text-xs font-bold text-gray-400 dark:text-gray-400 uppercase tracking-wider">Dosen DTPR</p>
+                <p className="text-2xl font-black text-white dark:text-white leading-none mt-1">{statTS}</p>
               </div>
             </div>
-            <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 flex items-center gap-4 transition-colors">
-              <div className="p-3 bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-xl"><History size={24} /></div>
+            <div className="bg-gray-900 dark:bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 dark:border-gray-700 flex items-center gap-4 transition-colors">
+              <div className="p-3 bg-orange-900/20 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-xl"><History size={24} /></div>
               <div>
-                <p className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Mode</p>
-                <p className="text-2xl font-black text-gray-900 dark:text-white leading-none mt-1">{showTrash ? 'Sampah' : 'Aktif'}</p>
+                <p className="text-xs font-bold text-gray-400 dark:text-gray-400 uppercase tracking-wider">Mode</p>
+                <p className="text-2xl font-black text-white dark:text-white leading-none mt-1">{showTrash ? 'Sampah' : 'Aktif'}</p>
               </div>
             </div>
           </div>
           <div className="flex gap-3 items-end">
             <div className="flex-1 lg:w-48">
-              <label className="block text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Prodi</label>
-              <select value={filterIdProdi} onChange={(e) => setFilterIdProdi(e.target.value)} className="w-full px-4 py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 outline-none font-bold text-sm transition cursor-pointer dark:text-white">
+              <label className="block text-[10px] font-black text-gray-400 dark:text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Prodi</label>
+              <select value={filterIdProdi} onChange={(e) => setFilterIdProdi(e.target.value)} className="w-full px-4 py-2.5 bg-gray-900 dark:bg-gray-900 border border-gray-700 dark:border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-900/40 dark:focus:ring-blue-900/20 outline-none font-bold text-sm transition cursor-pointer dark:text-white">
                 {prodiList.map(p => <option key={p.id_prodi} value={p.id_prodi}>{p.nama_prodi}</option>)}
               </select>
             </div>
             <div className="flex-1 lg:w-32">
-              <label className="block text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-1.5 ml-1">Tahun (TS)</label>
-              <select value={filterIdTahun} onChange={(e) => setFilterIdTahun(e.target.value)} className="w-full px-4 py-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-900/20 outline-none font-bold text-sm transition cursor-pointer dark:text-white">
+              <label className="block text-[10px] font-black text-gray-400 dark:text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Tahun (TS)</label>
+              <select value={filterIdTahun} onChange={(e) => setFilterIdTahun(e.target.value)} className="w-full px-4 py-2.5 bg-gray-900 dark:bg-gray-900 border border-gray-700 dark:border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-900/40 dark:focus:ring-blue-900/20 outline-none font-bold text-sm transition cursor-pointer dark:text-white">
                 {tahunList.map(t => <option key={t.id_tahun} value={t.id_tahun}>{t.tahun}</option>)}
               </select>
             </div>
-            <button onClick={fetchData} className="p-2.5 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 transition text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 shadow-sm">
+            <button onClick={fetchData} className="p-2.5 bg-gray-900 dark:bg-gray-900 border border-gray-700 dark:border-gray-700 rounded-xl hover:bg-gray-950/50 dark:hover:bg-gray-800 transition text-gray-400 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 shadow-sm">
               <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
             </button>
-            <button onClick={() => setShowTrash(!showTrash)} className={`px-4 py-2.5 rounded-xl font-bold text-sm transition border shadow-sm ${showTrash ? 'bg-orange-50 dark:bg-orange-900/10 border-orange-200 dark:border-orange-900/30 text-orange-600 dark:text-orange-400' : 'bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'}`}>
+            <button onClick={() => setShowTrash(!showTrash)} className={`px-4 py-2.5 rounded-xl font-bold text-sm transition border shadow-sm ${showTrash ? 'bg-orange-900/20 dark:bg-orange-900/10 border-orange-800 dark:border-orange-900/30 text-orange-600 dark:text-orange-400' : 'bg-gray-900 dark:bg-gray-900 border-gray-700 dark:border-gray-700 text-gray-400 dark:text-gray-400 hover:bg-gray-950/50 dark:hover:bg-gray-800'}`}>
               {showTrash ? 'Lihat Aktif' : 'Lihat Sampah'}
             </button>
           </div>
@@ -339,90 +339,90 @@ export default function PengembanganPage() {
 
         {/* Form Section */}
         {showForm && (
-          <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-xl shadow-gray-200/50 dark:shadow-black/20 border border-gray-100 dark:border-gray-800 p-8 mb-8 animate-in slide-in-from-top-4 duration-500 transition-colors">
-            <h2 className="text-xl font-black text-gray-900 dark:text-white mb-6">{editingId ? 'Edit Pengembangan' : 'Input Pengembangan Baru'}</h2>
+          <div className="bg-gray-900 dark:bg-gray-900 rounded-3xl shadow-xl shadow-gray-950/50 dark:shadow-black/20 border border-gray-700 dark:border-gray-700 p-8 mb-8 animate-in slide-in-from-top-4 duration-500 transition-colors">
+            <h2 className="text-xl font-black text-white dark:text-white mb-6">{editingId ? 'Edit Pengembangan' : 'Input Pengembangan Baru'}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Pilih Dosen</label>
-                  <select value={formData.id_dosen} onChange={(e) => setFormData({...formData, id_dosen: e.target.value})} className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" required>
+                  <label className="block text-sm font-bold text-gray-300 dark:text-gray-300 mb-2">Pilih Dosen</label>
+                  <select value={formData.id_dosen} onChange={(e) => setFormData({...formData, id_dosen: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" required>
                     <option value="">Pilih Dosen</option>
                     {dosenList.map(d => <option key={d.id_dosen} value={d.id_dosen}>{d.nama_lengkap}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Tahun Akademik</label>
-                  <select value={formData.id_tahun} onChange={(e) => setFormData({...formData, id_tahun: e.target.value})} className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" required>
+                  <label className="block text-sm font-bold text-gray-300 dark:text-gray-300 mb-2">Tahun Akademik</label>
+                  <select value={formData.id_tahun} onChange={(e) => setFormData({...formData, id_tahun: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" required>
                     <option value="">Pilih Tahun</option>
                     {tahunList.map(t => <option key={t.id_tahun} value={t.id_tahun}>{t.tahun}</option>)}
                   </select>
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Jenis Pengembangan</label>
-                  <input type="text" value={formData.jenis_pengembangan} onChange={(e) => setFormData({...formData, jenis_pengembangan: e.target.value})} className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" placeholder="Contoh: Tugas Belajar, Sertifikasi, Pelatihan Riset" required />
+                  <label className="block text-sm font-bold text-gray-300 dark:text-gray-300 mb-2">Jenis Pengembangan</label>
+                  <input type="text" value={formData.jenis_pengembangan} onChange={(e) => setFormData({...formData, jenis_pengembangan: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" placeholder="Contoh: Tugas Belajar, Sertifikasi, Pelatihan Riset" required />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Nama Kegiatan / Instansi</label>
-                  <input type="text" value={formData.nama_pengembangan} onChange={(e) => setFormData({...formData, nama_pengembangan: e.target.value})} className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" placeholder="Contoh: S3 Ilmu Komputer - Universitas Indonesia" required />
+                  <label className="block text-sm font-bold text-gray-300 dark:text-gray-300 mb-2">Nama Kegiatan / Instansi</label>
+                  <input type="text" value={formData.nama_pengembangan} onChange={(e) => setFormData({...formData, nama_pengembangan: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" placeholder="Contoh: S3 Ilmu Komputer - Universitas Indonesia" required />
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Link Bukti (Sertifikat / SK)</label>
-                  <input type="url" value={formData.link_bukti} onChange={(e) => setFormData({...formData, link_bukti: e.target.value})} className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-white dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" placeholder="https://..." />
+                  <label className="block text-sm font-bold text-gray-300 dark:text-gray-300 mb-2">Link Bukti (Sertifikat / SK)</label>
+                  <input type="url" value={formData.link_bukti} onChange={(e) => setFormData({...formData, link_bukti: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 dark:bg-gray-800 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 dark:focus:bg-gray-900 rounded-2xl outline-none transition font-medium dark:text-white" placeholder="https://..." />
                 </div>
               </div>
-              <div className="flex justify-end gap-3 pt-4 border-t border-gray-100 dark:border-gray-800">
-                <button type="button" onClick={resetForm} className="px-8 py-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-2xl hover:bg-gray-200 dark:hover:bg-gray-700 transition font-bold">Batal</button>
-                <button type="submit" className="px-10 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black shadow-lg shadow-blue-200 dark:shadow-blue-900/40">{editingId ? 'Update Data' : 'Simpan Data'}</button>
+              <div className="flex justify-end gap-3 pt-4 border-t border-gray-700 dark:border-gray-700">
+                <button type="button" onClick={resetForm} className="px-8 py-3 bg-gray-800 dark:bg-gray-800 text-gray-400 dark:text-gray-400 rounded-2xl hover:bg-gray-700 dark:hover:bg-gray-700 transition font-bold">Batal</button>
+                <button type="submit" className="px-10 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black shadow-lg shadow-blue-900/20 dark:shadow-blue-900/40">{editingId ? 'Update Data' : 'Simpan Data'}</button>
               </div>
             </form>
           </div>
         )}
 
         {/* Table Section */}
-        <div className="bg-white dark:bg-gray-900 rounded-[2.5rem] shadow-xl shadow-gray-200/30 dark:shadow-black/20 border border-gray-100 dark:border-gray-800 overflow-hidden transition-all duration-500">
+        <div className="bg-gray-900 dark:bg-gray-900 rounded-[2.5rem] shadow-xl shadow-gray-950/30 dark:shadow-black/20 border border-gray-700 dark:border-gray-700 overflow-hidden transition-all duration-500">
           {loading ? (
-            <div className="p-20 text-center text-gray-400 dark:text-gray-600 font-bold">
+            <div className="p-20 text-center text-gray-400 dark:text-gray-400 font-bold">
               <RefreshCw className="animate-spin mx-auto mb-4 text-blue-500" size={48} />
               <p className="text-lg tracking-tight">Menyinkronkan data...</p>
             </div>
           ) : (showTrash ? trashData : pivotedDataInfo.data).length === 0 ? (
             <div className="p-20 text-center">
-              <p className="text-gray-400 dark:text-gray-600 font-bold text-xl tracking-tight">Belum ada data pengembangan DTPR</p>
+              <p className="text-gray-400 dark:text-gray-400 font-bold text-xl tracking-tight">Belum ada data pengembangan DTPR</p>
             </div>
           ) : (
             <div className="overflow-x-auto p-4">
-              <table className="w-full border-collapse border border-gray-300 dark:border-gray-700 text-sm">
+              <table className="w-full border-collapse border border-gray-600 dark:border-gray-700 text-sm">
                 <thead>
                   {showTrash ? (
-                    <tr className="bg-gray-100 dark:bg-gray-800 text-[11px] font-black text-gray-700 dark:text-gray-300 uppercase text-center">
-                      <th className="px-4 py-3 border border-gray-300 dark:border-gray-700">Dosen DTPR</th>
-                      <th className="px-4 py-3 border border-gray-300 dark:border-gray-700">Pengembangan</th>
-                      <th className="px-4 py-3 border border-gray-300 dark:border-gray-700">Tahun</th>
-                      <th className="px-4 py-3 border border-gray-300 dark:border-gray-700">Aksi</th>
+                    <tr className="bg-gray-800 dark:bg-gray-800 text-[11px] font-black text-gray-300 dark:text-gray-300 uppercase text-center">
+                      <th className="px-4 py-3 border border-gray-600 dark:border-gray-700">Dosen DTPR</th>
+                      <th className="px-4 py-3 border border-gray-600 dark:border-gray-700">Pengembangan</th>
+                      <th className="px-4 py-3 border border-gray-600 dark:border-gray-700">Tahun</th>
+                      <th className="px-4 py-3 border border-gray-600 dark:border-gray-700">Aksi</th>
                     </tr>
                   ) : (
                     <>
                       {/* Baris 1: Tahun Akademik + TS cols + Link Bukti (rowspan 3) + Aksi (rowspan 3) */}
-                      <tr className="bg-gray-100 dark:bg-gray-800 text-[11px] font-black text-gray-700 dark:text-gray-300 text-center">
-                        <th colSpan="2" className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-left uppercase">Tahun Akademik</th>
-                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 uppercase">TS-2</th>
-                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 uppercase">TS-1</th>
-                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 uppercase">TS</th>
-                        <th rowSpan="3" className="px-4 py-3 border border-gray-300 dark:border-gray-700 align-middle uppercase">Link Bukti</th>
-                        <th rowSpan="3" className="px-4 py-3 border border-gray-300 dark:border-gray-700 align-middle uppercase">Aksi</th>
+                      <tr className="bg-gray-800 dark:bg-gray-800 text-[11px] font-black text-gray-300 dark:text-gray-300 text-center">
+                        <th colSpan="2" className="px-4 py-3 border border-gray-600 dark:border-gray-700 text-left uppercase">Tahun Akademik</th>
+                        <th className="px-4 py-3 border border-gray-600 dark:border-gray-700 uppercase">TS-2</th>
+                        <th className="px-4 py-3 border border-gray-600 dark:border-gray-700 uppercase">TS-1</th>
+                        <th className="px-4 py-3 border border-gray-600 dark:border-gray-700 uppercase">TS</th>
+                        <th rowSpan="3" className="px-4 py-3 border border-gray-600 dark:border-gray-700 align-middle uppercase">Link Bukti</th>
+                        <th rowSpan="3" className="px-4 py-3 border border-gray-600 dark:border-gray-700 align-middle uppercase">Aksi</th>
                       </tr>
                       {/* Baris 2: Jumlah Dosen DTPR */}
-                      <tr className="bg-gray-100 dark:bg-gray-800 text-[11px] font-black text-gray-700 dark:text-gray-300 text-center">
-                        <th colSpan="2" className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-left uppercase">Jumlah Dosen DTPR</th>
-                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">{statTS2}</th>
-                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">{statTS1}</th>
-                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white">{statTS}</th>
+                      <tr className="bg-gray-800 dark:bg-gray-800 text-[11px] font-black text-gray-300 dark:text-gray-300 text-center">
+                        <th colSpan="2" className="px-4 py-3 border border-gray-600 dark:border-gray-700 text-left uppercase">Jumlah Dosen DTPR</th>
+                        <th className="px-4 py-3 border border-gray-600 dark:border-gray-700 text-white dark:text-white">{statTS2}</th>
+                        <th className="px-4 py-3 border border-gray-600 dark:border-gray-700 text-white dark:text-white">{statTS1}</th>
+                        <th className="px-4 py-3 border border-gray-600 dark:border-gray-700 text-white dark:text-white">{statTS}</th>
                       </tr>
                       {/* Baris 3: Jenis / Nama DTPR / Jumlah */}
-                      <tr className="bg-gray-100 dark:bg-gray-800 text-[11px] font-black text-gray-700 dark:text-gray-300 text-center">
-                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-left uppercase">Jenis Pengembangan DTPR</th>
-                        <th className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-left uppercase">Nama DTPR</th>
-                        <th colSpan="3" className="px-4 py-3 border border-gray-300 dark:border-gray-700 uppercase">Jumlah</th>
+                      <tr className="bg-gray-800 dark:bg-gray-800 text-[11px] font-black text-gray-300 dark:text-gray-300 text-center">
+                        <th className="px-4 py-3 border border-gray-600 dark:border-gray-700 text-left uppercase">Jenis Pengembangan DTPR</th>
+                        <th className="px-4 py-3 border border-gray-600 dark:border-gray-700 text-left uppercase">Nama DTPR</th>
+                        <th colSpan="3" className="px-4 py-3 border border-gray-600 dark:border-gray-700 uppercase">Jumlah</th>
                       </tr>
                     </>
                   )}
@@ -430,42 +430,42 @@ export default function PengembanganPage() {
                 <tbody>
                   {showTrash ? (
                     trashData.map((item) => (
-                      <tr key={item.id_pengembangan} className="hover:bg-orange-50/30 dark:hover:bg-orange-900/10 transition-colors text-center text-xs">
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-black text-gray-900 dark:text-white text-left">{item.nama_dtpr}</td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-400 text-left">{item.jenis_pengembangan}</td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700">
-                          <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded text-[10px] font-black">{item.nama_tahun || item.id_tahun}</span>
+                      <tr key={item.id_pengembangan} className="hover:bg-orange-900/30 dark:hover:bg-orange-900/10 transition-colors text-center text-xs">
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700 font-black text-white dark:text-white text-left">{item.nama_dtpr}</td>
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700 text-gray-400 dark:text-gray-400 text-left">{item.jenis_pengembangan}</td>
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700">
+                          <span className="px-2 py-1 bg-gray-800 dark:bg-gray-800 text-gray-400 dark:text-gray-400 rounded text-[10px] font-black">{item.nama_tahun || item.id_tahun}</span>
                         </td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700">
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700">
                           <div className="flex items-center justify-center gap-2">
-                            <button onClick={() => handleRestore(item.id_pengembangan)} className="p-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-lg transition" title="Restore"><RotateCcw size={15} /></button>
-                            <button onClick={() => handleHardDelete(item.id_pengembangan)} className="p-1.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus Permanen"><Trash size={15} /></button>
+                            <button onClick={() => handleRestore(item.id_pengembangan)} className="p-1.5 bg-emerald-900/20 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-lg transition" title="Restore"><RotateCcw size={15} /></button>
+                            <button onClick={() => handleHardDelete(item.id_pengembangan)} className="p-1.5 bg-red-950/40 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus Permanen"><Trash size={15} /></button>
                           </div>
                         </td>
                       </tr>
                     ))
                   ) : (
                     pivotedDataInfo.data.map((row, idx) => (
-                      <tr key={idx} className="hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition-colors text-center text-xs">
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-bold text-gray-600 dark:text-gray-400 text-left">{row.jenis_pengembangan}</td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-black text-gray-900 dark:text-white text-left">{row.nama_dtpr}</td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-bold text-gray-700 dark:text-gray-300">{row.ts2 || '-'}</td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-bold text-gray-700 dark:text-gray-300">{row.ts1 || '-'}</td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700 font-black text-gray-900 dark:text-white">{row.ts || '-'}</td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700">
+                      <tr key={idx} className="hover:bg-blue-900/30 dark:hover:bg-blue-900/10 transition-colors text-center text-xs">
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700 font-bold text-gray-400 dark:text-gray-400 text-left">{row.jenis_pengembangan}</td>
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700 font-black text-white dark:text-white text-left">{row.nama_dtpr}</td>
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700 font-bold text-gray-300 dark:text-gray-300">{row.ts2 || '-'}</td>
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700 font-bold text-gray-300 dark:text-gray-300">{row.ts1 || '-'}</td>
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700 font-black text-white dark:text-white">{row.ts || '-'}</td>
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700">
                           {(() => {
                             const tsItem = row.raw.find(ri => {
                               const tObj = tahunList.find(t => t.id_tahun === ri.id_tahun);
                               return tObj && parseInt(tObj.tahun) === currentTSYear;
                             });
                             return tsItem?.link_bukti ? (
-                              <a href={tsItem.link_bukti} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-700 font-bold bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded-lg transition text-xs">
+                              <a href={tsItem.link_bukti} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-400 font-bold bg-blue-900/20 dark:bg-blue-900/20 px-2 py-1 rounded-lg transition text-xs">
                                 <ExternalLink size={12} /> Buka
                               </a>
-                            ) : <span className="text-gray-400 dark:text-gray-600 italic">-</span>;
+                            ) : <span className="text-gray-400 dark:text-gray-400 italic">-</span>;
                           })()}
                         </td>
-                        <td className="px-4 py-3 border border-gray-300 dark:border-gray-700">
+                        <td className="px-4 py-3 border border-gray-600 dark:border-gray-700">
                           <div className="flex justify-center gap-2">
                             {(() => {
                               const currentYearItem = row.raw.find(ri => {
@@ -474,10 +474,10 @@ export default function PengembanganPage() {
                               });
                               if (currentYearItem) {
                                 return (
-                                  <div className="inline-flex items-center bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-1.5 rounded-xl shadow-sm transition-all group-hover:border-blue-200 dark:group-hover:border-blue-800 group-hover:shadow-md">
-                                    <button onClick={() => handleEdit(currentYearItem)} className="p-1.5 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition" title="Edit TS"><Edit size={16} /></button>
-                                    <div className="w-px h-4 bg-gray-200 dark:bg-gray-800 mx-2"></div>
-                                    <button onClick={() => handleSoftDelete(currentYearItem.id_pengembangan)} className="p-1.5 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition" title="Hapus TS"><Trash2 size={16} /></button>
+                                  <div className="inline-flex items-center bg-gray-900 dark:bg-gray-900 border border-gray-700 dark:border-gray-700 p-1.5 rounded-xl shadow-sm transition-all group-hover:border-blue-800 dark:group-hover:border-blue-800 group-hover:shadow-md">
+                                    <button onClick={() => handleEdit(currentYearItem)} className="p-1.5 text-blue-600 dark:text-blue-400 hover:bg-blue-900/20 dark:hover:bg-blue-900/20 rounded-lg transition" title="Edit TS"><Edit size={16} /></button>
+                                    <div className="w-px h-4 bg-gray-700 dark:bg-gray-800 mx-2"></div>
+                                    <button onClick={() => handleSoftDelete(currentYearItem.id_pengembangan)} className="p-1.5 text-red-600 dark:text-red-400 hover:bg-red-950/40 dark:hover:bg-red-900/20 rounded-lg transition" title="Hapus TS"><Trash2 size={16} /></button>
                                   </div>
                                 );
                               } else {
@@ -494,7 +494,7 @@ export default function PengembanganPage() {
                                       setEditingId(null);
                                       setShowForm(true);
                                     }}
-                                    className="inline-flex items-center gap-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-all font-black text-[10px] uppercase tracking-widest border border-blue-100 dark:border-blue-900/30"
+                                    className="inline-flex items-center gap-1.5 bg-blue-900/20 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-xl hover:bg-blue-900/30 dark:hover:bg-blue-900/30 transition-all font-black text-[10px] uppercase tracking-widest border border-blue-900/50 dark:border-blue-900/30"
                                   >
                                     <Plus size={14} /> Isi TS
                                   </button>
@@ -511,7 +511,7 @@ export default function PengembanganPage() {
             </div>
           )}
         </div>
-        <div className="mt-6 p-4 bg-gray-100/50 dark:bg-gray-900/50 rounded-2xl border border-gray-200/50 dark:border-gray-800 text-[10px] font-bold text-gray-500 dark:text-gray-500 uppercase tracking-widest flex items-center gap-2">
+        <div className="mt-6 p-4 bg-gray-800/50 dark:bg-gray-900/50 rounded-2xl border border-gray-700/50 dark:border-gray-700 text-[10px] font-bold text-gray-400 dark:text-gray-400 uppercase tracking-widest flex items-center gap-2">
           <History size={14} />
           <span>Keterangan: Pengisian data tidak berulang. Jika dosen dikirim tugas belajar di tahun TS-2, maka tidak lagi dihitung di TS-1.</span>
         </div>

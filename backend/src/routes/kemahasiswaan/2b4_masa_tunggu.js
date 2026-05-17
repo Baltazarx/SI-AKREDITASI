@@ -3,7 +3,7 @@ const router = express.Router();
 const controller2b4 = require('../../controllers/kemahasiswaan/2b4_masa_tunggu');
 const { verifyToken, authorize } = require('../../middlewares/auth');
 
-router.use(verifyToken, authorize('MHS', 'ADMIN'));
+router.use(verifyToken, authorize('KEMAHASISWAAN', 'ADMIN'));
 
 // --- CRUD Aktif ---
 router.get('/', controller2b4.index);

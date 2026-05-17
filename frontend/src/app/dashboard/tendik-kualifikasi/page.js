@@ -62,25 +62,25 @@ export default function TendikKualifikasiPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-gray-950/50">
       <div className="max-w-7xl mx-auto p-6">
         {/* Header Section */}
         <div className="mb-8">
-          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-500 hover:text-gray-800 transition mb-4 group">
+          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition mb-4 group">
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Kembali ke Dashboard</span>
           </button>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Kualifikasi Tendik (1.A.5)</h1>
-              <p className="text-gray-500 mt-1 font-medium">Rekapitulasi kualifikasi pendidikan terakhir tenaga kependidikan</p>
+              <h1 className="text-3xl font-black text-white tracking-tight">Kualifikasi Tendik (1.A.5)</h1>
+              <p className="text-gray-400 mt-1 font-medium">Rekapitulasi kualifikasi pendidikan terakhir tenaga kependidikan</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button onClick={fetchData} className="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-2.5 rounded-xl hover:bg-gray-50 transition shadow-sm font-bold text-sm">
+              <button onClick={fetchData} className="flex items-center gap-2 bg-gray-900 border border-gray-700 text-gray-300 px-4 py-2.5 rounded-xl hover:bg-gray-950/50 transition shadow-sm font-bold text-sm">
                 <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
                 <span>Refresh Data</span>
               </button>
-              <button onClick={handleExport} className="flex items-center gap-2 bg-amber-500 text-white px-5 py-2.5 rounded-xl hover:bg-amber-600 transition shadow-lg shadow-amber-200 font-bold text-sm">
+              <button onClick={handleExport} className="flex items-center gap-2 bg-amber-500 text-white px-5 py-2.5 rounded-xl hover:bg-amber-600 transition shadow-lg shadow-amber-950/50 font-bold text-sm">
                 <Download size={18} />
                 <span>Export Excel LKPS</span>
               </button>
@@ -90,43 +90,43 @@ export default function TendikKualifikasiPage() {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className="p-3 bg-blue-50 text-blue-600 rounded-xl"><Users size={24} /></div>
+          <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+            <div className="p-3 bg-blue-900/20 text-blue-600 rounded-xl"><Users size={24} /></div>
             <div>
               <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Tendik</p>
-              <p className="text-2xl font-black text-gray-900">{Object.values(totals).reduce((a, b) => a + b, 0)}</p>
+              <p className="text-2xl font-black text-white">{Object.values(totals).reduce((a, b) => a + b, 0)}</p>
             </div>
           </div>
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl"><GraduationCap size={24} /></div>
+          <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+            <div className="p-3 bg-emerald-900/20 text-emerald-600 rounded-xl"><GraduationCap size={24} /></div>
             <div>
               <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Kualifikasi S1-S3</p>
-              <p className="text-2xl font-black text-gray-900">{totals.s1 + totals.s2 + totals.s3}</p>
+              <p className="text-2xl font-black text-white">{totals.s1 + totals.s2 + totals.s3}</p>
             </div>
           </div>
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className="p-3 bg-amber-50 text-amber-600 rounded-xl"><Briefcase size={24} /></div>
+          <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+            <div className="p-3 bg-amber-950/40 text-amber-600 rounded-xl"><Briefcase size={24} /></div>
             <div>
               <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Unit Kerja Aktif</p>
-              <p className="text-2xl font-black text-gray-900">{data.length}</p>
+              <p className="text-2xl font-black text-white">{data.length}</p>
             </div>
           </div>
         </div>
 
         {/* Info Card */}
-        <div className="bg-blue-50/50 border border-blue-100 rounded-[2rem] p-6 mb-8 flex items-start gap-4">
-          <div className="p-2 bg-blue-500 text-white rounded-lg shadow-lg shadow-blue-200">
+        <div className="bg-blue-900/50 border border-blue-900/50 rounded-[2rem] p-6 mb-8 flex items-start gap-4">
+          <div className="p-2 bg-blue-500 text-white rounded-lg shadow-lg shadow-blue-900/20">
             <Info size={20} />
           </div>
           <div>
-            <p className="text-blue-900 font-black text-sm uppercase tracking-wider">Sinkronisasi Otomatis</p>
-            <p className="text-blue-700/70 text-xs mt-1 font-medium leading-relaxed">
+            <p className="text-blue-200 font-black text-sm uppercase tracking-wider">Sinkronisasi Otomatis</p>
+            <p className="text-blue-400/70 text-xs mt-1 font-medium leading-relaxed">
               Tabel ini dihasilkan secara otomatis dari data Master Tenaga Kependidikan. 
               Perubahan pada data master akan langsung tercermin di sini.
             </p>
             <button 
               onClick={() => router.push('/dashboard/master/tendik')}
-              className="mt-3 text-blue-600 text-[10px] font-black flex items-center gap-1.5 hover:gap-2 transition-all uppercase tracking-widest bg-white px-3 py-1.5 rounded-lg border border-blue-100 shadow-sm"
+              className="mt-3 text-blue-600 text-[10px] font-black flex items-center gap-1.5 hover:gap-2 transition-all uppercase tracking-widest bg-gray-900 px-3 py-1.5 rounded-lg border border-blue-900/50 shadow-sm"
             >
               <ExternalLink size={12} /> Kelola Master Tendik
             </button>
@@ -134,7 +134,7 @@ export default function TendikKualifikasiPage() {
         </div>
 
         {/* Table Section */}
-        <div className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/30 border border-gray-100 overflow-hidden transition-all duration-500">
+        <div className="bg-gray-900 rounded-[2.5rem] shadow-xl shadow-gray-950/30 border border-gray-700 overflow-hidden transition-all duration-500">
           {loading ? (
             <div className="p-20 text-center text-gray-400 font-bold">
               <RefreshCw className="animate-spin mx-auto mb-4 text-blue-500" size={48} />
@@ -143,49 +143,49 @@ export default function TendikKualifikasiPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
-                <thead className="bg-gray-50/50 border-b border-gray-100">
+                <thead className="bg-gray-800 border-b border-gray-700">
                   <tr>
-                    <th rowSpan="2" className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-r border-gray-100 text-center align-middle">No</th>
-                    <th rowSpan="2" className="px-8 py-4 text-[11px] font-black text-gray-900 uppercase tracking-[0.2em] border-r border-gray-100 align-middle">Jenis Tenaga Kependidikan</th>
-                    <th colSpan="8" className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-r border-gray-100 text-center bg-gray-50/30">Jumlah Berdasarkan Pendidikan Terakhir</th>
+                    <th rowSpan="2" className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-r border-gray-700 text-center align-middle">No</th>
+                    <th rowSpan="2" className="px-8 py-4 text-[11px] font-black text-white uppercase tracking-[0.2em] border-r border-gray-700 align-middle">Jenis Tenaga Kependidikan</th>
+                    <th colSpan="8" className="px-6 py-4 text-[10px] font-black text-gray-400 uppercase tracking-widest border-r border-gray-700 text-center bg-gray-950/30">Jumlah Berdasarkan Pendidikan Terakhir</th>
                     <th rowSpan="2" className="px-8 py-4 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] align-middle">Unit Kerja</th>
                   </tr>
-                  <tr className="border-b border-gray-100 bg-gray-50/20">
+                  <tr className="border-b border-gray-700 bg-gray-950/20">
                     {['S3', 'S2', 'S1', 'D4', 'D3', 'D2', 'D1', 'SMA'].map(edu => (
-                      <th key={edu} className="px-3 py-3 text-[9px] font-black text-gray-500 uppercase tracking-widest border-r border-gray-100 text-center">{edu}</th>
+                      <th key={edu} className="px-3 py-3 text-[9px] font-black text-gray-400 uppercase tracking-widest border-r border-gray-700 text-center">{edu}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-gray-800">
                   {data.map((row) => (
-                    <tr key={row.no} className="hover:bg-amber-50/30 transition-colors group">
-                      <td className="px-6 py-5 border-r border-gray-50 text-center text-[11px] font-black text-gray-300">{row.no}</td>
-                      <td className="px-8 py-5 border-r border-gray-50">
-                        <div className="text-sm font-black text-gray-900 group-hover:text-amber-600 transition-colors">{row.jenis}</div>
+                    <tr key={row.no} className="hover:bg-amber-950/30 transition-colors group">
+                      <td className="px-6 py-5 border-r border-gray-700 text-center text-[11px] font-black text-gray-300">{row.no}</td>
+                      <td className="px-8 py-5 border-r border-gray-700">
+                        <div className="text-sm font-black text-white group-hover:text-amber-600 transition-colors">{row.jenis}</div>
                       </td>
-                      <td className="px-3 py-5 border-r border-gray-50 text-center text-sm font-bold text-gray-600">{row.s3 || '-'}</td>
-                      <td className="px-3 py-5 border-r border-gray-50 text-center text-sm font-bold text-gray-600">{row.s2 || '-'}</td>
-                      <td className="px-3 py-5 border-r border-gray-50 text-center text-sm font-bold text-gray-600">{row.s1 || '-'}</td>
-                      <td className="px-3 py-5 border-r border-gray-50 text-center text-sm font-bold text-gray-600">{row.d4 || '-'}</td>
-                      <td className="px-3 py-5 border-r border-gray-50 text-center text-sm font-bold text-gray-600">{row.d3 || '-'}</td>
-                      <td className="px-3 py-5 border-r border-gray-50 text-center text-sm font-bold text-gray-600">{row.d2 || '-'}</td>
-                      <td className="px-3 py-5 border-r border-gray-50 text-center text-sm font-bold text-gray-600">{row.d1 || '-'}</td>
-                      <td className="px-3 py-5 border-r border-gray-50 text-center text-sm font-bold text-gray-600">{row.sma || '-'}</td>
+                      <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-bold text-gray-400">{row.s3 || '-'}</td>
+                      <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-bold text-gray-400">{row.s2 || '-'}</td>
+                      <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-bold text-gray-400">{row.s1 || '-'}</td>
+                      <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-bold text-gray-400">{row.d4 || '-'}</td>
+                      <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-bold text-gray-400">{row.d3 || '-'}</td>
+                      <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-bold text-gray-400">{row.d2 || '-'}</td>
+                      <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-bold text-gray-400">{row.d1 || '-'}</td>
+                      <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-bold text-gray-400">{row.sma || '-'}</td>
                       <td className="px-8 py-5 text-xs text-gray-400 italic font-medium">{row.unit_kerja || '-'}</td>
                     </tr>
                   ))}
                 </tbody>
-                <tfoot className="bg-gray-50/80 font-black border-t-2 border-gray-100">
-                  <tr className="text-gray-900">
+                <tfoot className="bg-gray-950/80 font-black border-t-2 border-gray-700">
+                  <tr className="text-white">
                     <td colSpan="2" className="px-8 py-5 text-right text-[10px] uppercase tracking-[0.2em] font-black text-gray-400">Total Keseluruhan</td>
-                    <td className="px-3 py-5 border-r border-gray-100 text-center text-sm font-black text-blue-600">{totals.s3}</td>
-                    <td className="px-3 py-5 border-r border-gray-100 text-center text-sm font-black text-blue-600">{totals.s2}</td>
-                    <td className="px-3 py-5 border-r border-gray-100 text-center text-sm font-black text-blue-600">{totals.s1}</td>
-                    <td className="px-3 py-5 border-r border-gray-100 text-center text-sm font-black text-gray-900">{totals.d4}</td>
-                    <td className="px-3 py-5 border-r border-gray-100 text-center text-sm font-black text-gray-900">{totals.d3}</td>
-                    <td className="px-3 py-5 border-r border-gray-100 text-center text-sm font-black text-gray-900">{totals.d2}</td>
-                    <td className="px-3 py-5 border-r border-gray-100 text-center text-sm font-black text-gray-900">{totals.d1}</td>
-                    <td className="px-3 py-5 border-r border-gray-100 text-center text-sm font-black text-gray-900">{totals.sma}</td>
+                    <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-black text-blue-600">{totals.s3}</td>
+                    <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-black text-blue-600">{totals.s2}</td>
+                    <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-black text-blue-600">{totals.s1}</td>
+                    <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-black text-white">{totals.d4}</td>
+                    <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-black text-white">{totals.d3}</td>
+                    <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-black text-white">{totals.d2}</td>
+                    <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-black text-white">{totals.d1}</td>
+                    <td className="px-3 py-5 border-r border-gray-700 text-center text-sm font-black text-white">{totals.sma}</td>
                     <td></td>
                   </tr>
                 </tfoot>
@@ -195,15 +195,15 @@ export default function TendikKualifikasiPage() {
         </div>
 
         {/* Footnote Section */}
-        <div className="mt-8 p-6 bg-white rounded-[2rem] border border-gray-100 shadow-sm">
+        <div className="mt-8 p-6 bg-gray-900 rounded-[2rem] border border-gray-700 shadow-sm">
           <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
             <Info size={14} className="text-amber-500" /> Keterangan Tambahan
           </p>
           <div className="space-y-2">
-            <p className="text-xs text-gray-500 font-medium leading-relaxed">
+            <p className="text-xs text-gray-400 font-medium leading-relaxed">
               <span className="text-amber-600 font-bold">*)</span> Pustakawan adalah staf perpustakaan yang memiliki ijazah atau sertifikat kompetensi pada bidang ilmu perpustakaan.
             </p>
-            <p className="text-xs text-gray-500 font-medium leading-relaxed">
+            <p className="text-xs text-gray-400 font-medium leading-relaxed">
               <span className="text-blue-600 font-bold">**)</span> Data diperbarui secara real-time berdasarkan input pada modul kepegawaian.
             </p>
           </div>

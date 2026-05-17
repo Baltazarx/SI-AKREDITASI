@@ -256,21 +256,21 @@ export default function PemetaanCplPlPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-gray-950/50">
       <div className="max-w-7xl mx-auto p-6">
         {/* Header Section */}
         <div className="mb-8">
-          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-500 hover:text-gray-800 transition mb-4 group">
+          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition mb-4 group">
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Kembali ke Dashboard</span>
           </button>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Pemetaan CPL dan PL (2.B.2)</h1>
-              <p className="text-gray-500 mt-1 font-medium">Pengelolaan hubungan CPL dengan Profil Lulusan</p>
+              <h1 className="text-3xl font-black text-white tracking-tight">Pemetaan CPL dan PL (2.B.2)</h1>
+              <p className="text-gray-400 mt-1 font-medium">Pengelolaan hubungan CPL dengan Profil Lulusan</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button onClick={() => window.open(`http://localhost:5000/api/prodi/2b2-pemetaan-cpl/export?id_prodi=${filterProdi}&token=${localStorage.getItem('token')}`, '_blank')} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-200 font-bold text-sm">
+              <button onClick={() => window.open(`http://localhost:5000/api/prodi/2b2-pemetaan-cpl/export?id_prodi=${filterProdi}&token=${localStorage.getItem('token')}`, '_blank')} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-900/20 font-bold text-sm">
                 <Download size={18} />
                 <span>Export Excel</span>
               </button>
@@ -282,22 +282,22 @@ export default function PemetaanCplPlPage() {
         <div className="flex gap-3 items-end mb-8">
           <div className="flex-1 lg:w-48">
             <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Tahun Akademik</label>
-            <select value={filterTahun} onChange={(e) => setFilterTahun(e.target.value)} className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-sm transition appearance-none cursor-pointer">
+            <select value={filterTahun} onChange={(e) => setFilterTahun(e.target.value)} className="w-full px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-900/40 outline-none font-bold text-sm transition appearance-none cursor-pointer">
               <option value="">Pilih Tahun</option>
               {tahunList.map(t => <option key={t.id_tahun} value={t.id_tahun}>{t.tahun}</option>)}
             </select>
           </div>
           <div className="flex-1 lg:w-48">
             <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Program Studi</label>
-            <select value={filterProdi} onChange={(e) => setFilterProdi(e.target.value)} className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-sm transition appearance-none cursor-pointer">
+            <select value={filterProdi} onChange={(e) => setFilterProdi(e.target.value)} className="w-full px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-900/40 outline-none font-bold text-sm transition appearance-none cursor-pointer">
               <option value="">Pilih Prodi</option>
               {prodiList.map(p => <option key={p.id_prodi} value={p.id_prodi}>{p.nama_prodi}</option>)}
             </select>
           </div>
-          <button onClick={fetchData} className="p-2.5 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
+          <button onClick={fetchData} className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl hover:bg-gray-950/50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
             <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
           </button>
-          <button onClick={() => setIsTrashView(!isTrashView)} className={`p-2.5 border rounded-xl transition shadow-sm flex items-center gap-2 ${isTrashView ? 'bg-red-50 border-red-200 text-red-600 hover:bg-red-100' : 'bg-white border-gray-200 text-gray-400 hover:text-red-600 hover:bg-gray-50'}`} title={isTrashView ? "Tampilkan Data Aktif" : "Lihat Data Sampah"}>
+          <button onClick={() => setIsTrashView(!isTrashView)} className={`p-2.5 border rounded-xl transition shadow-sm flex items-center gap-2 ${isTrashView ? 'bg-red-950/40 border-red-800 text-red-600 hover:bg-red-900/30' : 'bg-gray-900 border-gray-700 text-gray-400 hover:text-red-600 hover:bg-gray-950/50'}`} title={isTrashView ? "Tampilkan Data Aktif" : "Lihat Data Sampah"}>
             <Trash size={20} />
             <span className="font-bold text-sm hidden sm:inline">{isTrashView ? "Data Aktif" : "Lihat Sampah"}</span>
           </button>
@@ -305,43 +305,43 @@ export default function PemetaanCplPlPage() {
 
         {/* Form Section */}
         {editingCpl && (
-          <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 mb-8 animate-in slide-in-from-top-4 duration-500">
-            <h2 className="text-xl font-black text-gray-900 mb-6">
+          <div className="bg-gray-900 rounded-3xl shadow-xl shadow-gray-950/50 border border-gray-700 p-8 mb-8 animate-in slide-in-from-top-4 duration-500">
+            <h2 className="text-xl font-black text-white mb-6">
               {editingId ? 'Edit Pemetaan CPL dan PL' : 'Input Pemetaan CPL dan PL Baru'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">CPL</label>
-                  <div className="border border-gray-200 rounded-xl bg-white max-h-48 overflow-y-auto">
+                  <label className="block text-sm font-bold text-gray-300 mb-2">CPL</label>
+                  <div className="border border-gray-700 rounded-xl bg-gray-900 max-h-48 overflow-y-auto">
                     <table className="w-full text-sm">
-                      <thead className="bg-gray-50 sticky top-0">
+                      <thead className="bg-gray-800 sticky top-0">
                         <tr>
-                          <th className="px-4 py-2 text-left font-medium text-gray-700">Kode</th>
-                          <th className="px-4 py-2 text-left font-medium text-gray-700">Deskripsi</th>
+                          <th className="px-4 py-2 text-left font-medium text-gray-300">Kode</th>
+                          <th className="px-4 py-2 text-left font-medium text-gray-300">Deskripsi</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-100">
+                      <tbody className="divide-y divide-gray-800">
                         {editingCpl ? (
                           <tr 
                             key={editingCpl.id_cpl} 
-                            className="bg-blue-100"
+                            className="bg-blue-900/30"
                           >
-                            <td className="px-4 py-2 font-mono text-xs font-bold text-gray-800">{editingCpl.kode_cpl}</td>
-                            <td className="px-4 py-2 text-gray-600">{editingCpl.deskripsi_cpl}</td>
+                            <td className="px-4 py-2 font-mono text-xs font-bold text-gray-200">{editingCpl.kode_cpl}</td>
+                            <td className="px-4 py-2 text-gray-400">{editingCpl.deskripsi_cpl}</td>
                           </tr>
                         ) : (
                           cplList.map(cpl => (
                           <tr 
                             key={cpl.id_cpl} 
-                            className={`hover:bg-blue-50 cursor-pointer ${editingCpl?.id_cpl === cpl.id_cpl ? 'bg-blue-100' : ''}`}
+                            className={`hover:bg-blue-900/20 cursor-pointer ${editingCpl?.id_cpl === cpl.id_cpl ? 'bg-blue-900/30' : ''}`}
                             onClick={() => {
                               setEditingCpl(cpl);
                               setSelectedPls([]); // Reset selected PLs when CPL changes
                             }}
                           >
-                            <td className="px-4 py-2 font-mono text-xs font-bold text-gray-800">{cpl.kode_cpl}</td>
-                            <td className="px-4 py-2 text-gray-600">{cpl.deskripsi_cpl}</td>
+                            <td className="px-4 py-2 font-mono text-xs font-bold text-gray-200">{cpl.kode_cpl}</td>
+                            <td className="px-4 py-2 text-gray-400">{cpl.deskripsi_cpl}</td>
                           </tr>
                         ))
                         )}
@@ -351,22 +351,22 @@ export default function PemetaanCplPlPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Profil Lulusan</label>
-                  <div className="border border-gray-200 rounded-xl bg-white max-h-48 overflow-y-auto">
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Profil Lulusan</label>
+                  <div className="border border-gray-700 rounded-xl bg-gray-900 max-h-48 overflow-y-auto">
                     <table className="w-full text-sm">
-                      <thead className="bg-gray-50 sticky top-0">
+                      <thead className="bg-gray-800 sticky top-0">
                         <tr>
-                          <th className="px-4 py-2 text-left font-medium text-gray-700">Kode</th>
-                          <th className="px-4 py-2 text-left font-medium text-gray-700">Deskripsi</th>
+                          <th className="px-4 py-2 text-left font-medium text-gray-300">Kode</th>
+                          <th className="px-4 py-2 text-left font-medium text-gray-300">Deskripsi</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-gray-100">
+                      <tbody className="divide-y divide-gray-800">
                         {profilLulusanList.map(pl => {
                           const isMapped = selectedPls.includes(pl.id_pl);
                           return (
-                            <tr key={pl.id_pl} className="hover:bg-blue-50 cursor-pointer">
-                              <td className="px-4 py-2 font-mono text-xs font-bold text-gray-800">{pl.kode_pl}</td>
-                              <td className="px-4 py-2 text-gray-600">
+                            <tr key={pl.id_pl} className="hover:bg-blue-900/20 cursor-pointer">
+                              <td className="px-4 py-2 font-mono text-xs font-bold text-gray-200">{pl.kode_pl}</td>
+                              <td className="px-4 py-2 text-gray-400">
                                 <div className="flex items-center justify-between">
                                   <span>{pl.deskripsi_pl}</span>
                                   <input
@@ -379,7 +379,7 @@ export default function PemetaanCplPlPage() {
                                         setSelectedPls(prev => prev.filter(id => id !== pl.id_pl));
                                       }
                                     }}
-                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+                                    className="w-4 h-4 text-blue-600 bg-gray-800 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
                                   />
                                 </div>
                               </td>
@@ -393,26 +393,26 @@ export default function PemetaanCplPlPage() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Tahun Akademik</label>
+                    <label className="block text-sm font-bold text-gray-300 mb-2">Tahun Akademik</label>
                     <input
                       type="text"
                       value={filterTahun ? tahunList.find(t => t.id_tahun === parseInt(filterTahun))?.tahun : ''}
                       readOnly
-                      className="w-full px-4 py-3 bg-gray-100 border-transparent border-2 border-gray-300 rounded-2xl outline-none transition font-medium text-gray-600"
+                      className="w-full px-4 py-3 bg-gray-800 border-transparent border-2 border-gray-600 rounded-2xl outline-none transition font-medium text-gray-400"
                     />
                   </div>
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <button type="button" onClick={resetForm} className="px-8 py-3 bg-gray-100 text-gray-600 rounded-2xl hover:bg-gray-200 transition font-bold">Batal</button>
-                <button type="submit" className="px-10 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black shadow-lg shadow-blue-200">{editingId ? 'Update Data' : 'Simpan Data'}</button>
+                <button type="button" onClick={resetForm} className="px-8 py-3 bg-gray-800 text-gray-400 rounded-2xl hover:bg-gray-700 transition font-bold">Batal</button>
+                <button type="submit" className="px-10 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black shadow-lg shadow-blue-900/20">{editingId ? 'Update Data' : 'Simpan Data'}</button>
               </div>
             </form>
           </div>
         )}
 
         {/* Table Section - Matrix View */}
-        <div className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/30 border border-gray-100 overflow-hidden transition-all duration-500">
+        <div className="bg-gray-900 rounded-[2.5rem] shadow-xl shadow-gray-950/30 border border-gray-700 overflow-hidden transition-all duration-500">
           {loading ? (
             <div className="p-20 text-center text-gray-400 font-bold">
               <RefreshCw className="animate-spin mx-auto mb-4 text-blue-500" size={48} />
@@ -425,20 +425,20 @@ export default function PemetaanCplPlPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
-                <thead className="bg-gray-50/50 border-b-2 border-gray-200">
+                <thead className="bg-gray-800 border-b-2 border-gray-700">
                   <tr>
-                    <th className="px-4 py-3 text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] border-r border-gray-200 bg-gray-100 align-middle sticky left-0 z-20 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#e5e7eb]">
+                    <th className="px-4 py-3 text-[11px] font-black text-gray-300 uppercase tracking-[0.2em] border-r border-gray-700 bg-gray-800 align-middle sticky left-0 z-20 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#1f2937]">
                       CPL
                     </th>
-                    <th className="px-4 py-3 text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] border-r border-gray-200 text-center min-w-[200px]">
+                    <th className="px-4 py-3 text-[11px] font-black text-gray-300 uppercase tracking-[0.2em] border-r border-gray-700 text-center min-w-[200px]">
                       PL
                     </th>
-                    <th className="px-4 py-3 text-[11px] font-black text-gray-700 uppercase tracking-[0.2em] border-r border-gray-200 text-center min-w-[80px]">
+                    <th className="px-4 py-3 text-[11px] font-black text-gray-300 uppercase tracking-[0.2em] border-r border-gray-700 text-center min-w-[80px]">
                       Aksi
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-gray-800">
                   {cplList.map((cpl) => {
                     const mappedPls = profilLulusanList.filter(pl => 
                       data.some(item => item.id_cpl === cpl.id_cpl && item.id_pl === pl.id_pl)
@@ -448,16 +448,16 @@ export default function PemetaanCplPlPage() {
                       if (isTrashView) return null; // Sembunyikan CPL kosong di tampilan sampah
                       // CPL dengan PL kosong
                       return (
-                        <tr key={cpl.id_cpl} className="hover:bg-blue-50/30 transition-colors">
-                          <td className="px-4 py-3 border-r border-gray-200 bg-gray-50 align-top sticky left-0 z-10 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#e5e7eb]">
-                            <div className="font-black text-gray-900 text-sm">{cpl.kode_cpl || '-'}</div>
-                            <div className="text-[10px] text-gray-600 mt-1 font-medium">{cpl.deskripsi_cpl || '-'}</div>
+                        <tr key={cpl.id_cpl} className="hover:bg-blue-900/30 transition-colors">
+                          <td className="px-4 py-3 border-r border-gray-700 bg-gray-950/50 align-top sticky left-0 z-10 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#1f2937]">
+                            <div className="font-black text-white text-sm">{cpl.kode_cpl || '-'}</div>
+                            <div className="text-[10px] text-gray-400 mt-1 font-medium">{cpl.deskripsi_cpl || '-'}</div>
                           </td>
-                          <td className="px-4 py-3 border-r border-gray-200">
-                            <div className="font-mono text-xs font-bold text-gray-800">-</div>
-                            <div className="text-[10px] text-gray-600 mt-1">-</div>
+                          <td className="px-4 py-3 border-r border-gray-700">
+                            <div className="font-mono text-xs font-bold text-gray-200">-</div>
+                            <div className="text-[10px] text-gray-400 mt-1">-</div>
                           </td>
-                          <td className="px-4 py-3 border-r border-gray-200 text-center">
+                          <td className="px-4 py-3 border-r border-gray-700 text-center">
                             <button 
                               onClick={() => handleEditCpl(cpl)} 
                               className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 transition shadow-sm"
@@ -471,26 +471,26 @@ export default function PemetaanCplPlPage() {
                     }
                     
                     return (
-                      <tr key={cpl.id_cpl} className="hover:bg-blue-50/30 transition-colors">
-                        <td className="px-4 py-3 border-r border-gray-200 bg-gray-50 align-top sticky left-0 z-10 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#e5e7eb]">
-                          <div className="font-black text-gray-900 text-sm">{cpl.kode_cpl || '-'}</div>
-                          <div className="text-[10px] text-gray-600 mt-1 font-medium">{cpl.deskripsi_cpl || '-'}</div>
+                      <tr key={cpl.id_cpl} className="hover:bg-blue-900/30 transition-colors">
+                        <td className="px-4 py-3 border-r border-gray-700 bg-gray-950/50 align-top sticky left-0 z-10 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#1f2937]">
+                          <div className="font-black text-white text-sm">{cpl.kode_cpl || '-'}</div>
+                          <div className="text-[10px] text-gray-400 mt-1 font-medium">{cpl.deskripsi_cpl || '-'}</div>
                         </td>
-                        <td className="px-4 py-3 border-r border-gray-200 align-top">
+                        <td className="px-4 py-3 border-r border-gray-700 align-top">
                           <div className="flex flex-wrap gap-3">
                             {mappedPls.map(pl => (
-                              <div key={pl.id_pl} className="bg-gradient-to-br from-indigo-50 to-blue-50/50 border border-indigo-100/60 rounded-xl p-3 max-w-[280px] shadow-sm">
-                                <div className="font-black text-indigo-900 text-xs mb-1">{pl.kode_pl}</div>
-                                <div className="text-[10px] text-indigo-800/80 leading-relaxed font-medium">{pl.deskripsi_pl}</div>
+                              <div key={pl.id_pl} className="bg-gradient-to-br from-indigo-950/50 to-blue-900/20 border border-indigo-900/60 rounded-xl p-3 max-w-[280px] shadow-sm">
+                                <div className="font-black text-indigo-300 text-xs mb-1">{pl.kode_pl}</div>
+                                <div className="text-[10px] text-indigo-400/80 leading-relaxed font-medium">{pl.deskripsi_pl}</div>
                               </div>
                             ))}
                           </div>
                         </td>
-                        <td className="px-4 py-3 border-r border-gray-200 text-center align-top w-[140px] min-w-[140px] max-w-[140px] bg-white">
+                        <td className="px-4 py-3 border-r border-gray-700 text-center align-top w-[140px] min-w-[140px] max-w-[140px] bg-gray-900">
                           {isTrashView ? (
                             <button 
                               onClick={() => handleHardDeleteGroup(cpl)} 
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 w-full justify-center bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-red-600 hover:text-white transition-colors border border-red-100 shadow-sm"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 w-full justify-center bg-red-950/40 text-red-600 text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-red-600 hover:text-white transition-colors border border-red-900/50 shadow-sm"
                             >
                               <Trash2 size={12} />
                               Hapus
@@ -498,7 +498,7 @@ export default function PemetaanCplPlPage() {
                           ) : (
                             <button 
                               onClick={() => handleEditCpl(cpl)} 
-                              className="inline-flex items-center gap-1.5 px-3 py-1.5 w-full justify-center bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-blue-600 hover:text-white transition-colors border border-blue-100 shadow-sm"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 w-full justify-center bg-blue-900/20 text-blue-600 text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-blue-600 hover:text-white transition-colors border border-blue-900/50 shadow-sm"
                             >
                               <Edit size={12} />
                               Atur PL

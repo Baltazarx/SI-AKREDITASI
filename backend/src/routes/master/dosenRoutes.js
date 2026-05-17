@@ -6,23 +6,17 @@ const { UNITS } = require('../../config/permissions');
 
 /**
  * ROUTES: Tabel Master Dosen
+ * - GET: Semua role terautentikasi (untuk dropdown Pilih Dosen di seluruh modul)
+ * - POST/PUT/DELETE: Hanya ADMIN
  */
 
-router.use(verifyToken, authorize(UNITS.ADMIN));
+// Read: semua user yang sudah login bisa akses (untuk dropdown Dosen)
+router.get('/', verifyToken, dosenController.index);
+router.get('/:id', verifyToken, dosenController.show);
 
-// Get All Data
-router.get('/', dosenController.index);
-
-// Get Data by ID
-router.get('/:id', dosenController.show);
-
-// Create Data
-router.post('/', dosenController.store);
-
-// Update Data
-router.put('/:id', dosenController.update);
-
-// Delete Data
-router.delete('/:id', dosenController.destroy);
+// Write: hanya ADMIN
+router.post('/', verifyToken, authorize(UNITS.ADMIN), dosenController.store);
+router.put('/:id', verifyToken, authorize(UNITS.ADMIN), dosenController.update);
+router.delete('/:id', verifyToken, authorize(UNITS.ADMIN), dosenController.destroy);
 
 module.exports = router;

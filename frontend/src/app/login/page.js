@@ -67,24 +67,24 @@ export default function LoginPage() {
       </div>
       
       {/* Main card */}
-      <div className="relative bg-white/90 backdrop-blur-xl p-10 rounded-3xl shadow-2xl w-full max-w-md border border-white/30 transform hover:scale-105 transition-all duration-500 animate-fade-in">
+      <div className="relative bg-gray-950/80 backdrop-blur-2xl p-10 rounded-3xl shadow-2xl w-full max-w-md border border-gray-800 transform hover:scale-105 transition-all duration-500 animate-fade-in">
         {/* Decorative elements */}
-        <div className="absolute -top-3 -right-3 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-400 rounded-full opacity-20 blur-xl animate-pulse-glow"></div>
-        <div className="absolute -bottom-3 -left-3 w-32 h-32 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-20 blur-xl animate-pulse-glow animation-delay-1000"></div>
+        <div className="absolute -top-3 -right-3 w-24 h-24 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full opacity-20 blur-xl animate-pulse-glow"></div>
+        <div className="absolute -bottom-3 -left-3 w-32 h-32 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full opacity-20 blur-xl animate-pulse-glow animation-delay-1000"></div>
         
         {/* Logo */}
         <div className="text-center mb-8">
           <div className="relative inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-3xl mb-6 shadow-2xl animate-bounce-subtle animate-pulse-glow">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent rounded-3xl"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-3xl"></div>
             <span className="text-3xl font-bold text-white relative z-10">A</span>
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent animate-fade-in">Panel Akreditasi</h1>
-          <p className="text-gray-600 mt-2 font-medium">STIKOM PGRI Banyuwangi</p>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400 bg-clip-text text-transparent animate-fade-in">Panel Akreditasi</h1>
+          <p className="text-gray-400 mt-2 font-medium">STIKOM PGRI Banyuwangi</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label htmlFor="username" className="block text-sm font-bold text-gray-700 mb-2">
+            <label htmlFor="username" className="block text-sm font-bold text-gray-300 mb-2">
               Username
             </label>
             <div className="relative">
@@ -93,16 +93,16 @@ export default function LoginPage() {
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all hover:border-blue-400 pl-12 shadow-sm"
+                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all hover:border-gray-700 pl-12 shadow-sm text-white"
                 placeholder="Masukkan username"
                 required
               />
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl">👤</div>
+              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl">👤</div>
             </div>
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-bold text-gray-700 mb-2">
+            <label htmlFor="password" className="block text-sm font-bold text-gray-300 mb-2">
               Password
             </label>
             <div className="relative">
@@ -111,16 +111,16 @@ export default function LoginPage() {
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all hover:border-blue-400 pl-12 shadow-sm"
+                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all hover:border-gray-700 pl-12 shadow-sm text-white"
                 placeholder="Masukkan password"
                 required
               />
-              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl">🔒</div>
+              <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl">🔒</div>
             </div>
           </div>
 
           {error && (
-            <div className="bg-gradient-to-r from-red-50 to-red-100 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm font-bold animate-pulse flex items-center gap-2">
+            <div className="bg-red-900/20 border border-red-900/30 text-red-400 px-4 py-3 rounded-xl text-sm font-bold animate-pulse flex items-center gap-2">
               <span className="text-xl">⚠️</span>
               {error}
             </div>
@@ -148,17 +148,13 @@ export default function LoginPage() {
           </button>
         </form>
 
-        <div className="mt-8 text-center text-sm text-gray-500 pt-6 border-t border-gray-200">
-          <p className="font-bold text-gray-700">Sistem Akreditasi v2.1</p>
-          <p className="text-xs mt-1">LAM INFOKOM - Badan Akreditasi Nasional</p>
+        <div className="mt-8 text-center text-sm text-gray-500 pt-6 border-t border-gray-800">
+          <p className="font-bold text-gray-400">Sistem Akreditasi v2.1</p>
+          <p className="text-[10px] mt-1 text-gray-600 uppercase tracking-widest">LAM INFOKOM - BAN-PT</p>
           <div className="flex justify-center gap-2 mt-4">
             <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
             <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse animation-delay-200"></div>
             <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse animation-delay-400"></div>
-          </div>
-          <div className="flex justify-center gap-4 mt-4 text-xl">
-            <span className="hover:scale-125 transition-transform cursor-pointer">🎓</span>
-            <span className="hover:scale-125 transition-transform cursor-pointer">🏛️</span>
           </div>
         </div>
       </div>

@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const controller1a3 = require('../../controllers/keuangan/1a3_penggunaan_dana');
 const { verifyToken, authorize } = require('../../middlewares/auth');
+const { UNITS } = require('../../config/permissions');
 
 // Keamanan: Keuangan, Admin, dan Waket 2
-router.use(verifyToken, authorize('KEUANGAN', 'ADMIN', 'WAKET2'));
+router.use(verifyToken, authorize(UNITS.KEUANGAN, UNITS.ADMIN, UNITS.WAKET_2));
 
 router.get('/', controller1a3.index);
 router.post('/', controller1a3.store);

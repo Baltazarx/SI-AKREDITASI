@@ -8,7 +8,7 @@ const { verifyToken, authorize } = require('../../middlewares/auth');
  * Memastikan semua handler terhubung ke fungsi controller yang ada.
  */
 
-router.use(verifyToken, authorize('MHS', 'ADMIN'));
+router.use(verifyToken, authorize('KEMAHASISWAAN', 'ADMIN'));
 
 // --- Data Aktif ---
 router.get('/', controller2b5.index);

@@ -3,7 +3,7 @@ const router = express.Router();
 const controller5_2 = require('../../controllers/sarpras/5_2_sarana_prasarana');
 const { verifyToken, authorize } = require('../../middlewares/auth');
 
-router.use(verifyToken, authorize('SARPRAS', 'ADMIN'));
+router.use(verifyToken, authorize('SARPRAS', 'ADMIN', 'SISFO'));
 
 router.get('/', controller5_2.index);
 router.get('/trash', controller5_2.trash);

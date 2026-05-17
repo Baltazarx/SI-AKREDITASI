@@ -6,23 +6,17 @@ const { UNITS } = require('../../config/permissions');
 
 /**
  * ROUTES: Tabel Master Program Studi (Prodi)
+ * - GET: Semua role terautentikasi (untuk dropdown di seluruh modul)
+ * - POST/PUT/DELETE: Hanya ADMIN
  */
 
-router.use(verifyToken, authorize(UNITS.ADMIN));
+// Read: semua user yang sudah login bisa akses (untuk dropdown Program Studi)
+router.get('/', verifyToken, prodiController.index);
+router.get('/:id', verifyToken, prodiController.show);
 
-// Get All Data
-router.get('/', prodiController.index);
-
-// Get Data by ID
-router.get('/:id', prodiController.show);
-
-// Create Data
-router.post('/', prodiController.store);
-
-// Update Data
-router.put('/:id', prodiController.update);
-
-// Delete Data
-router.delete('/:id', prodiController.destroy);
+// Write: hanya ADMIN
+router.post('/', verifyToken, authorize(UNITS.ADMIN), prodiController.store);
+router.put('/:id', verifyToken, authorize(UNITS.ADMIN), prodiController.update);
+router.delete('/:id', verifyToken, authorize(UNITS.ADMIN), prodiController.destroy);
 
 module.exports = router;

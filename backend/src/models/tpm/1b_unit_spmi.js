@@ -11,12 +11,12 @@ const Model1b = {
         const sql = `
             SELECT 
                 s.*, 
-                COALESCE(u.nama_unit, CONCAT('Unit ID: ', s.id_unit)) AS nama_unit, 
-                COALESCE(t.tahun, CONCAT('Tahun ID: ', s.id_tahun)) AS nama_tahun
+                COALESCE(u.nama_unit, CONCAT('Unit ID: ', s.unit_kerja_id_unit)) AS nama_unit, 
+                COALESCE(t.tahun, CONCAT('Tahun ID: ', s.tahun_akademik_id_tahun)) AS nama_tahun
             FROM \`1b_unit_spmi_dan_sdm\` s
-            LEFT JOIN unit_kerja u ON s.id_unit = u.id_unit
-            LEFT JOIN tahun_akademik t ON s.id_tahun = t.id_tahun
-            WHERE s.id_tahun = ? AND s.deleted_at IS NULL
+            LEFT JOIN unit_kerja u ON s.unit_kerja_id_unit = u.id_unit
+            LEFT JOIN tahun_akademik t ON s.tahun_akademik_id_tahun = t.id_tahun
+            WHERE s.tahun_akademik_id_tahun = ? AND s.deleted_at IS NULL
         `;
         const [rows] = await db.execute(sql, [id_tahun]);
         return rows;
@@ -27,10 +27,10 @@ const Model1b = {
         const sql = `
             SELECT 
                 s.*, 
-                COALESCE(u.nama_unit, CONCAT('Unit ID: ', s.id_unit)) AS nama_unit
+                COALESCE(u.nama_unit, CONCAT('Unit ID: ', s.unit_kerja_id_unit)) AS nama_unit
             FROM \`1b_unit_spmi_dan_sdm\` s
-            LEFT JOIN unit_kerja u ON s.id_unit = u.id_unit
-            WHERE s.id_tahun = ? AND s.deleted_at IS NOT NULL
+            LEFT JOIN unit_kerja u ON s.unit_kerja_id_unit = u.id_unit
+            WHERE s.tahun_akademik_id_tahun = ? AND s.deleted_at IS NOT NULL
         `;
         const [rows] = await db.execute(sql, [id_tahun]);
         return rows;
@@ -42,11 +42,11 @@ const Model1b = {
             INSERT INTO \`1b_unit_spmi_dan_sdm\` 
             (jenis_unit, dokumen_spmi, jumlah_auditor, auditor_certified, auditor_non_certified, 
              frekuensi_audit, bukti_certified_auditor, laporan_audit, 
-             id_unit, id_tahun, created_by) 
+             unit_kerja_id_unit, tahun_akademik_id_tahun, created_by) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
         return await db.execute(sql, [
-            data.jenis_unit, // Disimpan sebagai VARCHAR, bebas diisi PT/UPPS dari frontend
+            data.jenis_unit, 
             data.dokumen_spmi, totalAuditor, data.auditor_certified, data.auditor_non_certified,
             data.frekuensi_audit, data.bukti_certified_auditor, data.laporan_audit,
             data.id_unit, data.id_tahun, data.created_by
@@ -60,7 +60,7 @@ const Model1b = {
             SET jenis_unit = ?, dokumen_spmi = ?, jumlah_auditor = ?, auditor_certified = ?, 
                 auditor_non_certified = ?, frekuensi_audit = ?, 
                 bukti_certified_auditor = ?, laporan_audit = ?, 
-                id_unit = ?, updated_by = ?
+                unit_kerja_id_unit = ?, updated_by = ?
             WHERE id_unit_spmi = ?
         `;
         return await db.execute(sql, [

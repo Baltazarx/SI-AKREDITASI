@@ -29,6 +29,13 @@ class Prodi {
         return rows[0];
     }
 
+    // New: Get Data by Unit ID
+    static async getByUnit(id_unit) {
+        const query = "SELECT * FROM prodi WHERE id_unit = ?";
+        const [rows] = await db.query(query, [id_unit]);
+        return rows[0];
+    }
+
     // 3. Create Data
     static async create(data) {
         const query = `

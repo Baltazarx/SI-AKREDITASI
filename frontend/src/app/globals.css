@@ -1,16 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @layer base {
   body {
-    @apply transition-colors duration-500 ease-in-out bg-gray-50 text-gray-900;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: ease-in-out;
+    transition-duration: 500ms;
+    background-color: rgb(3, 7, 18);
+    /* bg-gray-950 */
+    color: rgb(243, 244, 246);
+    /* text-gray-100 */
   }
-  .dark body {
-    @apply bg-gray-950 text-gray-100;
+
+  /* Fix for select dropdown visibility in dark mode */
+  select {
+    background-color: rgb(17, 24, 39);
+    /* bg-gray-900 */
+    color: white;
+    border-color: rgb(55, 65, 81);
+    /* border-gray-700 */
   }
+
+  select option {
+    background-color: rgb(17, 24, 39);
+    /* bg-gray-900 */
+    color: white;
+  }
+
   * {
-    @apply transition-colors duration-500 ease-in-out border-gray-200 dark:border-gray-800;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: ease-in-out;
+    transition-duration: 500ms;
+    border-color: rgb(31, 41, 55);
+    /* border-gray-800 */
   }
 }
 
@@ -18,12 +41,15 @@
   0% {
     transform: translate(0px, 0px) scale(1);
   }
+
   33% {
     transform: translate(30px, -50px) scale(1.1);
   }
+
   66% {
     transform: translate(-20px, 20px) scale(0.9);
   }
+
   100% {
     transform: translate(0px, 0px) scale(1);
   }
@@ -42,9 +68,12 @@
 }
 
 @keyframes bounce-subtle {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -59,6 +88,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -70,9 +100,12 @@
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
+
   50% {
     transform: translateY(-20px) rotate(5deg);
   }
@@ -86,6 +119,7 @@
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -93,14 +127,17 @@
 
 .animate-shimmer {
   animation: shimmer 2s infinite;
-  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%);
+  background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
   background-size: 1000px 100%;
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
   }
@@ -114,6 +151,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

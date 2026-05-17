@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const alaController = require('../../controllers/ala/2a1_ala_controller');
+const { verifyToken, authorize } = require('../../middlewares/auth');
+
+router.use(verifyToken, authorize('ALA', 'ADMIN'));
 
 // Ambil data mahasiswa aktif (IKU: RESTful API)
 router.get('/:id_prodi', alaController.getData);

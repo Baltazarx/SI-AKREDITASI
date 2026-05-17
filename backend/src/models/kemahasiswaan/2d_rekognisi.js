@@ -16,10 +16,7 @@ const Model2d = {
             JOIN \`2d_ref_sumber_rekognisi\` s ON d.id_ref_sumber = s.id_ref_sumber
             JOIN tahun_akademik t ON d.id_tahun = t.id_tahun
             WHERE d.id_prodi = ? 
-            AND CAST(SUBSTRING_INDEX(t.tahun, '/', 1) AS UNSIGNED) BETWEEN 
-                (SELECT CAST(SUBSTRING_INDEX(tahun, '/', 1) AS UNSIGNED) - 2 FROM tahun_akademik WHERE id_tahun = ?) 
-                AND 
-                (SELECT CAST(SUBSTRING_INDEX(tahun, '/', 1) AS UNSIGNED) FROM tahun_akademik WHERE id_tahun = ?)
+            AND d.id_tahun BETWEEN (? - 2) AND ? 
             AND d.deleted_at IS NULL
             ORDER BY s.is_default DESC, s.nama_sumber ASC, d.id_tahun DESC
         `;
@@ -48,16 +45,11 @@ const Model2d = {
     // 3. Integrasi 2.B.4: Ambil Jumlah Lulusan Per Tahun
     getGraduatesCount: async (id_prodi, id_tahun) => {
         const sql = `
-            SELECT m.id_tahun, SUM(m.jumlah_lulusan) as total, t.tahun
-            FROM \`2b4_masa_tunggu\` m
-            JOIN tahun_akademik t ON m.id_tahun = t.id_tahun
-            WHERE m.id_prodi = ? 
-            AND CAST(SUBSTRING_INDEX(t.tahun, '/', 1) AS UNSIGNED) BETWEEN 
-                (SELECT CAST(SUBSTRING_INDEX(tahun, '/', 1) AS UNSIGNED) - 2 FROM tahun_akademik WHERE id_tahun = ?) 
-                AND 
-                (SELECT CAST(SUBSTRING_INDEX(tahun, '/', 1) AS UNSIGNED) FROM tahun_akademik WHERE id_tahun = ?)
-            AND m.deleted_at IS NULL
-            GROUP BY m.id_tahun, t.tahun
+            SELECT id_tahun, SUM(jumlah_lulusan) as total 
+            FROM \`2b4_masa_tunggu\` 
+            WHERE id_prodi = ? AND id_tahun BETWEEN (? - 2) AND ?
+            AND deleted_at IS NULL
+            GROUP BY id_tahun
         `;
         const [rows] = await db.execute(sql, [id_prodi, id_tahun, id_tahun]);
         return rows; // Mengembalikan array berisi total lulusan per tahun

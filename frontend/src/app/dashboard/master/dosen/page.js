@@ -10,6 +10,7 @@ export default function DosenPage() {
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const [ptSelection, setPtSelection] = useState('STIKOM PGRI BANYUWANGI');
   
   const [pegawaiList, setPegawaiList] = useState([]);
   const [prodiList, setProdiList] = useState([]);
@@ -110,6 +111,8 @@ export default function DosenPage() {
       perguruan_tinggi: item.perguruan_tinggi || 'STIKOM PGRI BANYUWANGI',
       id_jabatan_fungsional: item.id_jabatan_fungsional || '',
     });
+    const pt = item.perguruan_tinggi || 'STIKOM PGRI BANYUWANGI';
+    setPtSelection(pt === 'STIKOM PGRI BANYUWANGI' ? pt : 'Lainnya');
     setShowForm(true);
   };
 
@@ -138,30 +141,31 @@ export default function DosenPage() {
       perguruan_tinggi: 'STIKOM PGRI BANYUWANGI',
       id_jabatan_fungsional: '',
     });
+    setPtSelection('STIKOM PGRI BANYUWANGI');
     setEditingId(null);
     setShowForm(false);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-gray-950/50">
       <div className="max-w-7xl mx-auto p-6">
         {/* Header Section */}
         <div className="mb-8">
-          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-500 hover:text-gray-800 transition mb-4 group">
+          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition mb-4 group">
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Kembali ke Dashboard</span>
           </button>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Master Data - Dosen</h1>
-              <p className="text-gray-500 mt-1 font-medium">Kelola database dosen universitas</p>
+              <h1 className="text-3xl font-black text-white tracking-tight">Master Data - Dosen</h1>
+              <p className="text-gray-400 mt-1 font-medium">Kelola database dosen universitas</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 font-bold text-sm">
+              <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-900/20 font-bold text-sm">
                 <Plus size={18} />
                 <span>{showForm ? 'Tutup Form' : 'Tambah Dosen'}</span>
               </button>
-              <button onClick={fetchData} className="p-2.5 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
+              <button onClick={fetchData} className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl hover:bg-gray-950/50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
                 <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
               </button>
             </div>
@@ -170,41 +174,41 @@ export default function DosenPage() {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className="p-3 bg-blue-50 text-blue-600 rounded-xl"><UserCheck size={24} /></div>
+          <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+            <div className="p-3 bg-blue-900/20 text-blue-600 rounded-xl"><UserCheck size={24} /></div>
             <div>
               <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Dosen</p>
-              <p className="text-2xl font-black text-gray-900">{data.length}</p>
+              <p className="text-2xl font-black text-white">{data.length}</p>
             </div>
           </div>
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className="p-3 bg-purple-50 text-purple-600 rounded-xl"><GraduationCap size={24} /></div>
+          <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+            <div className="p-3 bg-purple-900/20 text-purple-600 rounded-xl"><GraduationCap size={24} /></div>
             <div>
               <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Lektor Kepala</p>
-              <p className="text-2xl font-black text-gray-900">{data.filter(d => d.nama_jafung === 'Lektor Kepala').length}</p>
+              <p className="text-2xl font-black text-white">{data.filter(d => d.nama_jafung === 'Lektor Kepala').length}</p>
             </div>
           </div>
-          <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-            <div className="p-3 bg-emerald-50 text-emerald-600 rounded-xl"><Users size={24} /></div>
+          <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+            <div className="p-3 bg-emerald-900/20 text-emerald-600 rounded-xl"><Users size={24} /></div>
             <div>
               <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Dosen TI</p>
-              <p className="text-2xl font-black text-gray-900">{data.filter(d => d.nama_prodi?.includes('Teknik Informatika')).length}</p>
+              <p className="text-2xl font-black text-white">{data.filter(d => d.nama_prodi?.includes('Teknik Informatika')).length}</p>
             </div>
           </div>
         </div>
 
         {/* Form Section */}
         {showForm && (
-          <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 mb-8 animate-in slide-in-from-top-4 duration-500">
-            <h2 className="text-xl font-black text-gray-900 mb-6">{editingId ? 'Edit Data Dosen' : 'Input Data Dosen Baru'}</h2>
+          <div className="bg-gray-900 rounded-3xl shadow-xl shadow-gray-950/50 border border-gray-700 p-8 mb-8 animate-in slide-in-from-top-4 duration-500">
+            <h2 className="text-xl font-black text-white mb-6">{editingId ? 'Edit Data Dosen' : 'Input Data Dosen Baru'}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Pilih Pegawai</label>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Pilih Pegawai</label>
                   <select 
                     value={formData.id_pegawai} 
                     onChange={(e) => setFormData({...formData, id_pegawai: e.target.value})} 
-                    className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium"
+                    className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium"
                     required
                   >
                     <option value="">-- Pilih Pegawai --</option>
@@ -214,11 +218,11 @@ export default function DosenPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Pilih Prodi</label>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Pilih Prodi</label>
                   <select 
                     value={formData.id_prodi} 
                     onChange={(e) => setFormData({...formData, id_prodi: e.target.value})} 
-                    className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium"
+                    className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium"
                     required
                   >
                     <option value="">-- Pilih Program Studi --</option>
@@ -228,19 +232,19 @@ export default function DosenPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">NIDN</label>
-                  <input type="text" value={formData.nidn} onChange={(e) => setFormData({...formData, nidn: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="Nomor Induk Dosen Nasional" />
+                  <label className="block text-sm font-bold text-gray-300 mb-2">NIDN</label>
+                  <input type="text" value={formData.nidn} onChange={(e) => setFormData({...formData, nidn: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium" placeholder="Nomor Induk Dosen Nasional" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">NUPTK</label>
-                  <input type="text" value={formData.nuptk} onChange={(e) => setFormData({...formData, nuptk: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="NUPTK (Jika ada)" />
+                  <label className="block text-sm font-bold text-gray-300 mb-2">NUPTK</label>
+                  <input type="text" value={formData.nuptk} onChange={(e) => setFormData({...formData, nuptk: e.target.value})} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium" placeholder="NUPTK (Jika ada)" />
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Jabatan Fungsional</label>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Jabatan Fungsional</label>
                   <select 
                     value={formData.id_jabatan_fungsional} 
                     onChange={(e) => setFormData({...formData, id_jabatan_fungsional: e.target.value})} 
-                    className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium"
+                    className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium"
                   >
                     <option value="">-- Pilih Jafung --</option>
                     {jafungList.map(j => (
@@ -249,20 +253,46 @@ export default function DosenPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Perguruan Tinggi</label>
-                  <input type="text" value={formData.perguruan_tinggi} onChange={(e) => setFormData({...formData, perguruan_tinggi: e.target.value})} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" />
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Perguruan Tinggi</label>
+                  <select 
+                    value={ptSelection} 
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setPtSelection(val);
+                      if (val !== 'Lainnya') {
+                        setFormData({...formData, perguruan_tinggi: val});
+                      } else {
+                        setFormData({...formData, perguruan_tinggi: ''});
+                      }
+                    }} 
+                    className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium mb-3"
+                  >
+                    <option value="STIKOM PGRI BANYUWANGI">STIKOM PGRI BANYUWANGI</option>
+                    <option value="Lainnya">Lainnya</option>
+                  </select>
+                  
+                  {ptSelection === 'Lainnya' && (
+                    <input 
+                      type="text" 
+                      value={formData.perguruan_tinggi} 
+                      onChange={(e) => setFormData({...formData, perguruan_tinggi: e.target.value})} 
+                      className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium animate-in slide-in-from-top-2" 
+                      placeholder="Masukkan Nama Perguruan Tinggi"
+                      required
+                    />
+                  )}
                 </div>
               </div>
               <div className="flex justify-end gap-3 pt-4">
-                <button type="button" onClick={resetForm} className="px-8 py-3 bg-gray-100 text-gray-600 rounded-2xl hover:bg-gray-200 transition font-bold">Batal</button>
-                <button type="submit" className="px-10 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black shadow-lg shadow-blue-200">{editingId ? 'Update Dosen' : 'Simpan Dosen'}</button>
+                <button type="button" onClick={resetForm} className="px-8 py-3 bg-gray-800 text-gray-400 rounded-2xl hover:bg-gray-700 transition font-bold">Batal</button>
+                <button type="submit" className="px-10 py-3 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 transition font-black shadow-lg shadow-blue-900/20">{editingId ? 'Update Dosen' : 'Simpan Dosen'}</button>
               </div>
             </form>
           </div>
         )}
 
         {/* Table Section */}
-        <div className="bg-white rounded-[2.5rem] shadow-xl shadow-gray-200/30 border border-gray-100 overflow-hidden transition-all duration-500">
+        <div className="bg-gray-900 rounded-[2.5rem] shadow-xl shadow-gray-950/30 border border-gray-700 overflow-hidden transition-all duration-500">
           {loading ? (
             <div className="p-20 text-center text-gray-400 font-bold">
               <RefreshCw className="animate-spin mx-auto mb-4 text-blue-500" size={48} />
@@ -275,39 +305,39 @@ export default function DosenPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left">
-                <thead className="bg-gray-50/50 border-b border-gray-100">
+                <thead className="bg-gray-800 border-b border-gray-700">
                   <tr>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0">Nama Dosen / Universitas</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0">Identitas (NIDN/NUPTK)</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0 text-center">Program Studi</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em] border-r border-gray-100 last:border-0">Jabatan Fungsional</th>
-                    <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">Aksi</th>
+                    <th className="px-8 py-5 text-[11px] font-black text-gray-300 uppercase tracking-[0.2em] border-r border-gray-700 last:border-0">Nama Dosen / Universitas</th>
+                    <th className="px-8 py-5 text-[11px] font-black text-gray-300 uppercase tracking-[0.2em] border-r border-gray-700 last:border-0">Identitas (NIDN/NUPTK)</th>
+                    <th className="px-8 py-5 text-[11px] font-black text-gray-300 uppercase tracking-[0.2em] border-r border-gray-700 last:border-0 text-center">Program Studi</th>
+                    <th className="px-8 py-5 text-[11px] font-black text-gray-300 uppercase tracking-[0.2em] border-r border-gray-700 last:border-0">Jabatan Fungsional</th>
+                    <th className="px-8 py-5 text-[11px] font-black text-gray-300 uppercase tracking-[0.2em]">Aksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-50">
+                <tbody className="divide-y divide-gray-800">
                   {data.map((item) => (
-                    <tr key={item.id_dosen} className="hover:bg-blue-50/30 transition-colors group">
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0">
-                        <div className="text-sm font-black text-gray-900 group-hover:text-blue-600 transition-colors">{item.nama_lengkap}</div>
+                    <tr key={item.id_dosen} className="hover:bg-blue-900/30 transition-colors group">
+                      <td className="px-8 py-6 border-r border-gray-700 last:border-0">
+                        <div className="text-sm font-black text-white group-hover:text-blue-600 transition-colors">{item.nama_lengkap}</div>
                         <div className="text-[11px] text-gray-400 font-bold mt-1 uppercase tracking-wider">{item.perguruan_tinggi}</div>
                       </td>
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0">
+                      <td className="px-8 py-6 border-r border-gray-700 last:border-0">
                         <div className="flex flex-col gap-1">
-                          <span className="text-xs font-bold text-gray-700">NIDN: {item.nidn || '-'}</span>
+                          <span className="text-xs font-bold text-gray-300">NIDN: {item.nidn || '-'}</span>
                           <span className="text-xs font-bold text-gray-400">NUPTK: {item.nuptk || '-'}</span>
                         </div>
                       </td>
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0 text-center">
-                        <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-wider border border-blue-100">{item.nama_prodi || '-'}</span>
+                      <td className="px-8 py-6 border-r border-gray-700 last:border-0 text-center">
+                        <span className="px-3 py-1 bg-blue-900/20 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-wider border border-blue-900/50">{item.nama_prodi || '-'}</span>
                       </td>
-                      <td className="px-8 py-6 border-r border-gray-50 last:border-0">
-                        <div className="text-sm font-bold text-gray-700">{item.nama_jafung || '-'}</div>
+                      <td className="px-8 py-6 border-r border-gray-700 last:border-0">
+                        <div className="text-sm font-bold text-gray-300">{item.nama_jafung || '-'}</div>
                       </td>
                       <td className="px-8 py-6">
-                        <div className="inline-flex items-center bg-white border border-gray-200 p-1.5 rounded-xl shadow-sm transition-all group-hover:border-blue-200 group-hover:shadow-md">
-                          <button onClick={() => handleEdit(item)} className="p-1.5 text-blue-600 hover:bg-blue-50 rounded-lg transition" title="Edit"><Edit size={16} /></button>
-                          <div className="w-px h-4 bg-gray-200 mx-2"></div>
-                          <button onClick={() => handleDelete(item.id_dosen)} className="p-1.5 text-red-600 hover:bg-red-50 rounded-lg transition" title="Hapus"><Trash2 size={16} /></button>
+                        <div className="inline-flex items-center bg-gray-900 border border-gray-700 p-1.5 rounded-xl shadow-sm transition-all group-hover:border-blue-800 group-hover:shadow-md">
+                          <button onClick={() => handleEdit(item)} className="p-1.5 text-blue-600 hover:bg-blue-900/20 rounded-lg transition" title="Edit"><Edit size={16} /></button>
+                          <div className="w-px h-4 bg-gray-700 mx-2"></div>
+                          <button onClick={() => handleDelete(item.id_dosen)} className="p-1.5 text-red-600 hover:bg-red-950/40 rounded-lg transition" title="Hapus"><Trash2 size={16} /></button>
                         </div>
                       </td>
                     </tr>

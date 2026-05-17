@@ -6,23 +6,17 @@ const { UNITS } = require('../../config/permissions');
 
 /**
  * ROUTES: Tabel Master Tenaga Kependidikan
+ * - GET: Semua role terautentikasi (untuk dropdown di seluruh modul)
+ * - POST/PUT/DELETE: Hanya ADMIN
  */
 
-router.use(verifyToken, authorize(UNITS.ADMIN));
+// Read: semua user yang sudah login bisa akses
+router.get('/', verifyToken, tendikController.index);
+router.get('/:id', verifyToken, tendikController.show);
 
-// Get All Data
-router.get('/', tendikController.index);
-
-// Get Data by ID
-router.get('/:id', tendikController.show);
-
-// Create Data
-router.post('/', tendikController.store);
-
-// Update Data
-router.put('/:id', tendikController.update);
-
-// Delete Data
-router.delete('/:id', tendikController.destroy);
+// Write: hanya ADMIN
+router.post('/', verifyToken, authorize(UNITS.ADMIN), tendikController.store);
+router.put('/:id', verifyToken, authorize(UNITS.ADMIN), tendikController.update);
+router.delete('/:id', verifyToken, authorize(UNITS.ADMIN), tendikController.destroy);
 
 module.exports = router;

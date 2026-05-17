@@ -314,25 +314,25 @@ export default function RekognisiPage() {
   const percTS2 = gradTS2 ? ((countTS2 / gradTS2) * 100).toFixed(2) : 0;
 
   return (
-    <div className="min-h-screen bg-gray-50/50">
+    <div className="min-h-screen bg-gray-950/50">
       <div className="max-w-7xl mx-auto p-6">
         {/* Header Section */}
         <div className="mb-8">
-          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-500 hover:text-gray-800 transition mb-4 group">
+          <button onClick={() => router.push('/dashboard')} className="flex items-center gap-2 text-gray-400 hover:text-gray-200 transition mb-4 group">
             <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Kembali ke Dashboard</span>
           </button>
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-black text-gray-900 tracking-tight">Rekognisi Mahasiswa (2.D)</h1>
-              <p className="text-gray-500 mt-1 font-medium">Pengelolaan data rekognisi dan pencapaian mahasiswa</p>
+              <h1 className="text-3xl font-black text-white tracking-tight">Rekognisi Mahasiswa (2.D)</h1>
+              <p className="text-gray-400 mt-1 font-medium">Pengelolaan data rekognisi dan pencapaian mahasiswa</p>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button onClick={handleAddMain} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-200 font-bold text-sm">
+              <button onClick={handleAddMain} className="flex items-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl hover:bg-blue-700 transition shadow-lg shadow-blue-900/20 font-bold text-sm">
                 <Plus size={18} />
                 <span>{showForm ? 'Tutup Form' : 'Tambah Data'}</span>
               </button>
-              <button onClick={handleExport} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-200 font-bold text-sm">
+              <button onClick={handleExport} className="flex items-center gap-2 bg-emerald-600 text-white px-5 py-2.5 rounded-xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-900/20 font-bold text-sm">
                 <Download size={18} />
                 <span>Export Excel</span>
               </button>
@@ -343,25 +343,25 @@ export default function RekognisiPage() {
         {/* Stats & Filters */}
         <div className="flex flex-col lg:flex-row gap-6 mb-8">
           <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-              <div className="p-3 bg-amber-50 text-amber-600 rounded-xl"><Award size={24} /></div>
+            <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+              <div className="p-3 bg-amber-950/40 text-amber-600 rounded-xl"><Award size={24} /></div>
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Rekognisi</p>
-                <p className="text-2xl font-black text-gray-900">{data.length}</p>
+                <p className="text-2xl font-black text-white">{data.length}</p>
               </div>
             </div>
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-              <div className="p-3 bg-purple-50 text-purple-600 rounded-xl"><Users size={24} /></div>
+            <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+              <div className="p-3 bg-purple-900/20 text-purple-600 rounded-xl"><Users size={24} /></div>
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Lulusan (Meta)</p>
-                <p className="text-2xl font-black text-gray-900">{totalLulusan}</p>
+                <p className="text-2xl font-black text-white">{totalLulusan}</p>
               </div>
             </div>
-            <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-              <div className="p-3 bg-blue-50 text-blue-600 rounded-xl"><Filter size={24} /></div>
+            <div className="bg-gray-900 p-5 rounded-2xl shadow-sm border border-gray-700 flex items-center gap-4">
+              <div className="p-3 bg-blue-900/20 text-blue-600 rounded-xl"><Filter size={24} /></div>
               <div>
                 <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">Program Studi</p>
-                <p className="text-sm font-black text-gray-900 truncate max-w-[120px]">
+                <p className="text-sm font-black text-white truncate max-w-[120px]">
                   {prodiList.find(p => p.id_prodi == filterProdi)?.nama_prodi || '-'}
                 </p>
               </div>
@@ -370,32 +370,32 @@ export default function RekognisiPage() {
           <div className="flex gap-3 items-end">
             <div className="flex-1 lg:w-48">
               <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Program Studi</label>
-              <select value={filterProdi} onChange={(e) => setFilterProdi(e.target.value)} className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-sm transition appearance-none cursor-pointer">
+              <select value={filterProdi} onChange={(e) => setFilterProdi(e.target.value)} className="w-full px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-900/40 outline-none font-bold text-sm transition appearance-none cursor-pointer">
                 <option value="">Pilih Prodi</option>
                 {prodiList.map(p => <option key={p.id_prodi} value={p.id_prodi}>{p.nama_prodi}</option>)}
               </select>
             </div>
             <div className="flex-1 lg:w-32">
               <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1.5 ml-1">Anchor (TS)</label>
-              <select value={filterTahun} onChange={(e) => setFilterTahun(e.target.value)} className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-sm transition appearance-none cursor-pointer">
+              <select value={filterTahun} onChange={(e) => setFilterTahun(e.target.value)} className="w-full px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-xl focus:ring-4 focus:ring-blue-900/40 outline-none font-bold text-sm transition appearance-none cursor-pointer">
                 <option value="">Pilih Tahun</option>
                 {tahunList.map(t => <option key={t.id_tahun} value={t.id_tahun}>{t.tahun}</option>)}
               </select>
             </div>
-            <button onClick={viewMode === 'main' ? fetchData : fetchTrashData} className="p-2.5 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
+            <button onClick={viewMode === 'main' ? fetchData : fetchTrashData} className="p-2.5 bg-gray-900 border border-gray-700 rounded-xl hover:bg-gray-950/50 transition text-gray-400 hover:text-blue-600 shadow-sm" title="Refresh Data">
               <RefreshCw size={20} className={loading ? 'animate-spin' : ''} />
             </button>
           </div>
         </div>
 
         {/* Tabs Navigation */}
-        <div className="flex border-b border-gray-200 mb-6">
+        <div className="flex border-b border-gray-700 mb-6">
           <button
             onClick={() => { setViewMode('main'); fetchData(); }}
             className={`px-6 py-3 font-bold text-sm tracking-wide transition-all uppercase ${
               viewMode === 'main'
                 ? 'border-b-4 border-blue-600 text-blue-600'
-                : 'text-gray-400 hover:text-gray-600'
+                : 'text-gray-400 hover:text-gray-400'
             }`}
           >
             Dashboard
@@ -416,20 +416,20 @@ export default function RekognisiPage() {
           <>
             {/* Form Section */}
             {showForm && (
-          <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 border border-gray-100 p-8 mb-8 animate-in slide-in-from-top-4 duration-500">
-            <h2 className="text-xl font-black text-gray-900 mb-6">{editingId ? 'Edit Data Rekognisi' : 'Input Data Rekognisi'}</h2>
+          <div className="bg-gray-900 rounded-3xl shadow-xl shadow-gray-950/50 border border-gray-700 p-8 mb-8 animate-in slide-in-from-top-4 duration-500">
+            <h2 className="text-xl font-black text-white mb-6">{editingId ? 'Edit Data Rekognisi' : 'Input Data Rekognisi'}</h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Program Studi</label>
-                  <select value={formData.id_prodi} onChange={(e) => setFormData({ ...formData, id_prodi: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" required>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Program Studi</label>
+                  <select value={formData.id_prodi} onChange={(e) => setFormData({ ...formData, id_prodi: e.target.value })} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium" required>
                     <option value="">Pilih Prodi</option>
                     {prodiList.map(p => <option key={p.id_prodi} value={p.id_prodi}>{p.nama_prodi}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Tahun Akademik (Terjadi Rekognisi)</label>
-                  <select value={formData.id_tahun} onChange={(e) => setFormData({ ...formData, id_tahun: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" required>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Tahun Akademik (Terjadi Rekognisi)</label>
+                  <select value={formData.id_tahun} onChange={(e) => setFormData({ ...formData, id_tahun: e.target.value })} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium" required>
                     <option value="">Pilih Tahun</option>
                     {tahunList.map(t => <option key={t.id_tahun} value={t.id_tahun}>{t.tahun}</option>)}
                   </select>
@@ -438,8 +438,8 @@ export default function RekognisiPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2">Sumber Rekognisi</label>
-                  <select value={formData.id_ref_sumber} onChange={(e) => setFormData({ ...formData, id_ref_sumber: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" required>
+                  <label className="block text-sm font-bold text-gray-300 mb-2">Sumber Rekognisi</label>
+                  <select value={formData.id_ref_sumber} onChange={(e) => setFormData({ ...formData, id_ref_sumber: e.target.value })} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium" required>
                     <option value="">-- Pilih Sumber --</option>
                     {refSources.map(s => <option key={s.id_ref_sumber} value={s.id_ref_sumber}>{s.nama_sumber}</option>)}
                     <option value="BARU" className="font-bold text-blue-600">+ Tambah Sumber Baru...</option>
@@ -449,26 +449,26 @@ export default function RekognisiPage() {
                 {formData.id_ref_sumber === 'BARU' && (
                   <div className="animate-in fade-in duration-300">
                     <label className="block text-sm font-bold text-blue-600 mb-2">Nama Sumber Baru</label>
-                    <input type="text" value={formData.nama_sumber_baru} onChange={(e) => setFormData({ ...formData, nama_sumber_baru: e.target.value })} className="w-full px-4 py-3 bg-blue-50/50 border-blue-200 border-2 focus:border-blue-500 rounded-2xl outline-none transition font-medium text-blue-900 placeholder-blue-300" placeholder="Ketik nama sumber di sini..." required />
+                    <input type="text" value={formData.nama_sumber_baru} onChange={(e) => setFormData({ ...formData, nama_sumber_baru: e.target.value })} className="w-full px-4 py-3 bg-blue-900/50 border-blue-800 border-2 focus:border-blue-500 rounded-2xl outline-none transition font-medium text-blue-200 placeholder-blue-300" placeholder="Ketik nama sumber di sini..." required />
                   </div>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Kegiatan Rekognisi</label>
-                <input type="text" value={formData.jenis_rekognisi} onChange={(e) => setFormData({ ...formData, jenis_rekognisi: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="Contoh: Juara 1 Lomba Nasional..." required />
+                <label className="block text-sm font-bold text-gray-300 mb-2">Kegiatan Rekognisi</label>
+                <input type="text" value={formData.jenis_rekognisi} onChange={(e) => setFormData({ ...formData, jenis_rekognisi: e.target.value })} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium" placeholder="Contoh: Juara 1 Lomba Nasional..." required />
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Tautan Bukti (Optional)</label>
-                <input type="url" value={formData.link_bukti} onChange={(e) => setFormData({ ...formData, link_bukti: e.target.value })} className="w-full px-4 py-3 bg-gray-50 border-transparent border-2 focus:border-blue-500 focus:bg-white rounded-2xl outline-none transition font-medium" placeholder="https://..." />
+                <label className="block text-sm font-bold text-gray-300 mb-2">Tautan Bukti (Optional)</label>
+                <input type="url" value={formData.link_bukti} onChange={(e) => setFormData({ ...formData, link_bukti: e.target.value })} className="w-full px-4 py-3 bg-gray-950/50 border-transparent border-2 focus:border-blue-500 focus:bg-gray-900 rounded-2xl outline-none transition font-medium" placeholder="https://..." />
               </div>
 
               <div className="flex gap-4 pt-4">
-                <button type="submit" className="flex-1 bg-blue-600 text-white px-6 py-3.5 rounded-2xl hover:bg-blue-700 transition font-black text-sm uppercase tracking-wider shadow-lg shadow-blue-200">
+                <button type="submit" className="flex-1 bg-blue-600 text-white px-6 py-3.5 rounded-2xl hover:bg-blue-700 transition font-black text-sm uppercase tracking-wider shadow-lg shadow-blue-900/20">
                   Simpan Data
                 </button>
-                <button type="button" onClick={() => {setShowForm(false); resetForm();}} className="px-6 py-3.5 rounded-2xl text-gray-500 hover:bg-gray-100 transition font-bold text-sm">
+                <button type="button" onClick={() => {setShowForm(false); resetForm();}} className="px-6 py-3.5 rounded-2xl text-gray-400 hover:bg-gray-800 transition font-bold text-sm">
                   Batal
                 </button>
               </div>
@@ -477,11 +477,11 @@ export default function RekognisiPage() {
         )}
 
         {/* Table Section */}
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-          <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/30">
-            <h3 className="font-black text-gray-800">Daftar Rekognisi</h3>
+        <div className="bg-gray-900 rounded-3xl shadow-sm border border-gray-700 overflow-hidden">
+          <div className="p-6 border-b border-gray-700 flex justify-between items-center bg-gray-950/30">
+            <h3 className="font-black text-gray-200">Daftar Rekognisi</h3>
             {!filterProdi || !filterTahun ? (
-              <span className="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200">
+              <span className="text-xs font-bold text-amber-600 bg-amber-950/40 px-3 py-1 rounded-lg border border-amber-800">
                 Pilih Prodi & Tahun untuk melihat data
               </span>
             ) : null}
@@ -494,23 +494,23 @@ export default function RekognisiPage() {
             </div>
           ) : (
             <div className="overflow-x-auto p-4">
-              <table className="w-full text-left border-collapse border border-gray-200">
-                <thead className="bg-gray-100">
-                  <tr className="text-[11px] font-black text-gray-600 uppercase tracking-widest text-center">
-                    <th className="px-4 py-4 border border-gray-300" rowSpan="2">No</th>
-                    <th className="px-4 py-4 border border-gray-300" rowSpan="2">Sumber Rekognisi</th>
-                    <th className="px-4 py-4 border border-gray-300" rowSpan="2">Jenis Pengakuan Lulusan<br/>(Rekognisi)</th>
-                    <th className="px-4 py-2 border border-gray-300" colSpan="3">Tahun Akademik</th>
-                    <th className="px-4 py-4 border border-gray-300" rowSpan="2">Link Bukti</th>
-                    <th className="px-4 py-4 border border-gray-300 w-24" rowSpan="2">Aksi</th>
+              <table className="w-full text-left border-collapse border border-gray-700">
+                <thead className="bg-gray-800">
+                  <tr className="text-[11px] font-black text-gray-400 uppercase tracking-widest text-center">
+                    <th className="px-4 py-4 border border-gray-600" rowSpan="2">No</th>
+                    <th className="px-4 py-4 border border-gray-600" rowSpan="2">Sumber Rekognisi</th>
+                    <th className="px-4 py-4 border border-gray-600" rowSpan="2">Jenis Pengakuan Lulusan<br/>(Rekognisi)</th>
+                    <th className="px-4 py-2 border border-gray-600" colSpan="3">Tahun Akademik</th>
+                    <th className="px-4 py-4 border border-gray-600" rowSpan="2">Link Bukti</th>
+                    <th className="px-4 py-4 border border-gray-600 w-24" rowSpan="2">Aksi</th>
                   </tr>
-                  <tr className="text-[11px] font-black text-gray-600 uppercase tracking-widest text-center">
-                    <th className="px-4 py-2 border border-gray-300">TS-2<br/>({anchorYear-2})</th>
-                    <th className="px-4 py-2 border border-gray-300">TS-1<br/>({anchorYear-1})</th>
-                    <th className="px-4 py-2 border border-gray-300">TS<br/>({anchorYear})</th>
+                  <tr className="text-[11px] font-black text-gray-400 uppercase tracking-widest text-center">
+                    <th className="px-4 py-2 border border-gray-600">TS-2<br/>({anchorYear-2})</th>
+                    <th className="px-4 py-2 border border-gray-600">TS-1<br/>({anchorYear-1})</th>
+                    <th className="px-4 py-2 border border-gray-600">TS<br/>({anchorYear})</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-gray-600">
                   {(() => {
                     let rowNumber = 1;
                     return refSources.map((source) => {
@@ -518,16 +518,16 @@ export default function RekognisiPage() {
                       
                       if (sourceData.length === 0) {
                         return (
-                          <tr key={`empty-${source.id_ref_sumber}`} className="hover:bg-amber-50/50 transition-colors">
-                            <td className="px-4 py-3 border border-gray-200 text-center font-bold text-gray-500">{rowNumber++}</td>
-                            <td className="px-4 py-3 border border-gray-200 font-bold text-gray-800">{source.nama_sumber}</td>
-                            <td className="px-4 py-3 border border-gray-200 font-medium text-gray-400 italic text-center">-</td>
-                            <td className="px-4 py-3 border border-gray-200 text-center bg-gray-50/30"></td>
-                            <td className="px-4 py-3 border border-gray-200 text-center bg-gray-50/30"></td>
-                            <td className="px-4 py-3 border border-gray-200 text-center bg-gray-50/30"></td>
-                            <td className="px-4 py-3 border border-gray-200 text-center text-gray-400 italic">-</td>
-                            <td className="px-4 py-3 border border-gray-200 text-center">
-                              <button onClick={() => handleAddForSource(source.id_ref_sumber)} className="px-3 py-1.5 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg font-bold text-xs transition whitespace-nowrap">
+                          <tr key={`empty-${source.id_ref_sumber}`} className="hover:bg-amber-950/50 transition-colors">
+                            <td className="px-4 py-3 border border-gray-700 text-center font-bold text-gray-400">{rowNumber++}</td>
+                            <td className="px-4 py-3 border border-gray-700 font-bold text-gray-200">{source.nama_sumber}</td>
+                            <td className="px-4 py-3 border border-gray-700 font-medium text-gray-400 italic text-center">-</td>
+                            <td className="px-4 py-3 border border-gray-700 text-center bg-gray-950/30"></td>
+                            <td className="px-4 py-3 border border-gray-700 text-center bg-gray-950/30"></td>
+                            <td className="px-4 py-3 border border-gray-700 text-center bg-gray-950/30"></td>
+                            <td className="px-4 py-3 border border-gray-700 text-center text-gray-400 italic">-</td>
+                            <td className="px-4 py-3 border border-gray-700 text-center">
+                              <button onClick={() => handleAddForSource(source.id_ref_sumber)} className="px-3 py-1.5 bg-blue-900/20 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg font-bold text-xs transition whitespace-nowrap">
                                 <Plus size={14} className="inline mr-1" /> Tambah
                               </button>
                             </td>
@@ -541,27 +541,27 @@ export default function RekognisiPage() {
                         const isTS = parseInt(item.nama_tahun) === anchorYear;
 
                         return (
-                          <tr key={item.id_2d} className="hover:bg-amber-50/50 transition-colors">
+                          <tr key={item.id_2d} className="hover:bg-amber-950/50 transition-colors">
                             {idx === 0 && (
                               <>
-                                <td className="px-4 py-3 border border-gray-200 text-center font-bold text-gray-500" rowSpan={sourceData.length}>{rowNumber++}</td>
-                                <td className="px-4 py-3 border border-gray-200 font-bold text-gray-800" rowSpan={sourceData.length}>{source.nama_sumber}</td>
+                                <td className="px-4 py-3 border border-gray-700 text-center font-bold text-gray-400" rowSpan={sourceData.length}>{rowNumber++}</td>
+                                <td className="px-4 py-3 border border-gray-700 font-bold text-gray-200" rowSpan={sourceData.length}>{source.nama_sumber}</td>
                               </>
                             )}
-                            <td className="px-4 py-3 border border-gray-200 font-medium text-gray-700">{item.jenis_rekognisi}</td>
-                            <td className="px-4 py-3 border border-gray-200 text-center font-black text-emerald-600 bg-emerald-50/30">
+                            <td className="px-4 py-3 border border-gray-700 font-medium text-gray-300">{item.jenis_rekognisi}</td>
+                            <td className="px-4 py-3 border border-gray-700 text-center font-black text-emerald-600 bg-emerald-900/30">
                               {isTS2 ? 'V' : ''}
                             </td>
-                            <td className="px-4 py-3 border border-gray-200 text-center font-black text-emerald-600 bg-emerald-50/30">
+                            <td className="px-4 py-3 border border-gray-700 text-center font-black text-emerald-600 bg-emerald-900/30">
                               {isTS1 ? 'V' : ''}
                             </td>
-                            <td className="px-4 py-3 border border-gray-200 text-center font-black text-emerald-600 bg-emerald-50/30">
+                            <td className="px-4 py-3 border border-gray-700 text-center font-black text-emerald-600 bg-emerald-900/30">
                               {isTS ? 'V' : ''}
                             </td>
-                            <td className="px-4 py-3 border border-gray-200 text-center">
+                            <td className="px-4 py-3 border border-gray-700 text-center">
                               {isTS ? (
                                 item.link_bukti ? (
-                                  <a href={item.link_bukti} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-700 font-bold text-xs bg-blue-50/50 px-3 py-1.5 rounded-lg transition">
+                                  <a href={item.link_bukti} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-500 hover:text-blue-400 font-bold text-xs bg-blue-900/50 px-3 py-1.5 rounded-lg transition">
                                     <LinkIcon size={12} /> Buka
                                   </a>
                                 ) : (
@@ -571,13 +571,13 @@ export default function RekognisiPage() {
                                 <span className="text-xs text-gray-400 italic">-</span>
                               )}
                             </td>
-                            <td className="px-4 py-3 border border-gray-200 text-center">
+                            <td className="px-4 py-3 border border-gray-700 text-center">
                               {isTS ? (
                                 <div className="flex items-center justify-center gap-2">
-                                  <button onClick={() => handleEdit(item)} className="p-1.5 bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg font-bold text-xs transition" title="Edit">
+                                  <button onClick={() => handleEdit(item)} className="p-1.5 bg-blue-900/20 text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg font-bold text-xs transition" title="Edit">
                                     Edit
                                   </button>
-                                  <button onClick={() => handleDelete(item.id_2d)} className="p-1.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus">
+                                  <button onClick={() => handleDelete(item.id_2d)} className="p-1.5 bg-red-950/40 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus">
                                     <Trash2 size={16} />
                                   </button>
                                 </div>
@@ -591,27 +591,27 @@ export default function RekognisiPage() {
                     });
                   })()}
                 </tbody>
-                <tfoot className="bg-gray-100 font-bold text-gray-800 text-center">
+                <tfoot className="bg-gray-800 font-bold text-gray-200 text-center">
                   <tr>
-                    <td colSpan="3" className="px-4 py-3 border border-gray-300 text-right uppercase tracking-wider text-xs font-black text-gray-600">Jumlah Rekognisi</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{countTS2}</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{countTS1}</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{countTS}</td>
-                    <td colSpan="2" className="px-4 py-3 border border-gray-300 bg-gray-50"></td>
+                    <td colSpan="3" className="px-4 py-3 border border-gray-600 text-right uppercase tracking-wider text-xs font-black text-gray-400">Jumlah Rekognisi</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{countTS2}</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{countTS1}</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{countTS}</td>
+                    <td colSpan="2" className="px-4 py-3 border border-gray-600 bg-gray-950/50"></td>
                   </tr>
                   <tr>
-                    <td colSpan="3" className="px-4 py-3 border border-gray-300 text-right uppercase tracking-wider text-xs font-black text-gray-600">Jumlah Lulusan</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{gradTS2}</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{gradTS1}</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{gradTS}</td>
-                    <td colSpan="2" className="px-4 py-3 border border-gray-300 bg-gray-50"></td>
+                    <td colSpan="3" className="px-4 py-3 border border-gray-600 text-right uppercase tracking-wider text-xs font-black text-gray-400">Jumlah Lulusan</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{gradTS2}</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{gradTS1}</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{gradTS}</td>
+                    <td colSpan="2" className="px-4 py-3 border border-gray-600 bg-gray-950/50"></td>
                   </tr>
                   <tr>
-                    <td colSpan="3" className="px-4 py-3 border border-gray-300 text-right uppercase tracking-wider text-xs font-black text-gray-600">Persentase</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{percTS2}%</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{percTS1}%</td>
-                    <td className="px-4 py-3 border border-gray-300 bg-yellow-100/50 text-yellow-800">{percTS}%</td>
-                    <td colSpan="2" className="px-4 py-3 border border-gray-300 bg-gray-50"></td>
+                    <td colSpan="3" className="px-4 py-3 border border-gray-600 text-right uppercase tracking-wider text-xs font-black text-gray-400">Persentase</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{percTS2}%</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{percTS1}%</td>
+                    <td className="px-4 py-3 border border-gray-600 bg-yellow-100/50 text-yellow-800">{percTS}%</td>
+                    <td colSpan="2" className="px-4 py-3 border border-gray-600 bg-gray-950/50"></td>
                   </tr>
                 </tfoot>
               </table>
@@ -622,10 +622,10 @@ export default function RekognisiPage() {
         )}
 
         {viewMode === 'trash' && (
-          <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-            <div className="p-6 border-b border-gray-100 bg-red-50/30 flex justify-between items-center">
+          <div className="bg-gray-900 rounded-3xl shadow-sm border border-gray-700 overflow-hidden">
+            <div className="p-6 border-b border-gray-700 bg-red-950/30 flex justify-between items-center">
               <div>
-                <h3 className="font-black text-red-800 flex items-center gap-2">
+                <h3 className="font-black text-red-300 flex items-center gap-2">
                   <Trash2 size={20} /> Tempat Sampah
                 </h3>
                 <p className="text-sm font-bold text-red-500/70 mt-1">Data rekognisi yang telah dihapus sementara</p>
@@ -639,7 +639,7 @@ export default function RekognisiPage() {
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                  <thead className="bg-gray-50/80 border-b border-gray-100">
+                  <thead className="bg-gray-950/80 border-b border-gray-700">
                     <tr className="text-[11px] font-black text-gray-400 uppercase tracking-widest">
                       <th className="px-6 py-4 w-16 text-center">No</th>
                       <th className="px-6 py-4">Sumber Rekognisi</th>
@@ -648,23 +648,23 @@ export default function RekognisiPage() {
                       <th className="px-6 py-4 text-center w-32">Aksi</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-50">
+                  <tbody className="divide-y divide-gray-800">
                     {trashData.map((item, index) => (
-                      <tr key={item.id_2d} className="hover:bg-red-50/30 transition-colors">
+                      <tr key={item.id_2d} className="hover:bg-red-950/30 transition-colors">
                         <td className="px-6 py-4 text-center font-bold text-gray-400">{index + 1}</td>
-                        <td className="px-6 py-4 font-black text-gray-800">{item.nama_sumber}</td>
-                        <td className="px-6 py-4 font-medium text-gray-500 line-through">{item.jenis_rekognisi}</td>
+                        <td className="px-6 py-4 font-black text-gray-200">{item.nama_sumber}</td>
+                        <td className="px-6 py-4 font-medium text-gray-400 line-through">{item.jenis_rekognisi}</td>
                         <td className="px-6 py-4 text-center">
-                          <span className="bg-red-50 text-red-600 px-3 py-1 rounded-lg text-xs font-bold">
+                          <span className="bg-red-950/40 text-red-600 px-3 py-1 rounded-lg text-xs font-bold">
                             {item.nama_tahun}
                           </span>
                         </td>
                         <td className="px-6 py-4 text-center">
                           <div className="flex items-center justify-center gap-2">
-                            <button onClick={() => handleRestore(item.id_2d)} className="px-3 py-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-lg font-bold text-xs transition" title="Pulihkan">
+                            <button onClick={() => handleRestore(item.id_2d)} className="px-3 py-1.5 bg-emerald-900/20 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-lg font-bold text-xs transition" title="Pulihkan">
                               Restore
                             </button>
-                            <button onClick={() => handleHardDelete(item.id_2d)} className="p-1.5 bg-red-50 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus Permanen">
+                            <button onClick={() => handleHardDelete(item.id_2d)} className="p-1.5 bg-red-950/40 text-red-600 hover:bg-red-600 hover:text-white rounded-lg transition" title="Hapus Permanen">
                               <Trash2 size={16} />
                             </button>
                           </div>

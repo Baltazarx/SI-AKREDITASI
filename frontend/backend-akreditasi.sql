@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 14, 2026 at 11:33 PM
+-- Generation Time: May 21, 2026 at 06:52 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.3.22
 
@@ -201,7 +201,7 @@ CREATE TABLE `1b_unit_spmi_dan_sdm` (
 --
 
 INSERT INTO `1b_unit_spmi_dan_sdm` (`id_unit_spmi`, `jenis_unit`, `dokumen_spmi`, `jumlah_auditor`, `auditor_certified`, `auditor_non_certified`, `frekuensi_audit`, `bukti_certified_auditor`, `laporan_audit`, `unit_kerja_id_unit`, `tahun_akademik_id_tahun`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-(1, NULL, 'https://drjhgjyu', 2, 1, 1, 1, 'https://drjhgjyu', 'https://drjhgjyu', 2, 1, '2026-04-13 03:52:34', 3, '2026-04-13 04:44:58', NULL, NULL, NULL);
+(1, 'Unit Penjaminan Mutu Internal', 'https://drjhgjyu', 2, 1, 1, 1, 'https://drjhgjyu', 'https://drjhgjyu', 9, 1, '2026-04-13 03:52:34', 3, '2026-05-15 03:34:00', 9, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -252,6 +252,72 @@ INSERT INTO `2a1_data_mahasiswa` (`id_2a1`, `prodi_id_prodi`, `tahun_akademik_id
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `2a2_keragaman_asal_maba`
+--
+
+CREATE TABLE `2a2_keragaman_asal_maba` (
+  `id_2a2` int NOT NULL,
+  `prodi_id_prodi` int NOT NULL,
+  `tahun_akademik_id_tahun` int NOT NULL,
+  `jml_lokal` int DEFAULT '0' COMMENT 'Kota/Kabupaten sama dengan PS',
+  `jml_regional` int DEFAULT '0' COMMENT 'Luar Kabupaten, Dalam Jatim',
+  `jml_nasional` int DEFAULT '0' COMMENT 'Luar Jatim, Dalam Indonesia',
+  `jml_internasional` int DEFAULT '0' COMMENT 'Luar Negeri',
+  `jml_afirmasi` int DEFAULT '0' COMMENT 'Jalur Afirmasi',
+  `jml_khusus` int DEFAULT '0' COMMENT 'Berkebutuhan Khusus',
+  `ket_lokal` text COLLATE utf8mb4_unicode_ci,
+  `ket_regional` text COLLATE utf8mb4_unicode_ci,
+  `ket_nasional` text COLLATE utf8mb4_unicode_ci,
+  `ket_internasional` text COLLATE utf8mb4_unicode_ci,
+  `ket_afirmasi` text COLLATE utf8mb4_unicode_ci,
+  `ket_khusus` text COLLATE utf8mb4_unicode_ci,
+  `link_lokal` text COLLATE utf8mb4_unicode_ci,
+  `link_regional` text COLLATE utf8mb4_unicode_ci,
+  `link_nasional` text COLLATE utf8mb4_unicode_ci,
+  `link_internasional` text COLLATE utf8mb4_unicode_ci,
+  `link_afirmasi` text COLLATE utf8mb4_unicode_ci,
+  `link_khusus` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL,
+  `updated_by` int DEFAULT NULL,
+  `pmb_deleted_at` datetime DEFAULT NULL,
+  `pmb_deleted_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `2a2_keragaman_asal_maba`
+--
+
+INSERT INTO `2a2_keragaman_asal_maba` (`id_2a2`, `prodi_id_prodi`, `tahun_akademik_id_tahun`, `jml_lokal`, `jml_regional`, `jml_nasional`, `jml_internasional`, `jml_afirmasi`, `jml_khusus`, `ket_lokal`, `ket_regional`, `ket_nasional`, `ket_internasional`, `ket_afirmasi`, `ket_khusus`, `link_lokal`, `link_regional`, `link_nasional`, `link_internasional`, `link_afirmasi`, `link_khusus`, `created_at`, `updated_at`, `created_by`, `updated_by`, `pmb_deleted_at`, `pmb_deleted_by`) VALUES
+(1, 1, 1, 69, 10, 10, 1, 8, 1, '[{\"jml\":69,\"ket\":\"Banyuwangi\"}]', '[{\"jml\":5,\"ket\":\"Jember\"},{\"jml\":5,\"ket\":\"Pasuruan\"}]', '[{\"jml\":5,\"ket\":\"Jembrana\"},{\"jml\":5,\"ket\":\"Tegal\"}]', '[{\"jml\":1,\"ket\":\"Malaysia\"}]', '[{\"jml\":8,\"ket\":\"Banyuwangi\"}]', '[{\"jml\":1,\"ket\":\"Banyuwangi\"}]', 'https://hjsxbj.com', 'https://skjhijs.com', 'htpps://hwsiun.com', 'https://ajhdjhdj', 'https://hshnkjn', 'https://ajwjwh', '2026-05-17 21:34:16', '2026-05-18 04:15:48', 3, 3, NULL, NULL),
+(7, 1, 2, 40, 10, 0, 0, 8, 0, '[{\"jml\":40,\"ket\":\"Banyuwangi\"}]', '[{\"jml\":5,\"ket\":\"Jember\"},{\"jml\":5,\"ket\":\"Jombang\"}]', '[{\"jml\":0,\"ket\":\"\"}]', '[{\"jml\":0,\"ket\":\"\"}]', '[{\"jml\":8,\"ket\":\"Banyuwangi\"}]', '[{\"jml\":0,\"ket\":\"\"}]', 'https://hjsxbj.com', 'https://skjhijs.com', '', '', 'https://ksjk', 'https://ajwjwh', '2026-05-18 05:21:58', '2026-05-18 05:21:58', 3, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `2a3_kondisi_mahasiswa`
+--
+
+CREATE TABLE `2a3_kondisi_mahasiswa` (
+  `id_2a3` int NOT NULL,
+  `prodi_id_prodi` int NOT NULL,
+  `id_tahun` int NOT NULL COMMENT 'Tahun Angkatan (Cohort Academic Year)',
+  `maba` int NOT NULL DEFAULT '0' COMMENT 'Disinkronkan otomatis dari 2.A.1',
+  `lulus` int NOT NULL DEFAULT '0' COMMENT 'Jumlah akumulatif yang lulus',
+  `do` int NOT NULL DEFAULT '0' COMMENT 'Mengundurkan diri / Drop Out',
+  `aktif` int NOT NULL DEFAULT '0' COMMENT 'Disinkronkan langsung dari data Mahasiswa Aktif Tabel 2.A.1',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_by` int DEFAULT NULL,
+  `updated_by` int DEFAULT NULL,
+  `ala_deleted_at` datetime DEFAULT NULL,
+  `ala_deleted_by` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `2b1_isi_pembelajaran`
 --
 
@@ -275,7 +341,11 @@ CREATE TABLE `2b1_isi_pembelajaran` (
 INSERT INTO `2b1_isi_pembelajaran` (`id_2b1`, `id_mk`, `id_pl`, `id_tahun`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
 (14, 1, 5, 2, '2026-05-12 19:01:02', 3, NULL, NULL, NULL, NULL),
 (15, 1, 6, 2, '2026-05-12 19:01:02', 3, NULL, NULL, NULL, NULL),
-(16, 1, 9, 2, '2026-05-12 19:01:02', 3, '2026-05-12 19:01:14', 3, '2026-05-12 19:01:14', 3);
+(16, 1, 9, 2, '2026-05-12 19:01:02', 3, '2026-05-12 19:01:14', 3, '2026-05-12 19:01:14', 3),
+(17, 1, 5, 1, '2026-05-21 05:36:29', NULL, NULL, NULL, NULL, NULL),
+(18, 1, 6, 1, '2026-05-21 05:36:29', NULL, NULL, NULL, NULL, NULL),
+(19, 1, 10, 1, '2026-05-21 05:37:04', NULL, NULL, NULL, NULL, NULL),
+(20, 1, 12, 1, '2026-05-21 05:37:04', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -312,7 +382,9 @@ INSERT INTO `2b2_pemetaan_cpl_pl` (`id_2b2`, `id_cpl`, `id_pl`, `id_tahun`, `cre
 (205, 1, 16, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL),
 (206, 1, 15, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL),
 (207, 1, 14, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL),
-(208, 1, 18, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL);
+(208, 1, 18, 2, '2026-05-12 21:17:35', 3, NULL, NULL, NULL, NULL),
+(209, 1, 5, 1, '2026-05-21 05:41:45', NULL, NULL, NULL, NULL, NULL),
+(210, 1, 9, 1, '2026-05-21 05:41:45', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -486,6 +558,27 @@ CREATE TABLE `2c_fleksibilitas_pembelajaran` (
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Dumping data for table `2c_fleksibilitas_pembelajaran`
+--
+
+INSERT INTO `2c_fleksibilitas_pembelajaran` (`id_2c`, `id_prodi`, `id_tahun`, `id_bentuk`, `jumlah_mhs`, `link_bukti`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
+(1, 1, 1, 1, 410, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(2, 1, 1, 2, 12, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(3, 1, 1, 3, 5, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(4, 1, 1, 4, 2, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(5, 1, 1, 5, 15, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(6, 1, 2, 1, 81, 'http://127.0.0.1:3001/backend/test-2c.html?serverWindowId=712b93ef-ee45-4edc-8c44-69d066b47fde', '2026-05-15 00:43:48', '2026-05-17 17:19:06', 1, 3, NULL, NULL),
+(7, 1, 2, 2, 10, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(8, 1, 2, 3, 4, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(9, 1, 2, 4, 1, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(10, 1, 2, 5, 8, NULL, '2026-05-15 00:43:48', '2026-05-15 01:22:23', 1, 3, NULL, NULL),
+(33, 1, 3, 1, 0, NULL, '2026-05-15 01:22:23', '2026-05-15 01:22:23', 3, NULL, NULL, NULL),
+(36, 1, 3, 2, 0, NULL, '2026-05-15 01:22:23', '2026-05-15 01:22:23', 3, NULL, NULL, NULL),
+(39, 1, 3, 3, 0, NULL, '2026-05-15 01:22:23', '2026-05-15 01:22:23', 3, NULL, NULL, NULL),
+(42, 1, 3, 4, 0, NULL, '2026-05-15 01:22:23', '2026-05-15 01:22:23', 3, NULL, NULL, NULL),
+(45, 1, 3, 5, 0, NULL, '2026-05-15 01:22:23', '2026-05-15 01:22:23', 3, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -614,7 +707,8 @@ INSERT INTO `3a2_penelitian_dtpr` (`id_3a2`, `id_dosen`, `id_tahun`, `id_roadmap
 (6, 2, 80, 2, 'Sistem Rekomendasi E-Commerce dengan Collaborative Filtering 2099', 2, 'Hibah Perusahaan', 'Lokal/Wilayah', 6, 30000000, 'https://example.com/bukti-4', '2026-05-13 18:18:23', '2026-05-13 20:31:17', NULL, 4, NULL, NULL),
 (7, 2, 79, 2, 'Pengembangan Sistem Cerdas Berbasis AI untuk Pertanian 2098', 2, 'Hibah DIKTI', 'Internasional', 12, 50000000, 'https://example.com/bukti-0', '2026-05-13 18:18:23', '2026-05-13 20:27:33', NULL, 4, NULL, NULL),
 (8, 1, 81, 2, 'Pengembangan Sistem Cerdas Berbasis AI untuk Pertanian 2100', 2, 'Hibah DIKTI', 'Lokal/Wilayah', 12, 50000000, 'https://example.com/bukti-0', '2026-05-13 20:25:54', '2026-05-13 20:31:19', NULL, 3, NULL, NULL),
-(9, 2, 2, 4, 'Push rank', 3, 'Mytic', 'Nasional', 1, 5000000, 'http://localhost/phpmyadmin', '2026-05-13 21:02:05', '2026-05-13 21:02:05', NULL, 3, NULL, NULL);
+(9, 2, 2, 4, 'Push rank', 3, 'Mytic', 'Nasional', 1, 5000000, 'http://localhost/phpmyadmin', '2026-05-13 21:02:05', '2026-05-13 21:02:05', NULL, 3, NULL, NULL),
+(10, 1, 1, 3, 'Pengembangan Website', 2, 'Terapan', 'Nasional', 1, 10000000, 'http://localhost:3000/dashboard/penelitian-dtpr?tab=3c1', '2026-05-21 05:29:12', '2026-05-21 05:29:12', NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -681,7 +775,8 @@ INSERT INTO `3c1_kerjasama_penelitian` (`id_3c1`, `id_3a2`, `id_tahun`, `judul_k
 (7, 5, 79, 'Smart Farming Partnership 7', 'BRIN Indonesia', 'Lokal/Wilayah', 1, 80000000, 'https://example.com/kerjasama-7', '2026-05-13 19:42:58', '2026-05-13 20:30:38', NULL, 4, NULL, NULL),
 (8, 8, 81, 'Kerjasama AI Research 6', 'Universitas Gadjah Mada', 'Nasional', 2, 30000000, 'https://example.com/kerjasama-6', '2026-05-13 20:25:54', '2026-05-13 20:25:54', NULL, 3, NULL, NULL),
 (10, 2, 81, 'Kerjasama AI Research 6', 'Universitas Gadjah Mada', 'Internasional', 2, 30000000, 'https://example.com/kerjasama-6', '2026-05-13 20:45:30', '2026-05-13 20:45:30', NULL, 3, NULL, NULL),
-(11, 9, 2, 'Kerjasama SMA', 'DC coffe', 'Internasional', 0, 0, 'https://www.youtube.com/', '2026-05-13 21:02:05', '2026-05-13 21:02:05', NULL, 3, NULL, NULL);
+(11, 9, 2, 'Kerjasama SMA', 'DC coffe', 'Internasional', 0, 0, 'https://www.youtube.com/', '2026-05-13 21:02:05', '2026-05-13 21:02:05', NULL, 3, NULL, NULL),
+(12, 10, 1, 'Pengembangan Website', 'UNTAG', 'Nasional', 0, 0, 'http://localhost:3000/dashboard/penelitian-dtpr?tab=3c1', '2026-05-21 05:29:12', '2026-05-21 05:29:12', NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -716,7 +811,8 @@ INSERT INTO `3c2_publikasi_penelitian` (`id_3c2`, `id_3a2`, `id_tahun`, `judul_p
 (6, 7, 79, 'IoT-based Smart Monitoring System (7)', 'S2', 'https://example.com/publikasi-7', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
 (7, 8, 81, 'Implementasi Deep Learning untuk Klasifikasi Tanaman (2)', 'S1', 'https://example.com/publikasi-2', '2026-05-13 20:25:54', '2026-05-13 20:25:54', NULL, 3, NULL, NULL),
 (9, 2, 81, 'Implementasi Deep Learning untuk Klasifikasi Tanaman (2)', 'S1', 'https://example.com/publikasi-2', '2026-05-13 20:45:30', '2026-05-13 20:45:30', NULL, 3, NULL, NULL),
-(10, 9, 2, 'Jurnal Penyesuaian', 'IB', 'https://www.facebook.com/', '2026-05-13 21:02:05', '2026-05-13 21:02:05', NULL, 3, NULL, NULL);
+(10, 9, 2, 'Jurnal Penyesuaian', 'IB', 'https://www.facebook.com/', '2026-05-13 21:02:05', '2026-05-13 21:02:05', NULL, 3, NULL, NULL),
+(11, 10, 1, 'Pengembangan Website', 'S4', 'http://localhost:3000/dashboard/penelitian-dtpr?tab=3c1', '2026-05-21 05:29:12', '2026-05-21 05:29:12', NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -751,7 +847,8 @@ INSERT INTO `3c3_perolehan_hki` (`id_3c3`, `id_3a2`, `id_tahun`, `judul_hki`, `j
 (6, 7, 79, 'Modul Pembelajaran Berbasis AI #7', 'Hak Cipta', 'https://example.com/hki-7', '2026-05-13 19:42:58', '2026-05-13 19:42:58', NULL, 4, NULL, NULL),
 (7, 8, 81, 'Sistem Klasifikasi Gambar Berbasis CNN #2', 'Paten', 'https://example.com/hki-2', '2026-05-13 20:25:54', '2026-05-13 20:25:54', NULL, 3, NULL, NULL),
 (9, 2, 81, 'Sistem Klasifikasi Gambar Berbasis CNN #2', 'Paten', 'https://example.com/hki-2', '2026-05-13 20:45:30', '2026-05-13 20:45:30', NULL, 3, NULL, NULL),
-(10, 9, 2, 'One piece', 'Paten', 'https://www.tiktok.com/', '2026-05-13 21:02:05', '2026-05-13 21:02:05', NULL, 3, NULL, NULL);
+(10, 9, 2, 'One piece', 'Paten', 'https://www.tiktok.com/', '2026-05-13 21:02:05', '2026-05-13 21:02:05', NULL, 3, NULL, NULL),
+(11, 10, 1, 'Hak Cipta', 'Hak Cipta', 'http://localhost:3000/dashboard/penelitian-dtpr?tab=3c1', '2026-05-21 05:29:12', '2026-05-21 05:29:12', NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -913,6 +1010,21 @@ CREATE TABLE `5_1_sistem_tata_kelola` (
   `updated_by` int DEFAULT NULL,
   `deleted_by` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `5_1_sistem_tata_kelola`
+--
+
+INSERT INTO `5_1_sistem_tata_kelola` (`id_5_1`, `jenis_tata_kelola`, `nama_sistem`, `akses`, `id_unit`, `link_bukti`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(1, 'Sistem Informasi Akademik', 'SIAKAD', 'Internet', 9, 'https://siakad.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL),
+(2, 'Sistem Penerimaan Mahasiswa Baru', 'PMB Online', 'Internet', 3, 'https://pmb.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL),
+(3, 'Sistem Penjaminan Mutu Internal', 'SI-SPMI', 'Internet', 2, 'https://spmi.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL),
+(4, 'Sistem Informasi Pengelolaan Keuangan', 'SIAKUL', 'Internet', 8, 'https://keuangan.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL),
+(5, 'Sistem Informasi Perpustakaan', 'SILIWANGI OPAC', 'Lokal', 4, 'https://perpus.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL),
+(6, 'Sistem Informasi Kepegawaian', 'SIMPEG', 'Internet', 12, 'https://simpeg.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL),
+(7, 'Sistem Informasi Penelitian & PkM', 'SIM-LPPM', 'Internet', 11, 'https://lppm.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL),
+(8, 'Sistem Informasi Kemahasiswaan & Alumni', 'SIMAWA', 'Internet', 10, 'https://simawa.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL),
+(9, 'Sistem Tata Kelola Administrasi & Dokumen', 'SI-TATA KELOLA', 'Internet', 5, 'https://sisfo.stikom-banyuwangi.ac.id', '2026-05-17 16:45:36', '2026-05-17 16:45:36', NULL, 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1321,7 +1433,8 @@ INSERT INTO `roadmap_lppm` (`id_roadmap`, `id_prodi`, `id_tahun`, `jenis_roadmap
 (3, 1, 1, 'PKM', 'https://example.com/roadmap-cybersecurity-2098', '2026-05-13 20:52:22', '2026-05-14 22:26:25', NULL, 1, 3, NULL),
 (4, 1, 2, 'Penelitian', 'https://example.com/roadmap-smartcity-2099', '2026-05-13 20:52:22', '2026-05-14 22:26:28', NULL, 1, NULL, NULL),
 (5, 1, 3, 'PKM', 'https://example.com/roadmap-ai-agriculture-2100', '2026-05-13 20:52:22', '2026-05-14 22:26:32', NULL, 1, NULL, NULL),
-(6, 1, 1, 'Penelitian', 'https://lppm.ummetro.ac.id/assets/manager/documents/de734aec402e310517e8dd921273f81b.pdf', '2026-05-14 23:09:13', '2026-05-14 23:09:13', NULL, 3, NULL, NULL);
+(6, 1, 1, 'Penelitian', 'https://lppm.ummetro.ac.id/assets/manager/documents/de734aec402e310517e8dd921273f81b.pdf', '2026-05-14 23:09:13', '2026-05-14 23:09:13', NULL, 3, NULL, NULL),
+(7, 2, 1, 'Penelitian', 'http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=backend-akreditasi&table=roadmap_lppm', '2026-05-21 05:21:50', '2026-05-21 05:21:50', NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1488,12 +1601,21 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id_user`, `id_unit`, `username`, `password`) VALUES
-(1, 5, 'sisfo', '$2b$10$R.zh9bsVykHEKByW8i3CgeSqSq10diBjxqEkvl5sBRt/.HjQ9zkli'),
-(2, 11, 'lppm', '$2a$12$OV4aMPsI8KpzgyuLtbn.heVQiSsrYqfFliGmfOPd4BvlbUY.B.oa6'),
-(3, 13, 'admin', '$2a$12$OV4aMPsI8KpzgyuLtbn.heVQiSsrYqfFliGmfOPd4BvlbUY.B.oa6'),
-(4, 3, 'pmb', '$2a$12$OV4aMPsI8KpzgyuLtbn.heVQiSsrYqfFliGmfOPd4BvlbUY.B.oa6'),
-(5, 6, 'ala', '$2a$12$OV4aMPsI8KpzgyuLtbn.heVQiSsrYqfFliGmfOPd4BvlbUY.B.oa6');
+INSERT INTO `users` (`id_user`, `id_unit`, `username`, `password`, `status`) VALUES
+(1, 5, 'sisfo', '$2b$10$R.zh9bsVykHEKByW8i3CgeSqSq10diBjxqEkvl5sBRt/.HjQ9zkli', 'Aktif'),
+(2, 11, 'lppm', '$2a$12$OV4aMPsI8KpzgyuLtbn.heVQiSsrYqfFliGmfOPd4BvlbUY.B.oa6', 'Aktif'),
+(3, 13, 'admin', '$2a$12$OV4aMPsI8KpzgyuLtbn.heVQiSsrYqfFliGmfOPd4BvlbUY.B.oa6', 'Aktif'),
+(4, 3, 'pmb', '$2a$12$OV4aMPsI8KpzgyuLtbn.heVQiSsrYqfFliGmfOPd4BvlbUY.B.oa6', 'Aktif'),
+(5, 6, 'ala', '$2a$12$OV4aMPsI8KpzgyuLtbn.heVQiSsrYqfFliGmfOPd4BvlbUY.B.oa6', 'Aktif'),
+(6, 1, 'UPPS', '$2b$10$Q6N3uGZSUImEIvwRY.oH/uJ71GPiSBlv.FOFYvZwin9t4fmQ3h1kK', 'Aktif'),
+(7, 7, 'WAKET2', '$2b$10$YDVwtnnBY.SvzLu7NVwgteKsC08VAJpxZDS9JXuY1WVv43n5ZnOaK', 'Aktif'),
+(8, 4, 'SARPRAS', '$2b$10$jUbZ3PVC.2nNEO.Ax6oQzOL/XsH4A0yxj37Cj2SPzzFumzGwgeDwi', 'Aktif'),
+(9, 2, 'TPM', '$2b$10$m/cm3G7W90Zq4eiCAysdFONjouMD5684sOU0RGbw51vxvh68SSr2u', 'Aktif'),
+(10, 9, 'PRODI-TI', '$2b$10$u4withZkFuBQF5TDGzhBqe5LvCCHkxhRTwxc1rEEtFfXHlzj.beHa', 'Aktif'),
+(11, 9, 'PRODI-MI', '$2b$10$6nHSz5yIowA0ZTanDNEwRu.NFhHGyVfp3Al/GlZkxu3/siwpZ7squ', 'Aktif'),
+(12, 10, 'KEMAHASISWAAN', '$2b$10$Q1TzHYJgtoE6AsKgLTl1cOo70qtwHCZ/vjDLIMZFUEj3.q3i8O7Ie', 'Aktif'),
+(14, 8, 'KEUANGAN', '$2b$10$aoHFOtL5ldlK6n6M.f1lBeVXYHbM9TH9RCDuyFIfgWFIzXS5yaIAW', 'Aktif'),
+(15, 12, 'KEPEGAWAIAN', '$2b$10$rPJTCW5/nSah/EMIytlWreiwrNR8iBDLsEP7p5yEhrj2UtXrTVRGy', 'Aktif');
 
 --
 -- Indexes for dumped tables
@@ -1556,6 +1678,22 @@ ALTER TABLE `2a1_data_mahasiswa`
   ADD UNIQUE KEY `idx_unique_prodi_tahun` (`prodi_id_prodi`,`tahun_akademik_id_tahun`),
   ADD KEY `idx_2a1_prodi_tahun` (`prodi_id_prodi`,`tahun_akademik_id_tahun`),
   ADD KEY `fk_2a1_tahun` (`tahun_akademik_id_tahun`);
+
+--
+-- Indexes for table `2a2_keragaman_asal_maba`
+--
+ALTER TABLE `2a2_keragaman_asal_maba`
+  ADD PRIMARY KEY (`id_2a2`),
+  ADD UNIQUE KEY `unique_prodi_tahun_2a2` (`prodi_id_prodi`,`tahun_akademik_id_tahun`),
+  ADD KEY `fk_2a2_tahun` (`tahun_akademik_id_tahun`);
+
+--
+-- Indexes for table `2a3_kondisi_mahasiswa`
+--
+ALTER TABLE `2a3_kondisi_mahasiswa`
+  ADD PRIMARY KEY (`id_2a3`),
+  ADD UNIQUE KEY `unique_prodi_tahun_2a3` (`prodi_id_prodi`,`id_tahun`),
+  ADD KEY `fk_2a3_tahun` (`id_tahun`);
 
 --
 -- Indexes for table `2b1_isi_pembelajaran`
@@ -1901,16 +2039,28 @@ ALTER TABLE `2a1_data_mahasiswa`
   MODIFY `id_2a1` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
+-- AUTO_INCREMENT for table `2a2_keragaman_asal_maba`
+--
+ALTER TABLE `2a2_keragaman_asal_maba`
+  MODIFY `id_2a2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `2a3_kondisi_mahasiswa`
+--
+ALTER TABLE `2a3_kondisi_mahasiswa`
+  MODIFY `id_2a3` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `2b1_isi_pembelajaran`
 --
 ALTER TABLE `2b1_isi_pembelajaran`
-  MODIFY `id_2b1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_2b1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `2b2_pemetaan_cpl_pl`
 --
 ALTER TABLE `2b2_pemetaan_cpl_pl`
-  MODIFY `id_2b2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+  MODIFY `id_2b2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT for table `2b3_peta_pemenuhan_cpl`
@@ -1946,7 +2096,7 @@ ALTER TABLE `2b6_metadata_lulusan`
 -- AUTO_INCREMENT for table `2c_fleksibilitas_pembelajaran`
 --
 ALTER TABLE `2c_fleksibilitas_pembelajaran`
-  MODIFY `id_2c` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_2c` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `2d_ref_sumber_rekognisi`
@@ -1970,7 +2120,7 @@ ALTER TABLE `3a1_sarana_prasarana_penelitian`
 -- AUTO_INCREMENT for table `3a2_penelitian_dtpr`
 --
 ALTER TABLE `3a2_penelitian_dtpr`
-  MODIFY `id_3a2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_3a2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `3a3_pengembangan_dtpr`
@@ -1982,19 +2132,19 @@ ALTER TABLE `3a3_pengembangan_dtpr`
 -- AUTO_INCREMENT for table `3c1_kerjasama_penelitian`
 --
 ALTER TABLE `3c1_kerjasama_penelitian`
-  MODIFY `id_3c1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_3c1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `3c2_publikasi_penelitian`
 --
 ALTER TABLE `3c2_publikasi_penelitian`
-  MODIFY `id_3c2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_3c2` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `3c3_perolehan_hki`
 --
 ALTER TABLE `3c3_perolehan_hki`
-  MODIFY `id_3c3` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_3c3` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `4a1_sarana_prasarana_pkm`
@@ -2030,7 +2180,7 @@ ALTER TABLE `4c3_perolehan_hki_pkm`
 -- AUTO_INCREMENT for table `5_1_sistem_tata_kelola`
 --
 ALTER TABLE `5_1_sistem_tata_kelola`
-  MODIFY `id_5_1` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_5_1` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `5_2_sarana_prasarana_pendidikan`
@@ -2102,7 +2252,7 @@ ALTER TABLE `master_sks_jabatan`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id_pegawai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pegawai` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `prodi`
@@ -2114,7 +2264,7 @@ ALTER TABLE `prodi`
 -- AUTO_INCREMENT for table `roadmap_lppm`
 --
 ALTER TABLE `roadmap_lppm`
-  MODIFY `id_roadmap` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_roadmap` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tahun_akademik`
@@ -2138,7 +2288,7 @@ ALTER TABLE `unit_kerja`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -2192,6 +2342,20 @@ ALTER TABLE `1b_unit_spmi_dan_sdm`
 ALTER TABLE `2a1_data_mahasiswa`
   ADD CONSTRAINT `fk_2a1_prodi` FOREIGN KEY (`prodi_id_prodi`) REFERENCES `prodi` (`id_prodi`),
   ADD CONSTRAINT `fk_2a1_tahun` FOREIGN KEY (`tahun_akademik_id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`);
+
+--
+-- Constraints for table `2a2_keragaman_asal_maba`
+--
+ALTER TABLE `2a2_keragaman_asal_maba`
+  ADD CONSTRAINT `fk_2a2_prodi` FOREIGN KEY (`prodi_id_prodi`) REFERENCES `prodi` (`id_prodi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_2a2_tahun` FOREIGN KEY (`tahun_akademik_id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `2a3_kondisi_mahasiswa`
+--
+ALTER TABLE `2a3_kondisi_mahasiswa`
+  ADD CONSTRAINT `fk_2a3_prodi` FOREIGN KEY (`prodi_id_prodi`) REFERENCES `prodi` (`id_prodi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_2a3_tahun` FOREIGN KEY (`id_tahun`) REFERENCES `tahun_akademik` (`id_tahun`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `2b1_isi_pembelajaran`

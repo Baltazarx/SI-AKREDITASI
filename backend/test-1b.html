@@ -43,11 +43,6 @@
         <input type="hidden" id="id_unit_spmi">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
             <div>
-                <label>Jenis Unit SPMI:</label><br>
-                <select id="jenis_unit" style="margin-bottom: 5px; width: 264px; padding: 5px;">
-                    <option value="PT">PT</option>
-                    <option value="UPPS">UPPS</option>
-                </select><br>
                 <label>Unit Kerja ID:</label><br><input type="number" id="unit_kerja_id_unit" placeholder="ID Unit Kerja"><br>
                 <label>Dokumen SPMI (Link):</label><br><input type="text" id="dokumen_spmi"><br>
                 <label>Auditor Certified:</label><br><input type="number" id="auditor_certified" value="0"><br>
@@ -69,15 +64,12 @@
     <table id="table-spmi">
         <thead>
             <tr>
-                <th>Unit SPMI</th>
-                <th>Nama Unit SPMI</th>
-                <th>Dokumen SPMI</th>
-                <th>Jumlah Auditor Mutu Internal</th>
-                <th>Certified</th>
-                <th>Non Certified</th>
-                <th>Frekuensi audit/monev per tahun</th>
-                <th>Bukti Certified Auditor</th>
-                <th>Laporan Audit</th>
+                <th>Unit Kerja</th>
+                <th>Total Auditor</th>
+                <th>Cert.</th>
+                <th>Non-Cert.</th>
+                <th>Frekuensi</th>
+                <th>Dokumen</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -161,21 +153,12 @@
                 const tbody = document.querySelector('#table-spmi tbody');
                 tbody.innerHTML = result.data.map(d => `
                     <tr class="row-kuning">
-                        <td><b>${d.jenis_unit || '-'}</b></td>
-                        <td>${d.nama_unit || '-'}</td>
-                        <td>
-                            ${d.dokumen_spmi ? `<a href="${d.dokumen_spmi}" target="_blank">Buka</a>` : '-'}
-                        </td>
-                        <td><b>${d.jumlah_auditor || 0}</b></td>
-                        <td>${d.auditor_certified || 0}</td>
-                        <td>${d.auditor_non_certified || 0}</td>
-                        <td>${d.frekuensi_audit || 0}x</td>
-                        <td>
-                            ${d.bukti_certified_auditor ? `<a href="${d.bukti_certified_auditor}" target="_blank">Buka</a>` : '-'}
-                        </td>
-                        <td>
-                            ${d.laporan_audit ? `<a href="${d.laporan_audit}" target="_blank">Buka</a>` : '-'}
-                        </td>
+                        <td>${d.nama_unit}</td>
+                        <td><b>${d.jumlah_auditor}</b></td>
+                        <td>${d.auditor_certified}</td>
+                        <td>${d.auditor_non_certified}</td>
+                        <td>${d.frekuensi_audit}x</td>
+                        <td><a href="${d.dokumen_spmi}" target="_blank">Buka</a></td>
                         <td>
                             <button onclick='isiEdit(${JSON.stringify(d)})'>Edit</button>
                             <button onclick="hapusSoft(${d.id_unit_spmi})" style="color:red">Hapus</button>
@@ -224,9 +207,8 @@
         try {
             const id = document.getElementById('id_unit_spmi').value;
             const body = {
-                jenis_unit: document.getElementById('jenis_unit').value,
-                id_unit: document.getElementById('unit_kerja_id_unit').value,
-                id_tahun: document.getElementById('filter_tahun').value,
+                unit_kerja_id_unit: document.getElementById('unit_kerja_id_unit').value,
+                tahun_akademik_id_tahun: document.getElementById('filter_tahun').value,
                 dokumen_spmi: document.getElementById('dokumen_spmi').value,
                 auditor_certified: document.getElementById('auditor_certified').value,
                 auditor_non_certified: document.getElementById('auditor_non_certified').value,
@@ -285,7 +267,6 @@
     function isiEdit(d) {
         document.getElementById('id_unit_spmi').value = d.id_unit_spmi;
         document.getElementById('unit_kerja_id_unit').value = d.unit_kerja_id_unit;
-        document.getElementById('jenis_unit').value = d.jenis_unit || 'PT';
         document.getElementById('dokumen_spmi').value = d.dokumen_spmi;
         document.getElementById('auditor_certified').value = d.auditor_certified;
         document.getElementById('auditor_non_certified').value = d.auditor_non_certified;
@@ -297,14 +278,6 @@
 
     function resetForm() {
         document.getElementById('id_unit_spmi').value = '';
-        document.getElementById('jenis_unit').value = 'PT';
-        document.getElementById('unit_kerja_id_unit').value = '';
-        document.getElementById('dokumen_spmi').value = '';
-        document.getElementById('auditor_certified').value = '0';
-        document.getElementById('auditor_non_certified').value = '0';
-        document.getElementById('frekuensi_audit').value = '1';
-        document.getElementById('bukti_certified_auditor').value = '';
-        document.getElementById('laporan_audit').value = '';
         document.getElementById('btn-save').innerText = "Simpan Data SPMI";
     }
 

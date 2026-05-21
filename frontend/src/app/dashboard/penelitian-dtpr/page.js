@@ -614,7 +614,7 @@ export default function PenelitianPage() {
                           {penelitianData.every(p => !p.kerjasama?.length) ? (
                             <tr><td colSpan="9" className="px-4 py-10 text-center font-bold text-gray-400">Belum ada data kerjasama.</td></tr>
                           ) : (
-                            penelitianData.flatMap(p => (p.kerjasama || []).map(k => ({ ...k, nama_dosen: p.nama_dosen, judul_penelitian: p.judul_penelitian }))).map((item, idx) => (
+                            penelitianData.flatMap(p => (p.kerjasama || []).map(k => ({ ...k, nama_dosen: p.nama_dosen, judul_penelitian: p.judul_penelitian, parent_durasi: p.durasi, parent_dana: p.jumlah_dana, parent_tahun: p.id_tahun }))).map((item, idx) => (
                               <tr key={idx} className="hover:bg-purple-900/30 dark:hover:bg-purple-900/5 transition-colors text-center text-gray-300 dark:text-gray-300">
                                 <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 font-bold">{idx + 1}</td>
                                 <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 text-left">
@@ -623,10 +623,10 @@ export default function PenelitianPage() {
                                 </td>
                                 <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 text-left font-bold">{item.mitra_kerja_sama}</td>
                                 <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 font-black text-purple-600">{item.sumber?.charAt(0)}</td>
-                                <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 font-bold">{item.durasi || 0}</td>
-                                <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 text-xs font-bold whitespace-nowrap">{tahunMap[item.id_tahun] === currentTS - 2 ? formatNominal(item.jumlah_dana) : '-'}</td>
-                                <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 text-xs font-bold whitespace-nowrap">{tahunMap[item.id_tahun] === currentTS - 1 ? formatNominal(item.jumlah_dana) : '-'}</td>
-                                <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 text-xs font-bold whitespace-nowrap">{tahunMap[item.id_tahun] === currentTS ? formatNominal(item.jumlah_dana) : '-'}</td>
+                                <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 font-bold">{item.parent_durasi || 0}</td>
+                                <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 text-xs font-bold whitespace-nowrap">{tahunMap[item.parent_tahun] === currentTS - 2 ? formatNominal(item.parent_dana) : '-'}</td>
+                                <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 text-xs font-bold whitespace-nowrap">{tahunMap[item.parent_tahun] === currentTS - 1 ? formatNominal(item.parent_dana) : '-'}</td>
+                                <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30 text-xs font-bold whitespace-nowrap">{tahunMap[item.parent_tahun] === currentTS ? formatNominal(item.parent_dana) : '-'}</td>
                                 <td className="px-4 py-3 border border-purple-900/50 dark:border-purple-900/30">
                                   {item.link_bukti && <a href={item.link_bukti} target="_blank" className="text-purple-600 hover:underline inline-flex p-2 bg-purple-900/20 dark:bg-purple-900/30 rounded-lg"><ExternalLink size={14} /></a>}
                                 </td>

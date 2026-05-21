@@ -288,9 +288,9 @@ const penelitianController = {
             rawData.forEach(item => {
                 if(item.kerjasama && item.kerjasama.length > 0) {
                     item.kerjasama.forEach(k => {
-                        const ts2 = k.id_tahun === targetTS - 2 ? k.jumlah_dana : 0;
-                        const ts1 = k.id_tahun === targetTS - 1 ? k.jumlah_dana : 0;
-                        const ts = k.id_tahun === targetTS ? k.jumlah_dana : 0;
+                        const ts2 = item.id_tahun === targetTS - 2 ? item.jumlah_dana : 0;
+                        const ts1 = item.id_tahun === targetTS - 1 ? item.jumlah_dana : 0;
+                        const ts = item.id_tahun === targetTS ? item.jumlah_dana : 0;
 
                         sumKTS2 += ts2;
                         sumKTS1 += ts1;
@@ -302,7 +302,7 @@ const penelitianController = {
                             k.judul_kerjasama || '-',
                             k.mitra_kerja_sama || '-',
                             formatSumber(k.sumber),
-                            k.durasi || 0,
+                            item.durasi || 0,
                             ts2,
                             ts1,
                             ts,

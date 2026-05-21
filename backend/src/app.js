@@ -68,8 +68,9 @@ const lppmKerjasamaPkm = require('./routes/lppm/4c1_kerjasama_pkm');
 const lppmPublikasiPkm = require('./routes/lppm/4c2_publikasi_pkm');
 const lppmHkiPkm = require('./routes/lppm/4c3_perolehan_hki_pkm');
 
-// Import Routes PMB (Kriteria 2.A.1)
+// Import Routes PMB (Kriteria 2.A.1 & 2.A.2)
 const route2a1_pmb = require('./routes/pmb/2a1_data_mahasiswa');
+const route2a2_pmb = require('./routes/pmb/2a2_keragaman_asal_maba');
 
 // Import Routes ALA (Kriteria 2.A.1)
 const route2a1_ala = require('./routes/ala/2a1_data_mahasiswa');
@@ -133,8 +134,9 @@ app.use('/api/prodi/2b2-pemetaan-cpl', route2b2);
 app.use('/api/prodi/2b3-peta-pemenuhan', route2b3);
 app.use('/api/prodi/2c-fleksibilitas', route2c);
 
-// Routes PMB (Tabel 2.A.1)
+// Routes PMB (Tabel 2.A.1 & 2.A.2)
 app.use('/api/pmb/2a1-data-mahasiswa', route2a1_pmb);
+app.use('/api/pmb/2a2-keragaman-asal', route2a2_pmb);
 
 // Routes ALA (Tabel 2.A.1)
 app.use('/api/ala/2a1-data-mahasiswa', route2a1_ala);

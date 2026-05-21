@@ -64,6 +64,8 @@ export default function DashboardLayout({ children }) {
     { icon: GraduationCap, label: '(1.A.5) Tendik', href: '/dashboard/tendik-kualifikasi', emoji: '📈', color: 'amber', roles: ['ADMIN', 'SARPRAS'] },
     { icon: ShieldCheck, label: '(1.B) SPMI', href: '/dashboard/spmi', emoji: '🔍', color: 'sky', roles: ['ADMIN', 'TPM'] },
     { icon: Users, label: '(2.A.1) Data Mahasiswa', href: '/dashboard/data-mahasiswa', emoji: '👥', color: 'violet', roles: ['ADMIN', 'PMB', 'ALA'] },
+    { icon: Users, label: '(2.A.2) Keragaman Asal Mhs', href: '/dashboard/pmb/2a2-keragaman-asal', emoji: '🌍', color: 'blue', roles: ['ADMIN', 'PMB'] },
+    { icon: Users, label: '(2.A.3) Kondisi Jumlah Mhs', href: '/dashboard/pmb/2a3-kondisi-mahasiswa', emoji: '📊', color: 'emerald', roles: ['ADMIN', 'ALA'] },
     { icon: BookOpen, label: '(2.B.1) Isi Pembelajaran', href: '/dashboard/isi-pembelajaran', emoji: '📚', color: 'cyan', roles: ['ADMIN', 'PRODI'] },
     { icon: Map, label: '(2.B.2) Pemetaan CPL-PL', href: '/dashboard/pemetaan-cpl-pl', emoji: '🗺️', color: 'teal', roles: ['ADMIN', 'PRODI'] },
     { icon: Target, label: '(2.B.3) Peta Pemenuhan CPL', href: '/dashboard/peta-pemenuhan-cpl', emoji: '🎯', color: 'lime', roles: ['ADMIN', 'PRODI'] },
@@ -205,7 +207,7 @@ export default function DashboardLayout({ children }) {
       roles: ['PMB'],
       children: [
         { label: 'Tabel 2.A.1 Data Mahasiswa', href: '/dashboard/data-mahasiswa' },
-        { label: 'Tabel 2.A.2 Keragaman Asal Mhs', href: '/dashboard/data-mahasiswa?tab=2a2' },
+        { label: 'Tabel 2.A.2 Keragaman Asal Mhs', href: '/dashboard/pmb/2a2-keragaman-asal' },
       ]
     },
     {
@@ -216,7 +218,7 @@ export default function DashboardLayout({ children }) {
       roles: ['ALA'],
       children: [
         { label: 'Tabel 2.A.1 Data Mahasiswa', href: '/dashboard/data-mahasiswa' },
-        { label: 'Tabel 2.A.3 Kondisi Jumlah Mhs', href: '/dashboard/data-mahasiswa?tab=2a3' },
+        { label: 'Tabel 2.A.3 Kondisi Jumlah Mhs', href: '/dashboard/pmb/2a3-kondisi-mahasiswa' },
       ]
     },
     {

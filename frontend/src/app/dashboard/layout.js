@@ -110,7 +110,7 @@ export default function DashboardLayout({ children }) {
       ]
     },
     { icon: ShieldCheck, label: '(5.1) Sistem Tata Kelola', href: '/dashboard/tata-kelola', emoji: '🖥️', color: 'blue', roles: ['ADMIN', 'SISFO'] },
-    { icon: Building2, label: '(5.2) Sarpras Pendidikan', href: '/dashboard/sarpras-pendidikan', emoji: '🏫', color: 'rose', roles: ['ADMIN', 'SARPRAS', 'SISFO'] },
+    { icon: Building2, label: '(5.2) Sarpras Pendidikan', href: '/dashboard/sarpras-pendidikan', emoji: '🏫', color: 'rose', roles: ['ADMIN', 'SARPRAS'] },
     { icon: Map, label: 'Roadmap LPPM', href: '/dashboard/master/roadmap-lppm', emoji: '🗺️', color: 'teal', roles: ['ADMIN', 'LPPM'] },
     { icon: FileText, label: '(6) Visi Misi', href: '/dashboard/visi-misi', emoji: '📝', color: 'orange', roles: ['ADMIN', 'UPPS'] },
   ];

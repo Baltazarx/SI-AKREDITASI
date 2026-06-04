@@ -14,12 +14,12 @@ export default function PemetaanCplPlPage() {
   const [filterProdi, setFilterProdi] = useState('');
   const [filterTahun, setFilterTahun] = useState('');
   const [isTrashView, setIsTrashView] = useState(false);
-  
+
   const [prodiList, setProdiList] = useState([]);
   const [cplList, setCplList] = useState([]);
   const [profilLulusanList, setProfilLulusanList] = useState([]);
   const [tahunList, setTahunList] = useState([]);
-  
+
   const [formData, setFormData] = useState({
     id_cpl: '',
     id_pl: '',
@@ -125,27 +125,27 @@ export default function PemetaanCplPlPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validation
     if (!editingCpl) {
       alert('Kolom CPL wajib diisi');
       return;
     }
-    
+
     if (!filterTahun) {
       alert('Kolom Tahun Akademik wajib diisi');
       return;
     }
-    
+
     const token = localStorage.getItem('token');
-    
+
     try {
       const originalMappedPls = data.filter(d => d.id_cpl === editingCpl.id_cpl);
       const originalPlIds = originalMappedPls.map(d => d.id_pl);
-      
+
       const toAdd = selectedPls.filter(id => !originalPlIds.includes(id));
       const toDelete = originalMappedPls.filter(d => !selectedPls.includes(d.id_pl));
-      
+
       // Save added PLs
       for (const plId of toAdd) {
         const res = await fetch(`http://localhost:5000/api/prodi/2b2-pemetaan-cpl`, {
@@ -160,14 +160,14 @@ export default function PemetaanCplPlPage() {
             id_tahun: parseInt(filterTahun)
           }),
         });
-        
+
         const result = await res.json();
         if (!result.success) {
           alert(result.message || 'Gagal menyimpan data');
           return;
         }
       }
-      
+
       // Delete removed PLs
       for (const item of toDelete) {
         await fetch(`http://localhost:5000/api/prodi/2b2-pemetaan-cpl/${item.id_2b2}`, {
@@ -175,7 +175,7 @@ export default function PemetaanCplPlPage() {
           headers: { 'Authorization': `Bearer ${token}` }
         });
       }
-      
+
       alert('Data berhasil disimpan');
       fetchData();
       resetForm();
@@ -206,7 +206,7 @@ export default function PemetaanCplPlPage() {
 
   const handleDelete = async (id) => {
     if (!confirm('Apakah Anda yakin ingin menghapus data ini?')) return;
-    
+
     const token = localStorage.getItem('token');
     try {
       const res = await fetch(`http://localhost:5000/api/prodi/2b2-pemetaan-cpl/${id}`, {
@@ -224,10 +224,10 @@ export default function PemetaanCplPlPage() {
 
   const handleHardDeleteGroup = async (cpl) => {
     if (!confirm('Apakah Anda yakin ingin menghapus permanen semua pemetaan untuk CPL ini? Data tidak dapat dikembalikan!')) return;
-    
+
     const itemsToDelete = data.filter(item => item.id_cpl === cpl.id_cpl);
     const token = localStorage.getItem('token');
-    
+
     try {
       for (const item of itemsToDelete) {
         await fetch(`http://localhost:5000/api/prodi/2b2-pemetaan-cpl/${item.id_2b2}?hard=true`, {
@@ -323,8 +323,8 @@ export default function PemetaanCplPlPage() {
                       </thead>
                       <tbody className="divide-y divide-gray-800">
                         {editingCpl ? (
-                          <tr 
-                            key={editingCpl.id_cpl} 
+                          <tr
+                            key={editingCpl.id_cpl}
                             className="bg-blue-900/30"
                           >
                             <td className="px-4 py-2 font-mono text-xs font-bold text-gray-200">{editingCpl.kode_cpl}</td>
@@ -332,24 +332,24 @@ export default function PemetaanCplPlPage() {
                           </tr>
                         ) : (
                           cplList.map(cpl => (
-                          <tr 
-                            key={cpl.id_cpl} 
-                            className={`hover:bg-blue-900/20 cursor-pointer ${editingCpl?.id_cpl === cpl.id_cpl ? 'bg-blue-900/30' : ''}`}
-                            onClick={() => {
-                              setEditingCpl(cpl);
-                              setSelectedPls([]); // Reset selected PLs when CPL changes
-                            }}
-                          >
-                            <td className="px-4 py-2 font-mono text-xs font-bold text-gray-200">{cpl.kode_cpl}</td>
-                            <td className="px-4 py-2 text-gray-400">{cpl.deskripsi_cpl}</td>
-                          </tr>
-                        ))
+                            <tr
+                              key={cpl.id_cpl}
+                              className={`hover:bg-blue-900/20 cursor-pointer ${editingCpl?.id_cpl === cpl.id_cpl ? 'bg-blue-900/30' : ''}`}
+                              onClick={() => {
+                                setEditingCpl(cpl);
+                                setSelectedPls([]); // Reset selected PLs when CPL changes
+                              }}
+                            >
+                              <td className="px-4 py-2 font-mono text-xs font-bold text-gray-200">{cpl.kode_cpl}</td>
+                              <td className="px-4 py-2 text-gray-400">{cpl.deskripsi_cpl}</td>
+                            </tr>
+                          ))
                         )}
                       </tbody>
                     </table>
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-bold text-gray-300 mb-2">Profil Lulusan</label>
                   <div className="border border-gray-700 rounded-xl bg-gray-900 max-h-48 overflow-y-auto">
@@ -390,7 +390,7 @@ export default function PemetaanCplPlPage() {
                     </table>
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                   <div>
                     <label className="block text-sm font-bold text-gray-300 mb-2">Tahun Akademik</label>
@@ -440,10 +440,10 @@ export default function PemetaanCplPlPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-800">
                   {cplList.map((cpl) => {
-                    const mappedPls = profilLulusanList.filter(pl => 
+                    const mappedPls = profilLulusanList.filter(pl =>
                       data.some(item => item.id_cpl === cpl.id_cpl && item.id_pl === pl.id_pl)
                     );
-                    
+
                     if (mappedPls.length === 0) {
                       if (isTrashView) return null; // Sembunyikan CPL kosong di tampilan sampah
                       // CPL dengan PL kosong
@@ -458,8 +458,8 @@ export default function PemetaanCplPlPage() {
                             <div className="text-[10px] text-gray-400 mt-1">-</div>
                           </td>
                           <td className="px-4 py-3 border-r border-gray-700 text-center">
-                            <button 
-                              onClick={() => handleEditCpl(cpl)} 
+                            <button
+                              onClick={() => handleEditCpl(cpl)}
                               className="inline-flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white text-xs font-bold rounded-lg hover:bg-green-700 transition shadow-sm"
                             >
                               <Plus size={14} />
@@ -469,7 +469,7 @@ export default function PemetaanCplPlPage() {
                         </tr>
                       );
                     }
-                    
+
                     return (
                       <tr key={cpl.id_cpl} className="hover:bg-blue-900/30 transition-colors">
                         <td className="px-4 py-3 border-r border-gray-700 bg-gray-950/50 align-top sticky left-0 z-10 w-[260px] min-w-[260px] max-w-[260px] shadow-[inset_-1px_0_0_0_#1f2937]">
@@ -488,16 +488,16 @@ export default function PemetaanCplPlPage() {
                         </td>
                         <td className="px-4 py-3 border-r border-gray-700 text-center align-top w-[140px] min-w-[140px] max-w-[140px] bg-gray-900">
                           {isTrashView ? (
-                            <button 
-                              onClick={() => handleHardDeleteGroup(cpl)} 
+                            <button
+                              onClick={() => handleHardDeleteGroup(cpl)}
                               className="inline-flex items-center gap-1.5 px-3 py-1.5 w-full justify-center bg-red-950/40 text-red-600 text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-red-600 hover:text-white transition-colors border border-red-900/50 shadow-sm"
                             >
                               <Trash2 size={12} />
                               Hapus
                             </button>
                           ) : (
-                            <button 
-                              onClick={() => handleEditCpl(cpl)} 
+                            <button
+                              onClick={() => handleEditCpl(cpl)}
                               className="inline-flex items-center gap-1.5 px-3 py-1.5 w-full justify-center bg-blue-900/20 text-blue-600 text-[10px] font-black uppercase tracking-wider rounded-lg hover:bg-blue-600 hover:text-white transition-colors border border-blue-900/50 shadow-sm"
                             >
                               <Edit size={12} />
